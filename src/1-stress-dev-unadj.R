@@ -32,7 +32,6 @@ d <- readRDS(paste0(dropboxDir, "Data/Cleaned/Audrie/stress-dev.RDS"))
 # Exposure: F2 Isoprostenes
 #Outcome: Child dev at year 1
 Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "iso.pca")             
-####change for t1
 Yvars <- c("sum_who", 
            "z_cdi_say_t2", "z_cdi_und_t2") 
 
