@@ -44,8 +44,8 @@ Wvars3_oragene<-c("laz_t2", "waz_t2", "ageday_t3_oragene", "month_ot3", "cesd_su
 # 
 
 # add hcz and time of day measurement later in pick covariates function 
-W2_F2.W2_anthro <- c(Wvars, Wvars2_F2 ,Wvars2_anthro) %>% unique(.)
-W2_F2.W3_anthro <- c(Wvars, Wvars2_F2 ,Wvars3_anthro, 
+W2_F2.W2_anthro <- c(Wvars, Wvars2_F2, Wvars2_anthro) %>% unique(.)
+W2_F2.W3_anthro <- c(Wvars, Wvars2_F2, Wvars3_anthro, 
                      "laz_t2", "waz_t2") %>% unique(.)
 W2_F2.W23_anthro <- c(Wvars, Wvars2_F2, Wvars2_anthro, Wvars3_anthro)
 # W3_vital.W3_anthro <- c(Wvars, Wvars3_vital,Wvars3_anthro) %>% unique(.)
@@ -63,6 +63,8 @@ pick_covariates <- function(i, j){
   if(grepl("t2_f2", i)){
     if(grepl("_t2_t3", j)){Wset = W2_F2.W23_anthro}
     else if(grepl("_t2", j)){Wset = W2_F2.W2_anthro}
+    else if(grepl("_who", j)){Wset = W2_F2.W2_anthro}
+    else if(grepl("_t3", j)){Wset = W2_F2.W3_anthro}
     else if(grepl("_t3", j)){Wset = W2_F2.W3_anthro}}
   else if(grepl("slope", i)){Wset = c(W3_salimetrics.W3_anthro, "t3_col_time_z01_cont")}
   else if(grepl("residual", i)){Wset = W3_salimetrics.W3_anthro}
@@ -82,8 +84,8 @@ pick_covariates <- function(i, j){
 #Exposure: Quartiles of F2-isoprostanes isomer score Year 1
 #Primary Outcome: WHO Gross motor and CDI score at Year 1
 
-Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "iso.pca")            
-Yvars <- c("sum_who", 
+Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "iso.pca_t2")            
+Yvars <- c("sum_who_t2_t3", 
            "z_cdi_say_t2", "z_cdi_und_t2") 
 
 #Fit models
@@ -137,8 +139,8 @@ saveRDS(H1a_adj_plot_data, paste0(dropboxDir,"results/stress-growth-models/figur
 #Exposure: Quartiles of F2-isoprostanes isomer score Year 1
 #Primary Outcome: EASQ and CDI score at Year 2
 
-Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "iso.pca")            
-Yvars <- c("z_comm_easq", "z_motor_easq", "z_personal_easq", "z_combined_easq", 
+Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_iso.pca")            
+Yvars <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
            "z_cdi_say_t3", "z_cdi_und_t3") 
 
 #Fit models
@@ -192,8 +194,9 @@ saveRDS(H1b_adj_plot_data, paste0(dropboxDir,"results/stress-growth-models/figur
 
 Xvars <- c("t3_cort_slope", "t3_cort_z01", "t3_cort_z03", "t3_saa_slope", "t3_saa_z01", "t3_saa_z02" )  
 
-Yvars <- c("z_comm_easq", "z_motor_easq", "z_personal_easq", "z_combined_easq", 
+Yvars <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
            "z_cdi_say_t3", "z_cdi_und_t3") 
+
 
 #Fit models
 H2_adj_models <- NULL
@@ -247,8 +250,9 @@ saveRDS(H2_adj_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure
 # Mean arterial pressure and heart rate at year 2 v. development at year 2
 
 Xvars <- c("t3_map", "t3_hr_mean")            
-Yvars <- c("z_comm_easq", "z_motor_easq", "z_personal_easq", "z_combined_easq", 
+Yvars <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
            "z_cdi_say_t3", "z_cdi_und_t3") 
+
 
 
 #Fit models
@@ -301,8 +305,9 @@ saveRDS(H3_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-dat
 #Glucocortoic receptor methylation year 2 v. development at year 2
 
 Xvars <- c("t3_gcr_mean", "t3_gcr_cpg12")            
-Yvars <- c("z_comm_easq", "z_motor_easq", "z_personal_easq", "z_combined_easq", 
+Yvars <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
            "z_cdi_say_t3", "z_cdi_und_t3") 
+
 
 #Fit models
 H4_models <- NULL
@@ -348,3 +353,4 @@ saveRDS(H4_res, here("results/adjusted/H4_adj_res.RDS"))
 
 #Save plot data
 saveRDS(H4_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H4_adj_spline_data.RDS"))
+
