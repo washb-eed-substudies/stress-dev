@@ -25,36 +25,19 @@ Wvars3_salimetrics<-c("laz_t2", "waz_t2", "ageday_t3_salimetrics", "month_lt3", 
 Wvars3_oragene<-c("laz_t2", "waz_t2", "ageday_t3_oragene", "month_ot3", "cesd_sum_ee_t3", "pss_sum_mom_t3", "diar7d_t3", "life_viol_any_t3") 
 
 
-#Add in time-varying covariates
-# W<- subset(d, select=Wvars)
-# W2_anthro<- subset(d, select=Wvars2_anthro)
-# W3_anthro<- subset(d, select=Wvars3_anthro)
-# 
-# W2_F2<- subset(d, select=Wvars2_F2)
-# W3_vital<- subset(d, select=Wvars3_vital)
-# W3_salimetrics<- subset(d, select=Wvars3_salimetrics)
-# W3_oragene<- subset(d, select=Wvars3_oragene)
-
-# W2_F2.W2_anthro <- cbind(W2_F2,W2_anthro) %>% subset(., select = which(!duplicated(names(.))))
-# W2_F2.W3_anthro <- cbind(W2_F2,W3_anthro) %>% subset(., select = which(!duplicated(names(.))))
-# W2_F2.W2_anthro.W3_anthro <- cbind(W2_F2,W2_anthro,W3_anthro) %>% subset(., select = which(!duplicated(names(.))))
-# W3_vital.W3_anthro <- cbind(W3_vital,W3_anthro) %>% subset(., select = which(!duplicated(names(.))))
-# W3_salimetrics.W3_anthro <- cbind(W3_salimetrics,W3_anthro) %>% subset(., select = which(!duplicated(names(.))))
-# W3_oragene.W3_anthro <- cbind(W3_oragene,W3_anthro) %>% subset(., select = which(!duplicated(names(.))))
-# 
-
-# add hcz and time of day measurement later in pick covariates function 
+ 
 W2_F2.W2_anthro <- c(Wvars, Wvars2_F2, Wvars2_anthro) %>% unique(.)
 W2_F2.W3_anthro <- c(Wvars, Wvars2_F2, Wvars3_anthro, 
                      "laz_t2", "waz_t2") %>% unique(.)
 W2_F2.W23_anthro <- c(Wvars, Wvars2_F2, Wvars2_anthro, Wvars3_anthro)
-# W3_vital.W3_anthro <- c(Wvars, Wvars3_vital,Wvars3_anthro) %>% unique(.)
-# W3_salimetrics.W3_anthro <- c(Wvars, Wvars3_salimetrics,Wvars3_anthro) %>% unique(.)
-# W3_oragene.W3_anthro <- c(Wvars, Wvars3_oragene,Wvars3_anthro) %>% unique(.)
+
+
 W3_vital.W3_anthro <- c(Wvars, Wvars3_vital, Wvars3_anthro) %>% unique(.)
 W3_salimetrics.W3_anthro <- c(Wvars, Wvars3_salimetrics, Wvars3_anthro) %>% unique(.)
 W3_oragene.W3_anthro <- c(Wvars, Wvars3_oragene, Wvars3_anthro) %>% unique(.)
 
+
+#pick covariates function
 
 pick_covariates <- function(i, j){
   # i is exposure as string
@@ -134,6 +117,7 @@ saveRDS(H1a_adj_res, here("results/adjusted/H1a_adj_res.RDS"))
 
 #Save plot data
 saveRDS(H1a_adj_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H1a_adj_spline_data.RDS"))
+
 
 ######H1b
 #Exposure: Quartiles of F2-isoprostanes isomer score Year 1
@@ -353,4 +337,3 @@ saveRDS(H4_res, here("results/adjusted/H4_adj_res.RDS"))
 
 #Save plot data
 saveRDS(H4_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H4_adj_spline_data.RDS"))
-
