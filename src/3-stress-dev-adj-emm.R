@@ -93,9 +93,9 @@ for(i in Xvars){
 
 
 #Get primary contrasts
-H1a_adj_emm_emm_res <- NULL
-for(i in 1:nrow(H1a_adj_emm_emm_models)){
-  res <- data.frame(X=H1a_adj_emm_emm_models$X[i], Y=H1a_adj_emm_models$Y[i])
+H1a_adj_emm_res <- NULL
+for(i in 1:nrow(H1a_adj_emm_models)){
+  res <- data.frame(X=H1a_adj_emm_models$X[i], Y=H1a_adj_emm_models$Y[i])
   preds <- predict_gam_diff(fit=H1a_adj_emm_models$fit[i][[1]], d=H1a_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
   H1a_adj_emm_res <-  bind_rows(H1a_adj_emm_res , preds$res)
 }
@@ -153,7 +153,7 @@ for(i in Xvars){
 
 
 #Get primary contrasts
-H1b_adj_emm_emm_res <- NULL
+H1b_adj_emm_res <- NULL
 for(i in 1:nrow(H1b_adj_emm_models)){
   res <- data.frame(X=H1b_adj_emm_models$X[i], Y=H1b_adj_emm_models$Y[i])
   preds <- predict_gam_diff(fit=H1b_adj_emm_models$fit[i][[1]], d=H1b_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
