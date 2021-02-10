@@ -67,7 +67,7 @@ pick_covariates <- function(i, j){
 #Exposure: Quartiles of F2-isoprostanes isomer score Year 1
 #Primary Outcome: WHO Gross motor and CDI score at Year 1
 
-Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "iso.pca_t2")            
+Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")            
 Yvars <- c("sum_who_t2_t3", 
            "z_cdi_say_t2", "z_cdi_und_t2") 
 
@@ -123,7 +123,7 @@ saveRDS(H1a_adj_plot_data, paste0(dropboxDir,"results/stress-growth-models/figur
 #Exposure: Quartiles of F2-isoprostanes isomer score Year 1
 #Primary Outcome: EASQ and CDI score at Year 2
 
-Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_iso.pca")            
+Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")            
 Yvars <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
            "z_cdi_say_t3", "z_cdi_und_t3") 
 
