@@ -6,7 +6,7 @@ rm(list=ls())
 source(here::here("0-config.R"))
 
 #Load stress-growth data
-d<-readRDS("data/stress_growth_data.RDS")
+d<-readRDS(paste0(dropboxDir, "Data/Cleaned/Andrew/stress_growth_data.RDS"))
 
 d <- d %>%
   mutate(
@@ -15,7 +15,7 @@ d <- d %>%
   )
 
 #Load development data
-dev <- readRDS("data/bangladesh-development.RDS")
+dev <-readRDS(paste0(dropboxDir, "Data/Cleaned/Andrew/bangladesh-development.RDS"))
 
 dev <- dev %>%
   mutate(
