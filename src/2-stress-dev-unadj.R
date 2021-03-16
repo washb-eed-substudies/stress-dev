@@ -6,6 +6,7 @@ source(here::here("0-config.R"))
 
 d <- readRDS(paste0(dropboxDir, "Data/Cleaned/Audrie/stress-dev.RDS"))
 
+
 #Example:
 
 #Fit GAM model with random effects for childid
