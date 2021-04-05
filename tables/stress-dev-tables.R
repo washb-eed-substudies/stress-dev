@@ -1,12 +1,14 @@
 rm(list=ls())
 
-library('flextable')
+
 library('officer')
 source(here::here("0-config.R"))
 library('here')
 library('data.table')
-
-
+# install.packages("gdtools", type = "source")
+# library('flextable')
+# install.packages("flextable", type = "binary")
+# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # load enrollment characteristics and results
 d <- read.csv(paste0(dropboxDir, "Data/Cleaned/Audrie/bangladesh-dm-ee-stress-growth-covariates-stresslab-anthro.csv"))
