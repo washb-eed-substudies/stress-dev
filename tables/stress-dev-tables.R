@@ -6,6 +6,8 @@ source(here::here("0-config.R"))
 library('here')
 library('data.table')
 
+
+
 # load enrollment characteristics and results
 d <- read.csv(paste0(dropboxDir, "Data/Cleaned/Audrie/bangladesh-dm-ee-stress-growth-covariates-stresslab-anthro.csv"))
 
@@ -103,13 +105,14 @@ names(tbl1)<- c("","","","n (%) or median (IQR)")
 
 #### Table 2 ####
 
-exposure <- c("t2_f2_8ip", "t2_f2_8ip","t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")
+#previously, there were two t2_f2_8ip, i edited it so tghat there is now "t2_f2_8ip", "t2_f2_23d" based on my ipv, stress, dep - child stress tables 
+exposure <- c("t2_f2_8ip", "t2_f2_23d","t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")
 outcome <- c("sum_who", "z_cdi_say_t2","z_cdi_und_t2","z_comm_easq", "z_motor_easq","z_personal_easq","z_combined_easq", 
              "z_cdi_say_t3","z_cdi_und_t3")
 expo_var <- c("IPF(2a)-III", "2,3-dinor-iPF(2a)-III", "iPF(2a)-VI", "8,12-iso-iPF(2a)-VI", "Combined urinary oxidative stress biomarkers")
 out_var <- c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressive language Z-score Year 1","CDI comprehension Z-score Year 1",
              "EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
-             "CDI expressive language Z-score Year 2","CDI comprehension Z-score Year 2")uni
+             "CDI expressive language Z-score Year 2","CDI comprehension Z-score Year 2")
 
 tbl2 <- growth_tbl("IPV", expo_var, out_var, exposure, outcome, H1a, H1a_adj,H1a_adj_emm, T)
 tbl2flex <- growth_tbl_flex("IPV", expo_var, out_var, exposure, outcome, H1a, H1a_adj,H1a_adj_emm, T)
