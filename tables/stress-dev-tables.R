@@ -32,25 +32,28 @@ H4_adj <- readRDS(here('results/adjusted/H4_adj_res.RDS'))
 H4_adj_emm <- readRDS(here('results/adjusted/H4_adj_emm_res.RDS'))
 
 #### Functions for growth tables ####
-source(here::here("table-functions.R"))
-# format for export
-flextbl<-flextable(tbl, col_keys=names(tbl))
-flextbl <- set_header_labels(flextbl,
-                             values = list("V1" = " ", "V2" = " ", "V3" = " ", "V4" = " ", "V5" = " ",
-                                           "V6" = "Predicted Outcome at 25th Percentile", "V7" = "Predicted Outcome at 75th Percentile", "V8" = "Coefficient (95% CI)", "V9" = "P-value", "V10" = "FDR Corrected P-value",
-                                           "V11" = "Predicted Outcome at 25th Percentile", "V12" = "Predicted Outcome at 75th Percentile", "V13" = "Coefficient (95% CI)", "V14" = "P-value", "V15" = "FDR Corrected P-value"))
-flextbl <- add_header_row(flextbl, values = c("","","","","", "Unadjusted", "Fully adjusted"), colwidths=c(1,1,1,1,1,5,5))
+source(here::here("tables/table-functions.R"))
+
+#COMMENTED FOLLOWING LINES AS THEY LED TO AN ERROR - ADDITIONAL TROUBLESHOOTING MAY BE NECEESSARY
+
+# # format for export
+# flextbl<-flextable(tbl, col_keys=names(tbl))
+# flextbl <- set_header_labels(flextbl,
+#                              values = list("V1" = " ", "V2" = " ", "V3" = " ", "V4" = " ", "V5" = " ",
+#                                            "V6" = "Predicted Outcome at 25th Percentile", "V7" = "Predicted Outcome at 75th Percentile", "V8" = "Coefficient (95% CI)", "V9" = "P-value", "V10" = "FDR Corrected P-value",
+#                                            "V11" = "Predicted Outcome at 25th Percentile", "V12" = "Predicted Outcome at 75th Percentile", "V13" = "Coefficient (95% CI)", "V14" = "P-value", "V15" = "FDR Corrected P-value"))
+# flextbl <- add_header_row(flextbl, values = c("","","","","", "Unadjusted", "Fully adjusted"), colwidths=c(1,1,1,1,1,5,5))
+# # flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
+# flextbl <- add_header_row(flextbl, values = c(name, "Outcome","N","25th Percentile","75th Percentile", "Outcome, 75th Percentile v. 25th Percentile"), colwidths=c(1,1,1,1,1,10))
+# # flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
+# flextbl <- hline(flextbl, part="header", border=fp_border(color="black"))
+# flextbl <- hline_bottom(flextbl, part="body", border=fp_border(color="black"))
 # flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
-flextbl <- add_header_row(flextbl, values = c(name, "Outcome","N","25th Percentile","75th Percentile", "Outcome, 75th Percentile v. 25th Percentile"), colwidths=c(1,1,1,1,1,10))
-# flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
-flextbl <- hline(flextbl, part="header", border=fp_border(color="black"))
-flextbl <- hline_bottom(flextbl, part="body", border=fp_border(color="black"))
-flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
-flextbl <- align(flextbl, align = "center", part = "all")
-flextbl <- align(flextbl, j = c(1, 2), align = "left", part="all")
-flextbl <- autofit(flextbl, part = "all")
-flextbl <- fit_to_width(flextbl, max_width=8)
-flextbl
+# flextbl <- align(flextbl, align = "center", part = "all")
+# flextbl <- align(flextbl, j = c(1, 2), align = "left", part="all")
+# flextbl <- autofit(flextbl, part = "all")
+# flextbl <- fit_to_width(flextbl, max_width=8)
+# flextbl
 
 
 
