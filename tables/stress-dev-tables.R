@@ -1,10 +1,18 @@
 rm(list=ls())
 
-
-library('officer')
-source(here::here("0-config.R"))
+library('flextable')
 library('here')
+library('officer')
 library('data.table')
+source(here::here("0-config.R")) 
+source(here::here("tables/table-functions.R"))
+here::here()
+
+
+#library('officer')
+#source(here::here("0-config.R"))
+#library('here')
+#library('data.table')
 # install.packages("gdtools", type = "source")
 # library('flextable')
 # install.packages("flextable", type = "binary")
@@ -32,9 +40,10 @@ H4_adj <- readRDS(here('results/adjusted/H4_adj_res.RDS'))
 H4_adj_emm <- readRDS(here('results/adjusted/H4_adj_emm_res.RDS'))
 
 #### Functions for growth tables ####
-source(here::here("table-functions.R"))
+source(here::here("tables/table-functions.R"))
 # format for export
-flextbl<-flextable(tbl, col_keys=names(tbl))
+  # flextbl<-flextable(as.data.frame(tbl), col_keys=names(tbl))
+  flextbl<-flextable(tbl, col_keys=names(tbl))
 flextbl <- set_header_labels(flextbl,
                              values = list("V1" = " ", "V2" = " ", "V3" = " ", "V4" = " ", "V5" = " ",
                                            "V6" = "Predicted Outcome at 25th Percentile", "V7" = "Predicted Outcome at 75th Percentile", "V8" = "Coefficient (95% CI)", "V9" = "P-value", "V10" = "FDR Corrected P-value",
