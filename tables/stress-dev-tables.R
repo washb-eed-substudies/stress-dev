@@ -5,6 +5,8 @@ library('here')
 library('officer')
 library('data.table')
 source(here::here("0-config.R")) 
+  #ERROR: "there is no package called washb"
+  # go to file and comment out the line for library washb
 source(here::here("tables/table-functions.R"))
 here::here()
 
@@ -19,7 +21,7 @@ here::here()
 # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # load enrollment characteristics and results
-d <- read.csv(paste0(dropboxDir, "Data/Cleaned/Audrie/bangladesh-dm-ee-stress-growth-covariates-stresslab-anthro.csv"))
+# d <- read.csv(paste0(dropboxDir, "Data/Cleaned/Audrie/bangladesh-dm-ee-stress-growth-covariates-stresslab-anthro.csv"))
 
 #Unadjusted
 H1a <- readRDS(here('results/unadjusted/H1a_res.RDS'))
@@ -41,25 +43,29 @@ H4_adj_emm <- readRDS(here('results/adjusted/H4_adj_emm_res.RDS'))
 
 #### Functions for growth tables ####
 source(here::here("tables/table-functions.R"))
-# format for export
-  # flextbl<-flextable(as.data.frame(tbl), col_keys=names(tbl))
-  flextbl<-flextable(tbl, col_keys=names(tbl))
-flextbl <- set_header_labels(flextbl,
-                             values = list("V1" = " ", "V2" = " ", "V3" = " ", "V4" = " ", "V5" = " ",
-                                           "V6" = "Predicted Outcome at 25th Percentile", "V7" = "Predicted Outcome at 75th Percentile", "V8" = "Coefficient (95% CI)", "V9" = "P-value", "V10" = "FDR Corrected P-value",
-                                           "V11" = "Predicted Outcome at 25th Percentile", "V12" = "Predicted Outcome at 75th Percentile", "V13" = "Coefficient (95% CI)", "V14" = "P-value", "V15" = "FDR Corrected P-value"))
-flextbl <- add_header_row(flextbl, values = c("","","","","", "Unadjusted", "Fully adjusted"), colwidths=c(1,1,1,1,1,5,5))
+
+
+#COMMENTED FOLLOWING LINES AS THEY LED TO AN ERROR - ADDITIONAL TROUBLESHOOTING MAY BE NECEESSARY
+
+# # format for export
+# flextbl<-flextable(tbl, col_keys=names(tbl))
+# flextbl <- set_header_labels(flextbl,
+#                              values = list("V1" = " ", "V2" = " ", "V3" = " ", "V4" = " ", "V5" = " ",
+#                                            "V6" = "Predicted Outcome at 25th Percentile", "V7" = "Predicted Outcome at 75th Percentile", "V8" = "Coefficient (95% CI)", "V9" = "P-value", "V10" = "FDR Corrected P-value",
+#                                            "V11" = "Predicted Outcome at 25th Percentile", "V12" = "Predicted Outcome at 75th Percentile", "V13" = "Coefficient (95% CI)", "V14" = "P-value", "V15" = "FDR Corrected P-value"))
+# flextbl <- add_header_row(flextbl, values = c("","","","","", "Unadjusted", "Fully adjusted"), colwidths=c(1,1,1,1,1,5,5))
+# # flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
+# flextbl <- add_header_row(flextbl, values = c(name, "Outcome","N","25th Percentile","75th Percentile", "Outcome, 75th Percentile v. 25th Percentile"), colwidths=c(1,1,1,1,1,10))
+# # flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
+# flextbl <- hline(flextbl, part="header", border=fp_border(color="black"))
+# flextbl <- hline_bottom(flextbl, part="body", border=fp_border(color="black"))
+#>>>>>>> ec8753a515e35971430abe99d2494499e5fd1a6b
 # flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
-flextbl <- add_header_row(flextbl, values = c(name, "Outcome","N","25th Percentile","75th Percentile", "Outcome, 75th Percentile v. 25th Percentile"), colwidths=c(1,1,1,1,1,10))
-# flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
-flextbl <- hline(flextbl, part="header", border=fp_border(color="black"))
-flextbl <- hline_bottom(flextbl, part="body", border=fp_border(color="black"))
-flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
-flextbl <- align(flextbl, align = "center", part = "all")
-flextbl <- align(flextbl, j = c(1, 2), align = "left", part="all")
-flextbl <- autofit(flextbl, part = "all")
-flextbl <- fit_to_width(flextbl, max_width=8)
-flextbl
+# flextbl <- align(flextbl, align = "center", part = "all")
+# flextbl <- align(flextbl, j = c(1, 2), align = "left", part="all")
+# flextbl <- autofit(flextbl, part = "all")
+# flextbl <- fit_to_width(flextbl, max_width=8)
+# flextbl
 
 
 
@@ -114,6 +120,7 @@ tbl1flex <- fit_to_width(tbl1flex, max_width=8)
 names(tbl1)<- c("","","","n (%) or median (IQR)")
 
 
+#FOR GATES MILESTONES
 #### Table 2 ####
 
 #previously, there were two t2_f2_8ip, i edited it so tghat there is now "t2_f2_8ip", "t2_f2_23d" based on my ipv, stress, dep - child stress tables 
@@ -125,8 +132,8 @@ out_var <- c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressi
              "EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score Year 2","CDI comprehension Z-score Year 2")
 
-tbl2 <- growth_tbl("IPV", expo_var, out_var, exposure, outcome, H1a, H1a_adj,H1a_adj_emm, T)
-tbl2flex <- growth_tbl_flex("IPV", expo_var, out_var, exposure, outcome, H1a, H1a_adj,H1a_adj_emm, T)
+tbl2 <- growth_tbl("IPV", expo_var, out_var, exposure, outcome, H1a, H1a_adj, T)
+tbl2flex <- growth_tbl_flex("IPV", expo_var, out_var, exposure, outcome, H1a, H1a_adj, T)
 
 #### Table 3 ####
 exposure <- c("cesd_sum_t2", "cesd_sum_ee_t3", "cesd_sum_t2_binary", "cesd_sum_ee_t3_binary")
@@ -134,8 +141,8 @@ outcome <- c("TS_t2_Z","TS_t3_Z","delta_TS_Z")
 expo_var <- c("Maternal Depression Year 1", "Maternal Depression Year 2", "Maternal Depression Year 1 Binary", "Maternal Depression Year 2 Binary")
 out_var <- c("Child TL Z-score Year 1","Child TL Z-score Year 2","Change in Child TL Z-Score")
 
-tbl3 <- growth_tbl("Maternal Depression", expo_var, out_var, exposure, outcome, H2, H2adj, T)
-tbl3flex <- growth_tbl_flex("Maternal Depression", expo_var, out_var, exposure, outcome, H2, H2adj, T)
+tbl3 <- growth_tbl("Maternal Depression", expo_var, out_var, exposure, outcome, H2, H2_adj, T)
+tbl3flex <- growth_tbl_flex("Maternal Depression", expo_var, out_var, exposure, outcome, H2, H2_adj, T)
 
 
 #### Table 4 ####
@@ -144,8 +151,8 @@ outcome <- c("TS_t3_Z")
 expo_var <- c("Maternal Perceived Stress", "Paternal Perceived Stress")
 out_var <- c("Child TL Z-score Year 2")
 
-tbl4 <- growth_tbl("Maternal Stress", expo_var, out_var, exposure, outcome, H3, H3adj, T)
-tbl4flex <- growth_tbl_flex("Maternal Stress", expo_var, out_var, exposure, outcome, H3, H3adj, T)
+tbl4 <- growth_tbl("Maternal Stress", expo_var, out_var, exposure, outcome, H3, H3_adj, T)
+tbl4flex <- growth_tbl_flex("Maternal Stress", expo_var, out_var, exposure, outcome, H3, H3_adj, T)
 
 
 #### SAVE TABLES ####
