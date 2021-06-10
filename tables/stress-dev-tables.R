@@ -161,5 +161,5 @@ write.csv(tbl2, here('tables/ipv-dep-stress-telo-table1.csv'))
 write.csv(tbl3, here('tables/ipv-dep-stress-telo-table2.csv'))
 write.csv(tbl4, here('tables/ipv-dep-stress-telo-table3.csv'))
 
-save_as_docx( "Table 1" = tbl2flex, "Table 2" = tbl3flex, "Table 3" = tbl4flex, path='/Users/lgg/Documents/Research\ Group/IPV\ and\ Telomere/ipv-dep-stress-telo-tables.docx')
+save_as_docx( "Table 1" = tbl2flex, "Table 2" = tbl3flex, "Table 3" = tbl4flex, path='tables/ipv-dep-stress-telo-tables.docx')
 
