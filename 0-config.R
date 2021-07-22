@@ -8,7 +8,7 @@
 #-------------------------------------
 library(tidyverse)
 library(haven)
-# library(washb)
+library(washb)
 library(foreign)
 library(data.table)
 library(tmle)
@@ -16,6 +16,7 @@ library(SuperLearner)
 library(devtools)
 library(kableExtra)
 library(here)
+library(washbgam)
 
 if(!require(faraway)){
   install.packages("faraway") 
