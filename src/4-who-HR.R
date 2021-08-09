@@ -1,9 +1,7 @@
 # WHO Hazard Ratios
-
 rm(list=ls())
 
 source(here::here("0-config.R"))
-
 d <- readRDS(paste0(dropboxDir, "Data/Cleaned/Audrie/stress-dev.RDS"))
 
 #Unadjusted
@@ -15,12 +13,11 @@ Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")
 Yvars <- c("sit_nosupp", "crawl_nosupp", "stand_supp",
            "walk_supp", "stand_nosupp", "walk_nosupp" )
 
-?fit_HR_GAM()
 #Fit models
 H1_who_models <- NULL
 for(i in Xvars){
   for(j in Yvars){
-    res_unadj <- fit_HR_GAM(d=d, X=i, Y=j, age = 'agedays_motor', W=NULL)
+    res_unadj <- fit_HR_GAM(d=d, X=i, Y=j, W=NULL)
     res <- data.frame(X=i, Y=j, fit=I(list(res_unadj$fit)), dat=I(list(res_unadj$dat)))
     H1_who_models <- bind_rows(H1_who_models, res)
   }

@@ -6,6 +6,9 @@
 # source base functions
 # load libraries
 #-------------------------------------
+#library(devtools)
+#install_github("ben-arnold/washb", force = TRUE)  
+#install_github("washb-eed-substudies/washbgam") 
 library(tidyverse)
 library(haven)
 library(washb)
