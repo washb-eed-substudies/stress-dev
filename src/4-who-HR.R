@@ -8,9 +8,9 @@ d <- readRDS(paste0(dropboxDir, "Data/Cleaned/Audrie/stress-dev.RDS"))
 
 #Hypothesis 1A
 
-Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")    
+Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "iso.pca")    
 
-Yvars <- c("who_sit_nosupp", "who_crawl_nosupp", "who_stand_supp",
+Yvars <- c("who_sit", "who_crawl", "who_stand_supp",
            "who_walk_supp", "who_stand_nosupp", "who_walk_nosup" )
 
 #Fit models
@@ -60,34 +60,22 @@ saveRDS(H1_who_plot_data, here("figure-data/H1_who_unadj_spline_data.RDS"))
 
 #Set list of adjustment variables
 #Make vectors of adjustment variable names
-Wvars<-c("sex","birthord", "momage","momheight","momedu", 
+Wvars<-c("birthord", "momage","momheight","momedu", 
          "hfiacat", "Nlt18","Ncomp", "watmin", "walls", "floor", "HHwealth",
-         "cesd_sum_t2", "diar7d_t2", "tr", "life_viol_any_t3")
-
-Wvars[!(Wvars %in% colnames(d))]
-
-
-
-#Add in time varying covariates:
-
-Wvars2_anthro<-c("ageday_at2", "month_at2")
-
-Wvars2_F2<-c("ageday_ut2", "month_ut2") 
-
-
+         "cesd_sum_t2", "diar7d_t2", "tr", "life_viol_any_t3", "month_at2", "month_ut2")
 
 # --------------------------------------------------------------------------
 #### Hypothesis 1a ####
-
-H1a_W <- c(Wvars, Wvars2_anthro, Wvars2_F2)
-
-##########################
+H1a_W_forced <- c("ageday_ut2", "sex")
+#Dropped "ageday_at2" due to collinearity
 
 ##########################
 
-Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")              
+##########################
 
-Yvars <- c("who_sit_nosupp", "who_crawl_nosupp", "who_stand_supp",
+Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "iso.pca")    
+
+Yvars <- c("who_sit", "who_crawl", "who_stand_supp",
            "who_walk_supp", "who_stand_nosupp", "who_walk_nosup" )
 
 #Fit models
@@ -96,9 +84,10 @@ for(i in Xvars){
   for(j in Yvars){
     print(i)
     print(j)
-    res_adj <- fit_HR_GAM(d=d, X=i, Y=j, age = "agedays_motor", 
-                          W=H1a_W, 
-                          forcedW = NULL,
+    res_adj <- fit_HR_GAM(d=d, X=i, Y=j, 
+                          age = "agedays_motor", 
+                          W= Wvars, 
+                          #forcedW = H1a_W_forced,
                           V = NULL,
                           id = "childid",
                           pval = 0.2,
