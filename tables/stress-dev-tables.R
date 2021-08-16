@@ -9,7 +9,7 @@ source(here::here("0-config.R"))
   # go to file and comment out the line for library washb
 source(here::here("tables/table-functions.R"))
 here::here()
-
+d <- readRDS(paste0(dropboxDir, "Data/Cleaned/Audrie/stress-dev.RDS"))
 
 #library('officer')
 #source(here::here("0-config.R"))
@@ -28,6 +28,7 @@ H1a <- readRDS(here('results/unadjusted/H1a_res.RDS'))
 H1b <- readRDS(here('results/unadjusted/H1b_res.RDS'))
 H2 <- readRDS(here('results/unadjusted/H2_res.RDS'))
 H3 <- readRDS(here('results/unadjusted/H3_res.RDS'))
+H4 <- readRDS(here('results/unadjusted/H4_res.RDS'))
 
 #Adjusted
 H1a_adj <- readRDS(here('results/adjusted/H1a_adj_res.RDS'))
@@ -40,6 +41,11 @@ H3_adj <- readRDS(here('results/adjusted/H3_adj_res.RDS'))
 H3_adj_emm <- readRDS(here('results/adjusted/H3_adj_emm_res.RDS'))
 H4_adj <- readRDS(here('results/adjusted/H4_adj_res.RDS'))
 H4_adj_emm <- readRDS(here('results/adjusted/H4_adj_emm_res.RDS'))
+
+#WHO Hazard Ratios
+
+H1a_who <- readRDS(here('results/unadjusted/H1_who_res.RDS'))
+H1a_who_adj <- readRDS(here('results/adjusted/H1a_who_adj_res.RDS'))
 
 #### Functions for growth tables ####
 source(here::here("tables/table-functions.R"))
@@ -132,34 +138,58 @@ out_var <- c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressi
              "EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score Year 2","CDI comprehension Z-score Year 2")
 
-tbl2 <- growth_tbl("IPV", expo_var, out_var, exposure, outcome, H1a, H1a_adj, T)
-tbl2flex <- growth_tbl_flex("IPV", expo_var, out_var, exposure, outcome, H1a, H1a_adj, T)
+tbl2 <- growth_tbl("Urinary isoprostanes at Year 1 and child development at Years 1 and 2", expo_var, out_var, exposure, outcome, H1a, H1a_adj)
+tbl2flex <- growth_tbl_flex("Urinary isoprostanes at Year 1 and child development at Years 1 and 2", expo_var, out_var, exposure, outcome, H1a, H1a_adj)
+
 
 #### Table 3 ####
-exposure <- c("cesd_sum_t2", "cesd_sum_ee_t3", "cesd_sum_t2_binary", "cesd_sum_ee_t3_binary")
-outcome <- c("TS_t2_Z","TS_t3_Z","delta_TS_Z")
-expo_var <- c("Maternal Depression Year 1", "Maternal Depression Year 2", "Maternal Depression Year 1 Binary", "Maternal Depression Year 2 Binary")
-out_var <- c("Child TL Z-score Year 1","Child TL Z-score Year 2","Change in Child TL Z-Score")
+#Hypothesis 2#
+exposure <- c("t3_cort_slope", "t3_cort_z01", "t3_cort_z03", "t3_saa_slope", "t3_saa_z01", "t3_saa_z02" )
+outcome <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
+             "z_cdi_say_t3", "z_cdi_und_t3") 
 
-tbl3 <- growth_tbl("Maternal Depression", expo_var, out_var, exposure, outcome, H2, H2_adj, T)
-tbl3flex <- growth_tbl_flex("Maternal Depression", expo_var, out_var, exposure, outcome, H2, H2_adj, T)
+
+expo_var <- c("Cortisol Reactivity", "Pre-stressor Cortisol", "Post-stressor Cortisol", "sAA Reactivity", "Pre-stressor sAA", "Post-stressor sAA")
+out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
+             "CDI expressive language Z-score","CDI comprehension Z-score")
+
+
+tbl3 <- growth_tbl("Salivary Stress Biomarkers and Child Development at Year 2", expo_var, out_var, exposure, outcome, H2, H2_adj)
+tbl3flex <- growth_tbl_flex("Salivary Stress Biomarkers and Development at Year 2", expo_var, out_var, exposure, outcome, H2, H2_adj)
 
 
 #### Table 4 ####
-exposure <- c("pss_sum_mom_t3", "pss_sum_dad_t3")
-outcome <- c("TS_t3_Z")
-expo_var <- c("Maternal Perceived Stress", "Paternal Perceived Stress")
-out_var <- c("Child TL Z-score Year 2")
+#Hypothesis 3#
+exposure <- c("t3_map", "t3_hr_mean")  
+outcome <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
+             "z_cdi_say_t3", "z_cdi_und_t3") 
+expo_var <- c("Mean arterial pressure", "Mean Resting Heart Rate")
+out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
+             "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl4 <- growth_tbl("Maternal Stress", expo_var, out_var, exposure, outcome, H3, H3_adj, T)
-tbl4flex <- growth_tbl_flex("Maternal Stress", expo_var, out_var, exposure, outcome, H3, H3_adj, T)
+tbl4 <- growth_tbl("Mean arterial pressure and heart rate at year 2 v. development at year 2", expo_var, out_var, exposure, outcome, H3, H3_adj)
+tbl4flex <- growth_tbl_flex("Mean arterial pressure and heart rate at year 2 v. development at year 2", expo_var, out_var, exposure, outcome, H3, H3_adj)
+
+#### Table 5 ####
+#Hypothesis 4#
+
+exposure <- c("t3_gcr_mean", "t3_gcr_cpg12")   
+outcome <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
+             "z_cdi_say_t3", "z_cdi_und_t3") 
+expo_var <- c("Mean Overall Percentage Glucocorticoid Receptor Methylation", "Percentage methylation at NGFI-A transcription factor binding site (CpG site #12)")
+out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
+             "CDI expressive language Z-score","CDI comprehension Z-score")
+
+tbl5 <- growth_tbl("Glucocortoic receptor methylation and child development at Year 2", expo_var, out_var, exposure, outcome, H4, H4_adj)
+tbl5flex <- growth_tbl_flex("Glucocortoic receptor methylation and child development at Year 2", expo_var, out_var, exposure, outcome, H4, H4_adj)
 
 
 #### SAVE TABLES ####
+write.csv(tbl1, here('tables/stress-dev-table1.csv'))
+write.csv(tbl2, here('tables/stress-dev-table2.csv'))
+write.csv(tbl3, here('tables/stress-dev-table3.csv'))
+write.csv(tbl4, here('tables/stress-dev-table4.csv'))
+write.csv(tbl5, here('tables/stress-dev-table5.csv'))
 
-write.csv(tbl2, here('tables/ipv-dep-stress-telo-table1.csv'))
-write.csv(tbl3, here('tables/ipv-dep-stress-telo-table2.csv'))
-write.csv(tbl4, here('tables/ipv-dep-stress-telo-table3.csv'))
-
-save_as_docx( "Table 1" = tbl2flex, "Table 2" = tbl3flex, "Table 3" = tbl4flex, path='tables/ipv-dep-stress-telo-tables.docx')
+save_as_docx("Table 1" = tbl1flex, "Table 2" = tbl2flex, "Table 3" = tbl3flex, "Table 4" = tbl4flex, "Table 5" = tbl5flex,  path='tables/stress-dev-tables.docx')
 
