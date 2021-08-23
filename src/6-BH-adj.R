@@ -22,18 +22,29 @@ H2_adj_emm_res <- readRDS(here('results/adjusted/H2_adj_emm_res.RDS'))
 H3_adj_emm_res <- readRDS(here('results/adjusted/H3_adj_emm_res.RDS'))
 H4_adj_emm_res <- readRDS(here('results/adjusted/H4_adj_emm_res.RDS'))
 
+#WHO Hazard Ratios
+
+H1a_who <- readRDS(here('results/unadjusted/H1_who_res.RDS'))
+H1a_who_adj <- readRDS(here('results/adjusted/H1a_who_adj_res.RDS'))
+H1a_who_adj_emm <- readRDS(here('results/adjusted/H1a_who_adj_emm_res.RDS'))
+
 H1a_res$H = 1
 H1a_res$subH = "a"
 H1b_res$H = 1
 H1b_res$subH = "b"
+H1a_who$H = 1
+H1a_who$subH = "c"
 H2_res$H = 2
 H3_res$H = 3
 H4_res$H = 4
+
 
 H1a_adj_res$H = 1
 H1a_adj_res$subH = "a"
 H1b_adj_res$H = 1
 H1b_adj_res$subH = "b"
+H1a_who_adj$H = 1
+H1a_who$subH = "c"
 H2_adj_res$H = 2
 H3_adj_res$H = 3
 H4_adj_res$H = 4
@@ -42,6 +53,8 @@ H1a_adj_emm_res$H = 1
 H1a_adj_emm_res$subH = "a"
 H1b_adj_emm_res$H = 1
 H1b_adj_emm_res$subH = "b"
+H1a_who_adj_emm$H = 1
+H1a_who_adj_emm$subH = "c"
 H2_adj_emm_res$H = 2
 H3_adj_emm_res$H = 3
 H4_adj_emm_res$H = 4

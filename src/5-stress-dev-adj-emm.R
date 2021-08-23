@@ -113,17 +113,17 @@ for(i in 1:nrow(H1a_adj_emm_models)){
 
 
 #Save models
-#saveRDS(H1a_adj_emm_models, paste0(dropboxDir,"results/stress-growth-models/models/H1a_adj_emm_models.RDS"))
+#saveRDS(H1a_adj_emm_models, paste0(dropboxDir,"results/stress-dev-models/models/H1a_adj_emm_models.RDS"))
 
 #Save results
 saveRDS(H1a_adj_emm_res, here("results/adjusted/H1a_adj_emm_res.RDS"))
 
 
 #Save plots
-#saveRDS(H1a_adj_emm_plot_list, paste0(dropboxDir,"results/stress-growth-models/figure-objects/H1a_adj_emm_splines.RDS"))
+#saveRDS(H1a_adj_emm_plot_list, paste0(dropboxDir,"results/stress-dev-models/figure-objects/H1a_adj_emm_splines.RDS"))
 
 #Save plot data
-saveRDS(H1a_adj_emm_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H1a_adj_emm_spline_data.RDS"))
+saveRDS(H1a_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H1a_adj_emm_spline_data.RDS"))
 
 
 ######H1b
@@ -173,17 +173,17 @@ for(i in 1:nrow(H1b_adj_emm_models)){
 
 
 #Save models
-#saveRDS(H1b_adj_emm_models, paste0(dropboxDir,"results/stress-growth-models/models/H1b_adj_emm_models.RDS"))
+#saveRDS(H1b_adj_emm_models, paste0(dropboxDir,"results/stress-dev-models/models/H1b_adj_emm_models.RDS"))
 
 #Save results
 saveRDS(H1b_adj_emm_res, here("results/adjusted/H1b_adj_emm_res.RDS"))
 
 
 #Save plots
-#saveRDS(H1b_adj_emm_plot_list, paste0(dropboxDir,"results/stress-growth-models/figure-objects/H1b_adj_emm_splines.RDS"))
+#saveRDS(H1b_adj_emm_plot_list, paste0(dropboxDir,"results/stress-dev-models/figure-objects/H1b_adj_emm_splines.RDS"))
 
 #Save plot data
-saveRDS(H1b_adj_emm_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H1b_adj_emm_spline_data.RDS"))
+saveRDS(H1b_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H1b_adj_emm_spline_data.RDS"))
 
 ## Hypothesis 2
 
@@ -230,17 +230,17 @@ for(i in 1:nrow(H2_adj_emm_models)){
 
 
 #Save models
-#saveRDS(H2_adj_emm_models, paste0(dropboxDir,"results/stress-growth-models/models/adj_H2_adj_emm_models.RDS"))
+#saveRDS(H2_adj_emm_models, paste0(dropboxDir,"results/stress-dev-models/models/adj_H2_adj_emm_models.RDS"))
 
 #Save results
 saveRDS(H2_adj_emm_res, here("results/adjusted/H2_adj_emm_res.RDS"))
 
 
 #Save plots
-#saveRDS(H2_adj_emm_plot_list, paste0(dropboxDir,"results/stress-growth-models/figure-objects/H2_adj_emm_splines.RDS"))
+#saveRDS(H2_adj_emm_plot_list, paste0(dropboxDir,"results/stress-dev-models/figure-objects/H2_adj_emm_splines.RDS"))
 
 #Save plot data
-saveRDS(H2_adj_emm_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H2_adj_emm_spline_data.RDS"))
+saveRDS(H2_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H2_adj_emm_spline_data.RDS"))
 
 
 
@@ -289,17 +289,17 @@ for(i in 1:nrow(H3_adj_emm_models)){
 
 
 #Save models
-#saveRDS(H3_adj_emm_models, paste0(dropboxDir,"results/stress-growth-models/models/adj_H3_adj_emm_models.RDS"))
+#saveRDS(H3_adj_emm_models, paste0(dropboxDir,"results/stress-dev-models/models/adj_H3_adj_emm_models.RDS"))
 
 #Save results
 saveRDS(H3_adj_emm_res, here("results/adjusted/H3_adj_emm_res.RDS"))
 
 
 #Save plots
-#saveRDS(H3_adj_emm_plot_list, paste0(dropboxDir,"results/stress-growth-models/figure-objects/H3_adj_emm_splines.RDS"))
+#saveRDS(H3_adj_emm_plot_list, paste0(dropboxDir,"results/stress-dev-models/figure-objects/H3_adj_emm_splines.RDS"))
 
 #Save plot data
-saveRDS(H3_adj_emm_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H3_adj_emm_spline_data.RDS"))
+saveRDS(H3_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H3_adj_emm_spline_data.RDS"))
 
 
 ##Hypothesis 4
@@ -347,17 +347,17 @@ for(i in 1:nrow(H4_adj_emm_models)){
 
 
 #Save models
-#saveRDS(H4_adj_emm_models, paste0(dropboxDir,"results/stress-growth-models/models/adj_H4_adj_emm_models.RDS"))
+#saveRDS(H4_adj_emm_models, paste0(dropboxDir,"results/stress-dev-models/models/adj_H4_adj_emm_models.RDS"))
 
 #Save results
 saveRDS(H4_adj_emm_res, here("results/adjusted/H4_adj_emm_res.RDS"))
 
 
 #Save plots
-#saveRDS(H4_adj_emm_plot_list, paste0(dropboxDir,"results/stress-growth-models/figure-objects/H4_adj_emm_splines.RDS"))
+#saveRDS(H4_adj_emm_plot_list, paste0(dropboxDir,"results/stress-dev-models/figure-objects/H4_adj_emm_splines.RDS"))
 
 #Save plot data
-saveRDS(H4_adj_emm_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H4_adj_emm_spline_data.RDS"))
+saveRDS(H4_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H4_adj_emm_spline_data.RDS"))
 
 
 

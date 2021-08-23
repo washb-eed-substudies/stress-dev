@@ -10,18 +10,7 @@ source(here::here("0-config.R"))
 source(here::here("tables/table-functions.R"))
 here::here()
 d <- readRDS(paste0(dropboxDir, "Data/Cleaned/Audrie/stress-dev.RDS"))
-#test
-#library('officer')
-#source(here::here("0-config.R"))
-#library('here')
-#library('data.table')
-# install.packages("gdtools", type = "source")
-# library('flextable')
-# install.packages("flextable", type = "binary")
-# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# load enrollment characteristics and results
-# d <- read.csv(paste0(dropboxDir, "Data/Cleaned/Audrie/bangladesh-dm-ee-stress-growth-covariates-stresslab-anthro.csv"))
 
 #Unadjusted
 H1a <- readRDS(here('results/unadjusted/H1a_res.RDS'))
@@ -46,6 +35,7 @@ H4_adj_emm <- readRDS(here('results/adjusted/H4_adj_emm_res.RDS'))
 
 H1a_who <- readRDS(here('results/unadjusted/H1_who_res.RDS'))
 H1a_who_adj <- readRDS(here('results/adjusted/H1a_who_adj_res.RDS'))
+H1a_who_adj_emm <- readRDS(here('results/adjusted/H1a_who_adj_emm_res.RDS'))
 
 #### Functions for growth tables ####
 source(here::here("tables/table-functions.R"))
@@ -183,6 +173,19 @@ out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Persona
 tbl5 <- growth_tbl("Glucocortoic receptor methylation and child development at Year 2", expo_var, out_var, exposure, outcome, H4, H4_adj)
 tbl5flex <- growth_tbl_flex("Glucocortoic receptor methylation and child development at Year 2", expo_var, out_var, exposure, outcome, H4, H4_adj)
 
+#Table 6. Hypothesis 1: WHO Hazard Ratios
+
+exposure <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "iso.pca")    
+
+outcome <- c("who_sit", "who_crawl", "who_stand_supp",
+           "who_walk_supp", "who_stand_nosupp", "who_walk_nosup" )
+
+expo_var <- c("IPF(2a)-III", "2,3-dinor-iPF(2a)-III", "iPF(2a)-VI", "8,12-iso-iPF(2a)-VI", "Combined urinary oxidative stress biomarkers")
+out_var <- c("Time to sitting unsupported", "Time to crawling","Time to standing with support",
+             "Time to walking with support", "Time to standing unsupported", "Time to walking unsupported")
+
+tbl6 <- growth_tbl("Urinary isoprostanes and time to WHO motor milestone at Year 1", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj)
+tbl6flex <- growth_tbl_flex("Urinary isoprostanes and time to WHO motor milestone at Year 1", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj)
 
 #### SAVE TABLES ####
 write.csv(tbl1, here('tables/stress-dev-table1.csv'))
@@ -190,6 +193,7 @@ write.csv(tbl2, here('tables/stress-dev-table2.csv'))
 write.csv(tbl3, here('tables/stress-dev-table3.csv'))
 write.csv(tbl4, here('tables/stress-dev-table4.csv'))
 write.csv(tbl5, here('tables/stress-dev-table5.csv'))
+write.csv(tbl6, here('tables/stress-dev-table6.csv'))
 
-save_as_docx("Table 1" = tbl1flex, "Table 2" = tbl2flex, "Table 3" = tbl3flex, "Table 4" = tbl4flex, "Table 5" = tbl5flex,  path='tables/stress-dev-tables.docx')
+save_as_docx("Table 1" = tbl1flex, "Table 2" = tbl2flex, "Table 3" = tbl3flex, "Table 4" = tbl4flex, "Table 5" = tbl5flex, "Table 6" = tbl6flex,  path='tables/stress-dev-tables.docx')
 
