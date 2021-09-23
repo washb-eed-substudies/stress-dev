@@ -14,7 +14,7 @@ Yvars <- c("who_sit", "who_crawl", "who_stand_supp",
            "who_walk_supp", "who_stand_nosupp", "who_walk_nosup" )
 
 #Fit models
-H1_who_models <- NULL
+H1a_who_models <- NULL
 for(i in Xvars){
   for(j in Yvars){
     res_unadj <- fit_HR_GAM(d=d, X=i, Y=j, age = "agedays_motor", 
@@ -25,35 +25,35 @@ for(i in Xvars){
                             pval = 0.2,
                             print = TRUE)
     res <- data.frame(X=i, Y=j, fit=I(list(res_unadj$fit)), dat=I(list(res_unadj$dat)))
-    H1_who_models <- bind_rows(H1_who_models, res)
+    H1a_who_models <- bind_rows(H1a_who_models, res)
   }
 }
 
 #Get primary contrasts
-H1_who_res <- NULL
-for(i in 1:nrow(H1_who_models)){
-  res <- data.frame(X=H1_who_models$X[i], Y=H1_who_models$Y[i])
-  preds <- predict_gam_HR(fit=H1_who_models$fit[i][[1]], d=H1_who_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
-  H1_who_res <-  bind_rows(H1_who_res , preds$res)
+H1a_who_res <- NULL
+for(i in 1:nrow(H1a_who_models)){
+  res <- data.frame(X=H1a_who_models$X[i], Y=H1a_who_models$Y[i])
+  preds <- predict_gam_HR(fit=H1a_who_models$fit[i][[1]], d=H1a_who_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
+  H1a_who_res <-  bind_rows(H1a_who_res , preds$res)
 }
 #Make list of plots
-H1_who_plot_list <- NULL
-H1_who_plot_data <- NULL
-for(i in 1:nrow(H1_who_models)){
-  res <- data.frame(X=H1_who_models$X[i], Y=H1_who_models$Y[i])
-  simul_plot <- gam_simul_CI(H1_who_models$fit[i][[1]], H1_who_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
-  H1_who_plot_list[[i]] <-  simul_plot$p
-  H1_who_plot_data <-  rbind(H1_who_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred))
+H1a_who_plot_list <- NULL
+H1a_who_plot_data <- NULL
+for(i in 1:nrow(H1a_who_models)){
+  res <- data.frame(X=H1a_who_models$X[i], Y=H1a_who_models$Y[i])
+  simul_plot <- gam_simul_CI(H1a_who_models$fit[i][[1]], H1a_who_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
+  H1a_who_plot_list[[i]] <-  simul_plot$p
+  H1a_who_plot_data <-  rbind(H1a_who_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred))
 }
 
 #Save models
-saveRDS(H1_who_models, here("models/H1_who_models.RDS"))
+saveRDS(H1a_who_models, here("models/H1a_who_models.RDS"))
 #Save results
-saveRDS(H1_who_res, here("results/unadjusted/H1_who_res.RDS"))
+saveRDS(H1a_who_res, here("results/unadjusted/H1a_who_res.RDS"))
 #Save plots
-#saveRDS(H1_who_plot_list, here("figure-objects/H1_who_unadj_splines.RDS"))
+#saveRDS(H1a_who_plot_list, here("figure-objects/H1a_who_unadj_splines.RDS"))
 #Save plot data
-saveRDS(H1_who_plot_data, here("figure-data/H1_who_unadj_spline_data.RDS"))
+saveRDS(H1a_who_plot_data, here("figure-data/H1a_who_unadj_spline_data.RDS"))
 
 ## Adjusted Models
 
