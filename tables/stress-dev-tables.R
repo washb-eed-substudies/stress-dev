@@ -184,8 +184,8 @@ expo_var <- c("IPF(2a)-III", "2,3-dinor-iPF(2a)-III", "iPF(2a)-VI", "8,12-iso-iP
 out_var <- c("Time to sitting unsupported", "Time to crawling","Time to standing with support",
              "Time to walking with support", "Time to standing unsupported", "Time to walking unsupported")
 
-tbl6 <- growth_tbl("Urinary isoprostanes and time to WHO motor milestone at Year 1", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj)
-tbl6flex <- growth_tbl_flex("Urinary isoprostanes and time to WHO motor milestone at Year 1", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj)
+tbl6 <- hr_tbl("Urinary isoprostanes and time to WHO motor milestone at Year 1", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj)
+tbl6flex <- hr_tbl_flex("Urinary isoprostanes and time to WHO motor milestone at Year 1", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj)
 
 #### SAVE TABLES ####
 write.csv(tbl1, here('tables/stress-dev-table1.csv'))
