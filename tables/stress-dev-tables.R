@@ -33,7 +33,7 @@ H4_adj_emm <- readRDS(here('results/adjusted/H4_adj_emm_res.RDS'))
 
 #WHO Hazard Ratios
 
-H1a_who <- readRDS(here('results/unadjusted/H1_who_res.RDS'))
+H1a_who <- readRDS(here('results/unadjusted/H1a_who_res.RDS'))
 H1a_who_adj <- readRDS(here('results/adjusted/H1a_who_adj_res.RDS'))
 H1a_who_adj_emm <- readRDS(here('results/adjusted/H1a_who_adj_emm_res.RDS'))
 
