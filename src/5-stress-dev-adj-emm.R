@@ -342,6 +342,7 @@ for(i in 1:nrow(H4_adj_emm_models)){
   res <- data.frame(X=H4_adj_emm_models$X[i], Y=H4_adj_emm_models$Y[i])
   simul_plot <- gam_simul_CI(H4_adj_emm_models$fit[i][[1]], H4_adj_emm_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
   H4_adj_emm_plot_list[[i]] <-  simul_plot$p
+  gc()
   H4_adj_emm_plot_data <-  rbind(H4_adj_emm_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred%>% subset(., select = c(Y,X,id,fit,se.fit,uprP, lwrP,uprS,lwrS))))
 }
 

@@ -8,7 +8,7 @@ d <- readRDS(paste0(dropboxDir, "Data/Cleaned/Audrie/stress-dev.RDS"))
 
 #Hypothesis 1A
 
-Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "iso.pca")    
+Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")    
 
 Yvars <- c("who_sit", "who_crawl", "who_stand_supp",
            "who_walk_supp", "who_stand_nosupp", "who_walk_nosup" )
@@ -74,7 +74,7 @@ Wvars<-c("birthord", "momage","momheight","momedu",
 
 ##########################
 
-Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "iso.pca")    
+Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")    
 
 Yvars <- c("who_sit", "who_crawl", "who_stand_supp",
            "who_walk_supp", "who_stand_nosupp", "who_walk_nosup" )

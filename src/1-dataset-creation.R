@@ -10,7 +10,7 @@ d<-readRDS(paste0(dropboxDir, "Data/Cleaned/Andrew/stress_growth_data.RDS"))
 
 d <- d %>%
   mutate(
-    t2_f2_iso.pca=iso.pca
+    t2_f2_iso.pca= t2_iso_pca
   )
 
 #Load development data

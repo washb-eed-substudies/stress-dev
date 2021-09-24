@@ -6,7 +6,6 @@ source(here::here("0-config.R"))
 
 d <- readRDS(paste0(dropboxDir, "Data/Cleaned/Audrie/stress-dev.RDS"))
 
-
 #Example:
 
 #Fit GAM model with random effects for childid
@@ -34,7 +33,7 @@ d <- readRDS(paste0(dropboxDir, "Data/Cleaned/Audrie/stress-dev.RDS"))
 # Exposure: F2 Isoprostenes
 #Outcome: Child dev at year 1
 Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")             
-Yvars <- c("sum_who", 
+Yvars <- c("sum_who_t2_t3", 
            "z_cdi_say_t2", "z_cdi_und_t2") 
 
 #Fit models
@@ -83,7 +82,7 @@ saveRDS(H1a_plot_data, here("figure-data/H1a_unadj_spline_data.RDS"))
 # Exposure: F2 Isoprostenes
 #Outcome: Child dev at year 2
 Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")           
-Yvars <- c("z_comm_easq", "z_motor_easq", "z_personal_easq", "z_combined_easq", 
+Yvars <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
            "z_cdi_say_t3", "z_cdi_und_t3") 
 
 #Fit models
@@ -133,7 +132,7 @@ saveRDS(H1b_plot_data, here("figure-data/H1b_unadj_spline_data.RDS"))
 #### Hypothesis 2 ####
 # Cortisol and sAA at  Year 2 and child development at Year 2
 Xvars <- c("t3_cort_slope", "t3_cort_z01", "t3_cort_z03", "t3_saa_slope", "t3_saa_z01", "t3_saa_z02" )            
-Yvars <- c("z_comm_easq", "z_motor_easq", "z_personal_easq", "z_combined_easq", 
+Yvars <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
            "z_cdi_say_t3", "z_cdi_und_t3") 
 
 #Fit models
@@ -182,7 +181,7 @@ saveRDS(H2_plot_data, here("figure-data/H2_unadj_spline_data.RDS"))
 #### Hypothesis 3 ####
 # Mean arterial pressure and heart rate at year 2 v. development at year 2
 Xvars <- c("t3_map", "t3_hr_mean")            
-Yvars <- c("z_comm_easq", "z_motor_easq", "z_personal_easq", "z_combined_easq", 
+Yvars <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
            "z_cdi_say_t3", "z_cdi_und_t3") 
 
 d$t3_ma
@@ -233,7 +232,7 @@ saveRDS(H3_plot_data, here("figure-data/H3_unadj_spline_data.RDS"))
 #### Hypothesis 4 ####
 #Glucocortoic receptor methylation year 2 v. development at year 2
 Xvars <- c("t3_gcr_mean", "t3_gcr_cpg12")             
-Yvars <- c("z_comm_easq", "z_motor_easq", "z_personal_easq", "z_combined_easq", 
+Yvars <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
            "z_cdi_say_t3", "z_cdi_und_t3") 
 
 #Fit models

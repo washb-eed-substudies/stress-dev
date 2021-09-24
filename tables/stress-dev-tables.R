@@ -41,30 +41,6 @@ H1a_who_adj_emm <- readRDS(here('results/adjusted/H1a_who_adj_emm_res.RDS'))
 source(here::here("tables/table-functions.R"))
 
 
-#COMMENTED FOLLOWING LINES AS THEY LED TO AN ERROR - ADDITIONAL TROUBLESHOOTING MAY BE NECEESSARY
-
-# # format for export
-# flextbl<-flextable(tbl, col_keys=names(tbl))
-# flextbl <- set_header_labels(flextbl,
-#                              values = list("V1" = " ", "V2" = " ", "V3" = " ", "V4" = " ", "V5" = " ",
-#                                            "V6" = "Predicted Outcome at 25th Percentile", "V7" = "Predicted Outcome at 75th Percentile", "V8" = "Coefficient (95% CI)", "V9" = "P-value", "V10" = "FDR Corrected P-value",
-#                                            "V11" = "Predicted Outcome at 25th Percentile", "V12" = "Predicted Outcome at 75th Percentile", "V13" = "Coefficient (95% CI)", "V14" = "P-value", "V15" = "FDR Corrected P-value"))
-# flextbl <- add_header_row(flextbl, values = c("","","","","", "Unadjusted", "Fully adjusted"), colwidths=c(1,1,1,1,1,5,5))
-# # flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
-# flextbl <- add_header_row(flextbl, values = c(name, "Outcome","N","25th Percentile","75th Percentile", "Outcome, 75th Percentile v. 25th Percentile"), colwidths=c(1,1,1,1,1,10))
-# # flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
-# flextbl <- hline(flextbl, part="header", border=fp_border(color="black"))
-# flextbl <- hline_bottom(flextbl, part="body", border=fp_border(color="black"))
-#>>>>>>> ec8753a515e35971430abe99d2494499e5fd1a6b
-# flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
-# flextbl <- align(flextbl, align = "center", part = "all")
-# flextbl <- align(flextbl, j = c(1, 2), align = "left", part="all")
-# flextbl <- autofit(flextbl, part = "all")
-# flextbl <- fit_to_width(flextbl, max_width=8)
-# flextbl
-
-
-
 #### MAIN TABLES ####
 #### Table 1 ####
 # Characteristics of participants
@@ -119,34 +95,28 @@ names(tbl1)<- c("","","","n (%) or median (IQR)")
 #FOR GATES MILESTONES
 #### Table 2 ####
 
-#previously, there were two t2_f2_8ip, i edited it so that there is now "t2_f2_8ip", "t2_f2_23d" based on my ipv, stress, dep - child stress tables 
 exposure <- c("t2_f2_8ip", "t2_f2_23d","t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")
-outcome <- c("sum_who", "z_cdi_say_t2","z_cdi_und_t2","z_comm_easq", "z_motor_easq","z_personal_easq","z_combined_easq", 
-             "z_cdi_say_t3","z_cdi_und_t3")
-expo_var <- c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarkers (ng/mg creatinine)")
-out_var <- c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressive language Z-score Year 1","CDI comprehension Z-score Year 1",
-             "EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
-             "CDI expressive language Z-score Year 2","CDI comprehension Z-score Year 2")
+outcome <- c("sum_who_t2_t3", "z_cdi_say_t2","z_cdi_und_t2")
+expo_var <- c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarker score")
+out_var <- c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl2 <- growth_tbl("Urinary isoprostanes at Year 1 and child development at Years 1 and 2", expo_var, out_var, exposure, outcome, H1a, H1a_adj)
-tbl2flex <- growth_tbl_flex("Urinary isoprostanes at Year 1 and child development at Years 1 and 2", expo_var, out_var, exposure, outcome, H1a, H1a_adj)
+tbl2 <- growth_tbl("Urinary isoprostanes and child development at Year 1", expo_var, out_var, exposure, outcome, H1a, H1a_adj)
+tbl2flex <- growth_tbl_flex("Urinary isoprostanes and child development at Year 1", expo_var, out_var, exposure, outcome, H1a, H1a_adj)
 
 ######
 #New table 3: Urinary isoprostanes at Year 1 and child development at Year 2
 
-#### Table 2 ####
+#### Table 3 ####
 
-#previously, there were two t2_f2_8ip, i edited it so that there is now "t2_f2_8ip", "t2_f2_23d" based on my ipv, stress, dep - child stress tables 
 exposure <- c("t2_f2_8ip", "t2_f2_23d","t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")
-outcome <- c("sum_who", "z_cdi_say_t2","z_cdi_und_t2","z_comm_easq", "z_motor_easq","z_personal_easq","z_combined_easq", 
+outcome <- c("z_comm_easq_t3", "z_motor_easq_t3","z_personal_easq_t3","z_combined_easq_t3", 
              "z_cdi_say_t3","z_cdi_und_t3")
-expo_var <- c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarkers (ng/mg creatinine)")
-out_var <- c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressive language Z-score Year 1","CDI comprehension Z-score Year 1",
-             "EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
-             "CDI expressive language Z-score Year 2","CDI comprehension Z-score Year 2")
+expo_var <- c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarker score")
+out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ Score",
+             "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl2 <- growth_tbl("Urinary isoprostanes at Year 1 and child development at Years 1 and 2", expo_var, out_var, exposure, outcome, H1a, H1a_adj)
-tbl2flex <- growth_tbl_flex("Urinary isoprostanes at Year 1 and child development at Years 1 and 2", expo_var, out_var, exposure, outcome, H1a, H1a_adj)
+tbl3 <- growth_tbl("Urinary isoprostanes at Year 1 and child development at Year 2", expo_var, out_var, exposure, outcome, H1b, H1b_adj)
+tbl3flex <- growth_tbl_flex("Urinary isoprostanes at Year 1 and child development at Year 2", expo_var, out_var, exposure, outcome, H1b, H1b_adj)
 
 
 #### Table 4 ####
@@ -192,12 +162,12 @@ tbl6flex <- growth_tbl_flex("Glucocortoic receptor methylation and child develop
 
 #Table 7. WHO Hazard Ratios
 
-exposure <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "iso.pca")    
+exposure <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")    
 
 outcome <- c("who_sit", "who_crawl", "who_stand_supp",
            "who_walk_supp", "who_stand_nosupp", "who_walk_nosup" )
 
-expo_var <- c("IPF(2a)-III", "2,3-dinor-iPF(2a)-III", "iPF(2a)-VI", "8,12-iso-iPF(2a)-VI", "Combined urinary oxidative stress biomarkers")
+expo_var <- c("IPF(2a)-III", "2,3-dinor-iPF(2a)-III", "iPF(2a)-VI", "8,12-iso-iPF(2a)-VI", "Combined urinary oxidative stress biomarker score")
 out_var <- c("Time to sitting unsupported", "Time to crawling","Time to standing with support",
              "Time to walking with support", "Time to standing unsupported", "Time to walking unsupported")
 
