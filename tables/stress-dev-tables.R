@@ -58,22 +58,28 @@ mediqr <- function(vector){
 n_med_col <- c(nperc(d$sex), mediqr(d$t2_f2_8ip), mediqr(d$t2_f2_23d), mediqr(d$t2_f2_VI), mediqr(d$t2_f2_12i),
                mediqr(d$t3_cort_slope), mediqr(d$t3_residual_cort), mediqr(d$t3_saa_slope), mediqr(d$t3_residual_saa),
                mediqr(d$t3_map), mediqr(d$t3_hr_mean), mediqr(d$t3_gcr_mean), mediqr(d$t3_gcr_cpg12),
+               
+               mediqr(d$sum_who_t2_t3), mediqr(d$z_cdi_say_t2), mediqr(d$z_cdi_und_t2),
+               mediqr(d$z_comm_easq_t3), mediqr(d$z_motor_easq_t3), mediqr(d$z_personal_easq_t3), mediqr(d$z_combined_easq_t3), mediqr(d$z_cdi_say_t3), mediqr(d$z_cdi_und_t3),
+               
                mediqr(d$laz_t2), mediqr(d$waz_t2), mediqr(d$whz_t2), mediqr(d$hcz_t2),
                mediqr(d$laz_t3), mediqr(d$waz_t3), mediqr(d$whz_t3), mediqr(d$hcz_t3),
                nperc(d$diar7d_t2), nperc(d$diar7d_t3), mediqr(d$momage), mediqr(d$momheight), 
                mediqr(d$momeduy), mediqr(d$cesd_sum_t2), mediqr(d$cesd_sum_ee_t3), mediqr(d$pss_sum_mom_t3), 
                nperc(d$life_viol_any_t3))
 
-tbl1 <- data.table("C1" = c("Child","","","","","","","","","","","","","","","","","","","","","","","Mother","","","","","",""),
-                   "C2" = c("", "Urinary F2-isoprostanes (Year 1)","","","", "Salivary cortisol reactivity (Year 2)","", "sAA reactivity (Year 2)","",
-                            "SAM biomarkers (Year 2)","", "Glucocorticoid receptor","", "Anthropometry (14 months, Year 1)","","","",
+tbl1 <- data.table("C1" = c("Child","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","Mother","","","","","",""),
+                   "C2" = c("", "Urinary F2-isoprostanes (ng/mg creatinine; Year 1)","","","", "Salivary cortisol reactivity (ug/dl; Year 2)","", "sAA reactivity (U/ml; Year 2)","",
+                            "SAM biomarkers (Year 2)","", "Glucocorticoid receptor percent methylation","", "Child development (Year 1)", "", "", "Child development (Year 2)", "", "", "", "", "", "Anthropometry (14 months, Year 1)","","","",
                             "Anthropometry (28 months, Year 2)","","","", "Diarrhea (14 months, Year 1)", "Diarrhea (28 months, Year 2)","",
                             "Anthropometry at enrollment", "Education", "Depression at Year 1", "Depression at Year 2", "Perceived stress at Year 2", 
                             "Intimate partner violence"),
                    "C3" = c("Female", "iPF(2a)-III", "2,3-dinor-iPF(2a)-III", "iPF(2a-VI", "8,12-iso-iPF(2a)-VI", 
                             "Change between pre- and post-stressor cortisol", "Cortisol residualized gain score", 
                             "Change between pre- and post-stressor sAA", "sAA residualized gain score",
-                            "Mean arterial pressure", "Resting heart rate", "NR3C1 exon 1F promoter methylation", "NGFI-A transcription factor binding site methylation",
+                            "Mean arterial pressure (mmHg)", "Resting heart rate (bpm)", "NR3C1 exon 1F promoter", "NGFI-A transcription factor binding site",
+                            "WHO Gross Motor Milestone sum score", "CDI expressive language z-score", "CDI language understanding z-score", 
+                            "EASQ communication z-score", "EASQ motor development z-score", "EASQ personal-social development z-score", "EASQ combined z-score", "CDI expressive language z-score", "CDI language understanding z-score",
                             "Length-for-age Z score", "Weight-for-age Z score", "Weight-for-length Z score", "Head circumference-for-age Z score",
                             "Length-for-age Z score", "Weight-for-age Z score", "Weight-for-length Z score", "Head circumference-for-age Z score",
                             "Caregiver-reported 7-day recall", "Caregiver-reported 7-day recall", "Age (years)", "Height (cm)", "Schooling completed (years)",
@@ -126,7 +132,7 @@ outcome <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combi
              "z_cdi_say_t3", "z_cdi_und_t3") 
 
 
-expo_var <- c("Cortisol Reactivity", "Pre-stressor Cortisol", "Post-stressor Cortisol", "sAA Reactivity", "Pre-stressor sAA", "Post-stressor sAA")
+expo_var <- c("Cortisol Reactivity (ug/dl/min)", "Pre-stressor Cortisol (ug/dl)", "Post-stressor Cortisol (ug/dl)", "sAA Reactivity (U/ml/min)", "Pre-stressor sAA (U/ml)", "Post-stressor sAA (U/ml)")
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
@@ -140,7 +146,7 @@ tbl4flex <- growth_tbl_flex("Salivary Stress Biomarkers and Development at Year 
 exposure <- c("t3_map", "t3_hr_mean")  
 outcome <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
              "z_cdi_say_t3", "z_cdi_und_t3") 
-expo_var <- c("Mean arterial pressure", "Mean Resting Heart Rate")
+expo_var <- c("Mean arterial pressure (mmHg)", "Mean Resting Heart Rate (bpm)")
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
@@ -167,7 +173,7 @@ exposure <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca"
 outcome <- c("who_sit", "who_crawl", "who_stand_supp",
            "who_walk_supp", "who_stand_nosupp", "who_walk_nosup" )
 
-expo_var <- c("IPF(2a)-III", "2,3-dinor-iPF(2a)-III", "iPF(2a)-VI", "8,12-iso-iPF(2a)-VI", "Combined urinary oxidative stress biomarker score")
+expo_var <- c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarker score")
 out_var <- c("Time to sitting unsupported", "Time to crawling","Time to standing with support",
              "Time to walking with support", "Time to standing unsupported", "Time to walking unsupported")
 
