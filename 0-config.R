@@ -20,6 +20,10 @@ library(devtools)
 library(kableExtra)
 library(here)
 library(washbgam)
+library(boxr)
+
+box_auth()
+
 
 if(!require(faraway)){
   install.packages("faraway") 
