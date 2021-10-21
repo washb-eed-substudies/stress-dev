@@ -2,9 +2,10 @@
 
 
 rm(list=ls())
-
+vignette("boxr")
 source(here::here("0-config.R"))
 
+zbdbox <- box_read(147779347962)
 #Load stress-growth data
 d<-readRDS(paste0(dropboxDir, "Data/Cleaned/Andrew/stress_growth_data.RDS"))
 

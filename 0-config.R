@@ -24,7 +24,6 @@ library(boxr)
 
 box_auth()
 
-
 if(!require(faraway)){
   install.packages("faraway") 
   library(faraway)
