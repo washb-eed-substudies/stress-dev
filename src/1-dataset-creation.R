@@ -1,11 +1,23 @@
-
+#Master dataset
+d <- box_read("871638120165")
+head(d)
 
 
 rm(list=ls())
-vignette("boxr")
+
 source(here::here("0-config.R"))
 
-zbdbox <- box_read(147779347962)
+#Read in master dataset
+dbox <- box_read("871638120165")
+head(dbox)
+
+#Subset to analytic sample
+
+#Rename variables as needed for analysis workflow 
+
+#Save analysis dataset
+
+#########
 #Load stress-growth data
 d<-readRDS(paste0(dropboxDir, "Data/Cleaned/Andrew/stress_growth_data.RDS"))
 

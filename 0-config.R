@@ -23,6 +23,8 @@ library(washbgam)
 library(boxr)
 
 box_auth()
+#It is also important to set the default working directory so that the code can reference the correct folder in box:
+#box_setwd("1410")
 
 if(!require(faraway)){
   install.packages("faraway") 
