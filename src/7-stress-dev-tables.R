@@ -189,5 +189,6 @@ write.csv(tbl5, here('tables/stress-dev-table5.csv'))
 write.csv(tbl6, here('tables/stress-dev-table6.csv'))
 write.csv(tbl7, here('tables/stress-dev-table6.csv'))
 
-save_as_docx("Table 1" = tbl1flex, "Table 2" = tbl2flex, "Table 3" = tbl3flex, "Table 4" = tbl4flex, "Table 5" = tbl5flex, "Table 6" = tbl6flex, "Table 7" = tbl7flex,  path='tables/stress-dev-tables.docx')
+save_as_docx("Table 1" = tbl1flex, "Table 2" = tbl2flex, "Table 3" = tbl3flex, "Table 4" = tbl4flex, "Table 5" = tbl5flex, "Table 6" = tbl6flex, "Table 7" = tbl7flex, 
+            pr_section = sect_properties, path='tables/stress-dev-tables.docx')
 
