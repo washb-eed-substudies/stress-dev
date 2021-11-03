@@ -327,7 +327,7 @@ hr_tbl <- function(name, expo_var, out_var, exposure, outcome, results, results_
   }else{
     tbl <- data.table(name = character(), "Outcome" = character(), "N" = character(), "25th Percentile" = character(), "75th Percentile" = character(),
                       "Outcome, 75th Percentile v. 25th Percentile" = character(), " " = character(), " " = character(),
-                      " " = character(), " " = character(), " " = character())
+                      " " = character())
     tbl <- rbind(tbl, list(" ", " ", " ", " ", " ", "Unadjusted", " ", "Adjusted", " "))
     tbl <- rbind(tbl, list(" ", " ", " ", " ", " ",
                            "Hazard Ratio (95% CI)", "P-value", 
@@ -348,7 +348,7 @@ hr_tbl <- function(name, expo_var, out_var, exposure, outcome, results, results_
         if(j==1|skipped==T){
           tbl <- rbind(tbl, list(expo_var[i], out_var[j], filtered_res$N, round(filtered_res$q1, 2), round(filtered_res$q3, 2), 
                                  unadj, round(filtered_res$Pval, 2),  
-                                 adj, round(filtered_adj$Pval, 2), ))
+                                 adj, round(filtered_adj$Pval, 2)))
           skipped<-F
         }else {
           tbl <- rbind(tbl, list("", out_var[j],  filtered_res$N, round(filtered_res$q1, 2), round(filtered_res$q3, 2), 
@@ -438,7 +438,7 @@ hr_tbl_flex <- function(name, expo_var, out_var, exposure, outcome, results, res
         }else {
           tbl <- rbind(tbl, list(" ", out_var[j],  filtered_res$N, round(filtered_res$q1, 2), round(filtered_res$q3, 2), 
                                  unadj, round(filtered_res$Pval, 2),
-                                 adj, round(filtered_adj$Pval, 2),))
+                                 adj, round(filtered_adj$Pval, 2)))
         }
       }
       if (i != length(exposure)) {
