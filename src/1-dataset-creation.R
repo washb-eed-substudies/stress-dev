@@ -1,14 +1,9 @@
-#Master dataset
-d <- box_read("871638120165")
-head(d)
-
-
 rm(list=ls())
 
 source(here::here("0-config.R"))
 
 #Read in master dataset
-dbox <- box_read("871638120165")
+dbox <- box_read("871638120165") %>% filter(.data["stress-dev"]==1)
 head(dbox)
 
 #Subset to analytic sample
