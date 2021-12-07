@@ -6,7 +6,9 @@
 # source base functions
 # load libraries
 #-------------------------------------
-
+#library(devtools)
+#install_github("ben-arnold/washb", force = TRUE)  
+#install_github("washb-eed-substudies/washbgam") 
 library(tidyverse)
 library(haven)
 library(washb)
@@ -17,6 +19,12 @@ library(SuperLearner)
 library(devtools)
 library(kableExtra)
 library(here)
+library(washbgam)
+library(boxr)
+
+box_auth()
+#It is also important to set the default working directory so that the code can reference the correct folder in box:
+#box_setwd("1410")
 
 if(!require(faraway)){
   install.packages("faraway") 

@@ -1,17 +1,24 @@
-
-
-
 rm(list=ls())
 
 source(here::here("0-config.R"))
 
+#Read in master dataset
+dbox <- box_read("871638120165") %>% filter(.data["stress-dev"]==1)
+head(dbox)
+
+#Subset to analytic sample
+
+#Rename variables as needed for analysis workflow 
+
+#Save analysis dataset
+
+#########
 #Load stress-growth data
 d<-readRDS(paste0(dropboxDir, "Data/Cleaned/Andrew/stress_growth_data.RDS"))
 
 d <- d %>%
   mutate(
-    t2_f2_iso.pca=iso.pca
-    
+    t2_f2_iso.pca= t2_iso_pca
   )
 
 #Load development data
