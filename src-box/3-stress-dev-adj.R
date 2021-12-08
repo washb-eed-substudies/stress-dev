@@ -4,11 +4,9 @@ source(here::here("0-config.R"))
 
 d <- box_read("880476682582")
 
-###Non-Forced Covariates
-
 #Set list of adjustment variables
 #Make vectors of adjustment variable names
-Wvars<-c("birthord", "momage","momheight","momedu", 
+Wvars<-c("sex","birthord", "momage","momheight","momedu", 
          "hfiacat", "Nlt18","Ncomp", "watmin", "walls", "floor", "HHwealth",
          "cesd_sum_t2", "diar7d_t2", "tr", "life_viol_any_t3")
 
@@ -18,20 +16,20 @@ Wvars[!(Wvars %in% colnames(d))]
 
 #Add in time varying covariates:
 
-Wvars2_anthro<-c("month_at2")
-Wvars3_anthro<-c("month_at3", "diar7d_t3", "cesd_sum_ee_t3", "pss_sum_mom_t3", "life_viol_any_t3")  
+Wvars2_anthro<-c("ageday_at2", "month_at2")
+Wvars3_anthro<-c("ageday_at3", "month_at3", "diar7d_t3", "cesd_sum_ee_t3", "pss_sum_mom_t3", "life_viol_any_t3")  
 
-Wvars2_F2<-c("month_ut2") 
-Wvars3_vital<-c("laz_t2", "waz_t2", "month_vt3", "cesd_sum_ee_t3", "pss_sum_mom_t3", "diar7d_t3", "life_viol_any_t3") 
-Wvars3_salimetrics<-c("laz_t2", "waz_t2",  "month_lt3", "cesd_sum_ee_t3", "pss_sum_mom_t3", "diar7d_t3", "life_viol_any_t3") 
-Wvars3_oragene<-c("laz_t2", "waz_t2", "month_ot3", "cesd_sum_ee_t3", "pss_sum_mom_t3", "diar7d_t3", "life_viol_any_t3") 
+Wvars2_F2<-c("ageday_ut2", "month_ut2") 
+Wvars3_vital<-c("laz_t2", "waz_t2", "ageday_t3_vital", "month_vt3", "cesd_sum_ee_t3", "pss_sum_mom_t3", "diar7d_t3", "life_viol_any_t3") 
+Wvars3_salimetrics<-c("laz_t2", "waz_t2", "ageday_t3_salimetrics", "month_lt3", "cesd_sum_ee_t3", "pss_sum_mom_t3", "diar7d_t3", "life_viol_any_t3") 
+Wvars3_oragene<-c("laz_t2", "waz_t2", "ageday_t3_oragene", "month_ot3", "cesd_sum_ee_t3", "pss_sum_mom_t3", "diar7d_t3", "life_viol_any_t3") 
 
 
- 
+
 W2_F2.W2_anthro <- c(Wvars, Wvars2_F2, Wvars2_anthro) %>% unique(.)
 W2_F2.W3_anthro <- c(Wvars, Wvars2_F2, Wvars3_anthro, 
                      "laz_t2", "waz_t2") %>% unique(.)
-W2_F2.W23_anthro <- c(Wvars, Wvars2_F2, Wvars2_anthro, Wvars3_anthro)
+W2_F2.W23_anthro <- c(Wvars, Wvars2_F2, Wvars2_anthro, Wvars3_anthro) %>% unique(.)
 
 
 W3_vital.W3_anthro <- c(Wvars, Wvars3_vital, Wvars3_anthro) %>% unique(.)
@@ -83,7 +81,7 @@ Wvars3_oragene_forced<-c("ageday_t3_oragene")
 
 W2_F2.W2_anthro_forced <- c(Wvars_forced, Wvars2_F2_forced, Wvars2_anthro_forced) %>% unique(.)
 W2_F2.W3_anthro_forced <- c(Wvars_forced, Wvars2_F2_forced, Wvars3_anthro_forced) %>% unique(.)
-W2_F2.W23_anthro_forced <- c(Wvars_forced, Wvars2_F2_forced, Wvars2_anthro_forced, Wvars3_anthro_forced)
+W2_F2.W23_anthro_forced <- c(Wvars_forced, Wvars2_F2_forced, Wvars2_anthro_forced, Wvars3_anthro_forced) %>% unique(.)
 
 
 W3_vital.W3_anthro_forced <- c(Wvars_forced, Wvars3_vital_forced, Wvars3_anthro_forced) %>% unique(.)
@@ -124,10 +122,6 @@ Xvars <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")
 Yvars <- c("sum_who_t2_t3", 
            "z_cdi_say_t2", "z_cdi_und_t2") 
 
-#Manually checking forced-in covariate set to troubleshoot
-Wset_forced <- pick_covariates_forced(i, j)
-Wset_forced
-#yields: sex, ageday_ut2, ageday_at2 
 
 #Fit models
 H1a_adj_models <- NULL
@@ -192,7 +186,8 @@ for(i in Xvars){
     print(i)
     print(j)
     Wset<-pick_covariates(i, j)
-    res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = "sex")
+    Wset_forced <- pick_covariates_forced(i, j)
+    res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced)
     res <- data.frame(X=i, Y=j, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
     H1b_adj_models <- bind_rows(H1b_adj_models, res)
   }
@@ -245,7 +240,8 @@ for(i in Xvars){
     print(i)
     print(j)
     Wset<-pick_covariates(i, j)
-    res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset)
+    Wset_forced <- pick_covariates_forced(i, j)
+    res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced)
     res <- data.frame(X=i, Y=j, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
     H2_adj_models <- bind_rows(H2_adj_models, res)
   }
@@ -302,7 +298,8 @@ for(i in Xvars){
     print(i)
     print(j)
     Wset<-pick_covariates(i, j)
-    res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset)
+    Wset_forced <- pick_covariates_forced(i, j)
+    res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced)
     res <- data.frame(X=i, Y=j, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
     H3_models <- bind_rows(H3_models, res)
   }
@@ -356,7 +353,8 @@ for(i in Xvars){
     print(i)
     print(j)
     Wset<-pick_covariates(i, j)
-    res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset)
+    Wset_forced <- pick_covariates_forced(i, j)
+    res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced)
     res <- data.frame(X=i, Y=j, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
     H4_models <- bind_rows(H4_models, res)
   }
