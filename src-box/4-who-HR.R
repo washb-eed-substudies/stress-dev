@@ -66,7 +66,7 @@ Wvars<-c("birthord", "momage","momheight","momedu",
 
 # --------------------------------------------------------------------------
 #### Hypothesis 1a ####
-#H1a_W_forced <- c("ageday_ut2", "sex")
+H1a_W_forced <- c("ageday_ut2", "sex")
 
 ######Included forced-in covariates for screening as led to error in forcedW command
 
@@ -88,7 +88,7 @@ for(i in Xvars){
     res_adj <- fit_HR_GAM(d=d, X=i, Y=j, 
                           age = "agedays_motor", 
                           W= Wvars, 
-                          #forcedW = H1a_W_forced,
+                          forcedW = H1a_W_forced,
                           V = NULL,
                           id = "childid",
                           pval = 0.2,
@@ -98,6 +98,7 @@ for(i in Xvars){
   }
 }
 
+#Yields Warning message:In newton(lsp = lsp, X = G$X, y = G$y, Eb = G$Eb, UrS = G$UrS, L = G$L,  : Fitting terminated with step failure - check results carefully
 
 #Get primary contrasts
 H1a_who_adj_res <- NULL
@@ -151,7 +152,7 @@ for(i in Xvars){
     res_adj <- fit_HR_GAM(d=d, X=i, Y=j, 
                           age = "agedays_motor", 
                           W= Wvars, 
-                          #forcedW = H1a_W_forced,
+                          forcedW = H1a_W_forced,
                           V = V.set.t2,
                           id = "childid",
                           pval = 0.2,
