@@ -138,7 +138,7 @@ for(i in Xvars){
     Wset<-pick_covariates(i, j)
     Wset_forced <- pick_covariates_forced(i, j)
     res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced, V = k)
-    res <- data.frame(X=i, Y=j, V = k, V = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
+    res <- data.frame(X=i, Y=j, V = k, int.p = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
     H1a_adj_emm_models <- bind_rows(H1a_adj_emm_models, res)
   }
 }
@@ -150,8 +150,10 @@ for(i in Xvars){
 H1a_adj_emm_res <- NULL
 for(i in 1:nrow(H1a_adj_emm_models)){
   res <- data.frame(X=H1a_adj_emm_models$X[i], Y=H1a_adj_emm_models$Y[i])
-  preds <- predict_gam_diff(fit=H1a_adj_emm_models$fit[i][[1]], d=H1a_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
-  H1a_adj_emm_res <-  bind_rows(H1a_adj_emm_res , preds$res)
+  preds <- predict_gam_emm(fit=H1a_adj_emm_models$fit[i][[1]], d=H1a_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
+  preds <- preds$res
+  preds$int.p <- H1a_adj_emm_models$int.p[i]
+  H1a_adj_emm_res <-  bind_rows(H1a_adj_emm_res , preds)
 }
 
 #Make list of plots
@@ -198,7 +200,7 @@ for(i in Xvars){
       Wset<-pick_covariates(i, j)
       Wset_forced <- pick_covariates_forced(i, j)
       res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced,  V = k)
-      res <- data.frame(X=i, Y=j, V = k, V = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
+      res <- data.frame(X=i, Y=j, V = k, int.p = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
       H1b_adj_emm_models <- bind_rows(H1b_adj_emm_models, res)
     }
   }
@@ -211,8 +213,11 @@ for(i in Xvars){
 H1b_adj_emm_res <- NULL
 for(i in 1:nrow(H1b_adj_emm_models)){
   res <- data.frame(X=H1b_adj_emm_models$X[i], Y=H1b_adj_emm_models$Y[i])
-  preds <- predict_gam_diff(fit=H1b_adj_emm_models$fit[i][[1]], d=H1b_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
-  H1b_adj_emm_res <-  bind_rows(H1b_adj_emm_res , preds$res)
+  preds <- predict_gam_emm(fit=H1b_adj_emm_models$fit[i][[1]], d=H1b_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
+  preds <- preds$res
+  preds$int.p <- H1b_adj_emm_models$int.p[i]
+  H1b_adj_emm_res <-  bind_rows(H1b_adj_emm_res , preds)
+  
 }
 
 #Make list of plots
@@ -258,7 +263,7 @@ for(i in Xvars){
       Wset<-pick_covariates(i, j)
       Wset_forced <- pick_covariates_forced(i, j)
       res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced,  V = k)
-      res <- data.frame(X=i, Y=j, V = k, V = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
+      res <- data.frame(X=i, Y=j, V = k, int.p = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
       H2_adj_emm_models <- bind_rows(H2_adj_emm_models, res)
     }
   }
@@ -268,8 +273,11 @@ for(i in Xvars){
 H2_adj_emm_res <- NULL
 for(i in 1:nrow(H2_adj_emm_models)){
   res <- data.frame(X=H2_adj_emm_models$X[i], Y=H2_adj_emm_models$Y[i])
-  preds <- predict_gam_diff(fit=H2_adj_emm_models$fit[i][[1]], d=H2_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
-  H2_adj_emm_res <-  bind_rows(H2_adj_emm_res , preds$res)
+  preds <- predict_gam_emm(fit=H2_adj_emm_models$fit[i][[1]], d=H2_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
+  preds <- preds$res
+  preds$int.p <- H2_adj_emm_models$int.p[i]
+  H2_adj_emm_res <-  bind_rows(H2_adj_emm_res , preds)
+  
 }
 
 #Make list of plots
@@ -319,7 +327,7 @@ for(i in Xvars){
       Wset<-pick_covariates(i, j)
       Wset_forced <- pick_covariates_forced(i, j)
       res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced,  V = k)
-      res <- data.frame(X=i, Y=j, V = k, V = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
+      res <- data.frame(X=i, Y=j, V = k, int.p = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
       H3_adj_emm_models <- bind_rows(H3_adj_emm_models, res)
     }
   }
@@ -329,8 +337,10 @@ for(i in Xvars){
 H3_adj_emm_res <- NULL
 for(i in 1:nrow(H3_adj_emm_models)){
   res <- data.frame(X=H3_adj_emm_models$X[i], Y=H3_adj_emm_models$Y[i])
-  preds <- predict_gam_diff(fit=H3_adj_emm_models$fit[i][[1]], d=H3_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
-  H3_adj_emm_res <-  bind_rows(H3_adj_emm_res , preds$res)
+  preds <- predict_gam_emm(fit=H3_adj_emm_models$fit[i][[1]], d=H3_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
+  preds <- preds$res
+  preds$int.p <- H3_adj_emm_models$int.p[i]
+  H3_adj_emm_res <-  bind_rows(H3_adj_emm_res , preds)
 }
 
 #Make list of plots
@@ -377,7 +387,7 @@ for(i in Xvars){
       Wset<-pick_covariates(i, j)
       Wset_forced <- pick_covariates_forced(i, j)
       res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced,  V = k)
-      res <- data.frame(X=i, Y=j, V = k, V = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
+      res <- data.frame(X=i, Y=j, V = k, int.p = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
       H4_adj_emm_models <- bind_rows(H4_adj_emm_models, res)
     }
   }
@@ -387,8 +397,10 @@ for(i in Xvars){
 H4_adj_emm_res <- NULL
 for(i in 1:nrow(H4_adj_emm_models)){
   res <- data.frame(X=H4_adj_emm_models$X[i], Y=H4_adj_emm_models$Y[i])
-  preds <- predict_gam_diff(fit=H4_adj_emm_models$fit[i][[1]], d=H4_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
-  H4_adj_emm_res <-  bind_rows(H4_adj_emm_res , preds$res)
+  preds <- predict_gam_emm(fit=H4_adj_emm_models$fit[i][[1]], d=H4_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
+  preds <- preds$res
+  preds$int.p <- H4_adj_emm_models$int.p[i]
+  H4_adj_emm_res <-  bind_rows(H4_adj_emm_res , preds)
 }
 
 
