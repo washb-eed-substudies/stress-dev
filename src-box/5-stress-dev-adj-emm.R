@@ -59,6 +59,58 @@ pick_covariates <- function(i, j){
   return(Wset)
 }
 
+#Forced in Covariates
+
+#Make vectors of adjustment variable names
+Wvars_forced<-c("sex")
+
+Wvars_forced[!(Wvars_forced %in% colnames(d))]
+
+
+
+#Add in time varying covariates:
+
+Wvars2_anthro_forced<-c("ageday_at2")
+Wvars3_anthro_forced<-c("ageday_at3")  
+
+Wvars2_F2_forced<-c("ageday_ut2") 
+Wvars3_vital_forced<-c("ageday_t3_vital") 
+Wvars3_salimetrics_forced<-c("ageday_t3_salimetrics") 
+Wvars3_oragene_forced<-c("ageday_t3_oragene") 
+
+
+
+W2_F2.W2_anthro_forced <- c(Wvars_forced, Wvars2_F2_forced, Wvars2_anthro_forced) %>% unique(.)
+W2_F2.W3_anthro_forced <- c(Wvars_forced, Wvars2_F2_forced, Wvars3_anthro_forced) %>% unique(.)
+W2_F2.W23_anthro_forced <- c(Wvars_forced, Wvars2_F2_forced, Wvars2_anthro_forced, Wvars3_anthro_forced) %>% unique(.)
+
+
+W3_vital.W3_anthro_forced <- c(Wvars_forced, Wvars3_vital_forced, Wvars3_anthro_forced) %>% unique(.)
+W3_salimetrics.W3_anthro_forced <- c(Wvars_forced, Wvars3_salimetrics_forced, Wvars3_anthro_forced) %>% unique(.)
+W3_oragene.W3_anthro_forced <- c(Wvars_forced, Wvars3_oragene_forced, Wvars3_anthro_forced) %>% unique(.)
+
+###
+
+pick_covariates_forced <- function(i, j){
+  # i is exposure as string
+  # j is outcome as string
+  # choose correct/build correct adjustment set based on exposure and outcome
+  if(grepl("t2_f2", i)){
+    if(grepl("_t2_t3", j)){Wset_forced = W2_F2.W23_anthro_forced}
+    else if(grepl("_t2", j)){Wset_forced = W2_F2.W2_anthro_forced}
+    else if(grepl("_who", j)){Wset_forced = W2_F2.W2_anthro_forced}
+    else if(grepl("_t3", j)){Wset_forced = W2_F2.W3_anthro_forced}
+    else if(grepl("_t3", j)){Wset_forced = W2_F2.W3_anthro_forced}}
+  else if(grepl("slope", i)){Wset_forced = W3_salimetrics.W3_anthro_forced}
+  else if(grepl("residual", i)){Wset_forced = W3_salimetrics.W3_anthro_forced}
+  else if(i %in% c("t3_map", "t3_hr_mean")){Wset_forced = W3_vital.W3_anthro_forced}
+  else{Wset_forced = W3_oragene.W3_anthro_forced}
+  
+  if(j=="hcz_t3"){Wset_forced=c(Wset_forced)}
+  return(Wset_forced)
+}
+
+
 ####Effect Measure Modifiers: family care inventory at t2 and t3
 
 V.set.t2 <- c("fci_t2")
@@ -84,7 +136,8 @@ for(i in Xvars){
     print(j)
     print(k)
     Wset<-pick_covariates(i, j)
-    res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, V = k)
+    Wset_forced <- pick_covariates_forced(i, j)
+    res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced, V = k)
     res <- data.frame(X=i, Y=j, V = k, V = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
     H1a_adj_emm_models <- bind_rows(H1a_adj_emm_models, res)
   }
@@ -143,7 +196,8 @@ for(i in Xvars){
       print(j)
       print(k)
       Wset<-pick_covariates(i, j)
-      res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, V = k)
+      Wset_forced <- pick_covariates_forced(i, j)
+      res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced,  V = k)
       res <- data.frame(X=i, Y=j, V = k, V = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
       H1b_adj_emm_models <- bind_rows(H1b_adj_emm_models, res)
     }
@@ -202,7 +256,8 @@ for(i in Xvars){
       print(j)
       print(k)
       Wset<-pick_covariates(i, j)
-      res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, V = k)
+      Wset_forced <- pick_covariates_forced(i, j)
+      res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced,  V = k)
       res <- data.frame(X=i, Y=j, V = k, V = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
       H2_adj_emm_models <- bind_rows(H2_adj_emm_models, res)
     }
@@ -262,7 +317,8 @@ for(i in Xvars){
       print(j)
       print(k)
       Wset<-pick_covariates(i, j)
-      res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, V = k)
+      Wset_forced <- pick_covariates_forced(i, j)
+      res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced,  V = k)
       res <- data.frame(X=i, Y=j, V = k, V = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
       H3_adj_emm_models <- bind_rows(H3_adj_emm_models, res)
     }
@@ -319,7 +375,8 @@ for(i in Xvars){
       print(j)
       print(k)
       Wset<-pick_covariates(i, j)
-      res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, V = k)
+      Wset_forced <- pick_covariates_forced(i, j)
+      res_adj <- fit_RE_gam(d=d, X=i, Y=j,  W=Wset, forcedW = Wset_forced,  V = k)
       res <- data.frame(X=i, Y=j, V = k, V = res_adj$int.p, fit=I(list(res_adj$fit)), dat=I(list(res_adj$dat)))
       H4_adj_emm_models <- bind_rows(H4_adj_emm_models, res)
     }

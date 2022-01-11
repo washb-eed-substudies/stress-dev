@@ -8,7 +8,6 @@ source(here::here("tables/table-functions.R"))
 here::here()
 d <- box_read("880476682582")
 
-
 #Unadjusted
 H1a <- readRDS(here('results/unadjusted/H1a_res.RDS'))
 H1b <- readRDS(here('results/unadjusted/H1b_res.RDS'))
@@ -40,7 +39,14 @@ source(here::here("tables/table-functions.R"))
 
 #### MAIN TABLES ####
 #### Table 1 ####
+
+#Relevel sex (1=female, 0= male) for nperc function
+
+levels(d$sex) <- c("1", "0")
+      
 # Characteristics of participants
+
+
 nperc <- function(vector){
   n <- sum(vector==1, na.rm=T)
   perc <- round(n/sum(!is.na(vector))*100)
