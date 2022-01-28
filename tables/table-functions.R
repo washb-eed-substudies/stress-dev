@@ -211,6 +211,8 @@ growth_tbl_flex <- function(name, expo_var, out_var, exposure, outcome, results,
   flextbl
 }
 
+#########
+
 subgroup_tbl <- function(name, expo_var, out_var, sub_var, exposure, outcome, subgroup, results){
   # build table
   tbl <- data.table(matrix(nrow=0, ncol=10))
@@ -278,6 +280,8 @@ subgroup_tbl <- function(name, expo_var, out_var, sub_var, exposure, outcome, su
   
   flextbl
 }
+
+#######
 
 hr_tbl <- function(name, expo_var, out_var, exposure, outcome, results, results_adj, adj_only=F){
   ### name: string name of group of exposures
@@ -363,6 +367,7 @@ hr_tbl <- function(name, expo_var, out_var, exposure, outcome, results, results_
   }
   tbl
 }
+#######
 
 hr_tbl_flex <- function(name, expo_var, out_var, exposure, outcome, results, results_adj, adj_only=F, exp_col_size = 1, out_col_size = 1){
   ### name: string name of group of exposures

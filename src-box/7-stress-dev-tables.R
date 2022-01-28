@@ -183,6 +183,8 @@ out_var <- c("Time to sitting unsupported", "Time to crawling","Time to standing
 tbl7 <- hr_tbl("Urinary isoprostanes and time to WHO motor milestone at Year 1", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj)
 tbl7flex <- hr_tbl_flex("Urinary isoprostanes and time to WHO motor milestone at Year 1", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj)
 
+
+
 #### SAVE TABLES ####
 write.csv(tbl1, here('tables/stress-dev-table1.csv'))
 write.csv(tbl2, here('tables/stress-dev-table2.csv'))

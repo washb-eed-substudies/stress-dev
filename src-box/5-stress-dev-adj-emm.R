@@ -8,7 +8,7 @@ d <- box_read("880476682582")
 #Set list of adjustment variables
 #Make vectors of adjustment variable names
 Wvars<-c("sex","birthord", "momage","momheight","momedu", 
-         "hfiacat", "Nlt18","Ncomp", "watmin", "walls", "floor", "HHwealth",
+         "hfiacat", "Nlt18","Ncomp", "watmin", "walls", "floor", "HHwealth_scaled",
          "cesd_sum_t2", "diar7d_t2", "tr", "life_viol_any_t3")
 
 Wvars[!(Wvars %in% colnames(d))]

@@ -61,7 +61,7 @@ saveRDS(H1a_who_plot_data, here("figure-data/H1a_who_unadj_spline_data.RDS"))
 #Set list of adjustment variables
 #Make vectors of adjustment variable names
 Wvars<-c("birthord", "momage","momheight","momedu", 
-         "hfiacat", "Nlt18","Ncomp", "watmin", "walls", "floor", "HHwealth",
+         "hfiacat", "Nlt18","Ncomp", "watmin", "walls", "floor", "HHwealth_scaled",
          "cesd_sum_t2", "diar7d_t2", "tr", "life_viol_any_t3", "month_at2", "month_ut2", "ageday_ut2", "ageday_at2", "sex")
 
 # --------------------------------------------------------------------------
