@@ -152,6 +152,7 @@ for(i in 1:nrow(H1a_adj_emm_models)){
   res <- data.frame(V=H1a_adj_emm_models$V[i], X=H1a_adj_emm_models$X[i], Y=H1a_adj_emm_models$Y[i])
   preds <- predict_gam_emm(fit=H1a_adj_emm_models$fit[i][[1]], d=H1a_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
   preds <- preds$res
+  preds$V <- res$V
   preds$int.p <- H1a_adj_emm_models$int.p[i]
   H1a_adj_emm_res <-  bind_rows(H1a_adj_emm_res , preds)
 }
