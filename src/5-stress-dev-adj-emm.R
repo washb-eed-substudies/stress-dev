@@ -144,8 +144,6 @@ for(i in Xvars){
 }
 }
 
-
-
 #Get primary contrasts
 H1a_adj_emm_res <- NULL
 for(i in 1:nrow(H1a_adj_emm_models)){
@@ -213,9 +211,10 @@ for(i in Xvars){
 #Get primary contrasts
 H1b_adj_emm_res <- NULL
 for(i in 1:nrow(H1b_adj_emm_models)){
-  res <- data.frame(X=H1b_adj_emm_models$X[i], Y=H1b_adj_emm_models$Y[i])
+  res <- data.frame(V=H1b_adj_emm_models$V[i], X=H1b_adj_emm_models$X[i], Y=H1b_adj_emm_models$Y[i])
   preds <- predict_gam_emm(fit=H1b_adj_emm_models$fit[i][[1]], d=H1b_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
   preds <- preds$res
+  preds$V <- res$V
   preds$int.p <- H1b_adj_emm_models$int.p[i]
   H1b_adj_emm_res <-  bind_rows(H1b_adj_emm_res , preds)
   
@@ -273,9 +272,10 @@ for(i in Xvars){
 #Get primary contrasts
 H2_adj_emm_res <- NULL
 for(i in 1:nrow(H2_adj_emm_models)){
-  res <- data.frame(X=H2_adj_emm_models$X[i], Y=H2_adj_emm_models$Y[i])
+  res <- data.frame(V=H2_adj_emm_models$V[i], X=H2_adj_emm_models$X[i], Y=H2_adj_emm_models$Y[i])
   preds <- predict_gam_emm(fit=H2_adj_emm_models$fit[i][[1]], d=H2_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
   preds <- preds$res
+  preds$V <- res$V
   preds$int.p <- H2_adj_emm_models$int.p[i]
   H2_adj_emm_res <-  bind_rows(H2_adj_emm_res , preds)
   
@@ -337,9 +337,10 @@ for(i in Xvars){
 #Get primary contrasts
 H3_adj_emm_res <- NULL
 for(i in 1:nrow(H3_adj_emm_models)){
-  res <- data.frame(X=H3_adj_emm_models$X[i], Y=H3_adj_emm_models$Y[i])
+  res <- data.frame(V=H3_adj_emm_models$V[i], X=H3_adj_emm_models$X[i], Y=H3_adj_emm_models$Y[i])
   preds <- predict_gam_emm(fit=H3_adj_emm_models$fit[i][[1]], d=H3_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
   preds <- preds$res
+  preds$V <- res$V
   preds$int.p <- H3_adj_emm_models$int.p[i]
   H3_adj_emm_res <-  bind_rows(H3_adj_emm_res , preds)
 }
@@ -397,9 +398,10 @@ for(i in Xvars){
 #Get primary contrasts
 H4_adj_emm_res <- NULL
 for(i in 1:nrow(H4_adj_emm_models)){
-  res <- data.frame(X=H4_adj_emm_models$X[i], Y=H4_adj_emm_models$Y[i])
+  res <- data.frame(V=H4_adj_emm_models$V[i], X=H4_adj_emm_models$X[i], Y=H4_adj_emm_models$Y[i])
   preds <- predict_gam_emm(fit=H4_adj_emm_models$fit[i][[1]], d=H4_adj_emm_models$dat[i][[1]], quantile_diff=c(0.25,0.75), Xvar=res$X, Yvar=res$Y)
   preds <- preds$res
+  preds$V <- res$V
   preds$int.p <- H4_adj_emm_models$int.p[i]
   H4_adj_emm_res <-  bind_rows(H4_adj_emm_res , preds)
 }

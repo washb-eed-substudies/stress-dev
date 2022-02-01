@@ -5,6 +5,32 @@
 #V.set.t2 <- c("fci_t2")
 #V.set.t3 <- c("fci_t2", "fci_t3")
 
+rm(list=ls())
+
+library('flextable')
+library('officer')
+source(here::here("0-config.R")) 
+
+source(here::here("tables/table-functions.R"))
+here::here()
+d <- box_read("880476682582")
+
+
+
+#Adjusted
+H1a_adj_emm <- readRDS(here('results/bh-corrected/H1a_adj_emm_res_BH.RDS'))  %>% mutate(int.Pval = int.p) %>% mutate(BH.int.Pval = NA)
+H1b_adj_emm <- readRDS(here('results/bh-corrected/H1b_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) %>% mutate(BH.int.Pval = NA)
+H2_adj_emm <- readRDS(here('results/bh-corrected/H2_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) %>% mutate(BH.int.Pval = NA)
+H3_adj_emm <- readRDS(here('results/bh-corrected/H3_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) %>% mutate(BH.int.Pval = NA)
+H4_adj_emm <- readRDS(here('results/bh-corrected/H4_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) %>% mutate(BH.int.Pval = NA)
+
+#WHO Hazard Ratios
+H1a_who_adj_emm <- readRDS(here('results/bh-corrected/H1a_who_adj_emm_res_BH.RDS'))
+
+#### Functions for growth tables ####
+source(here::here("tables/table-functions.R"))
+
+
 #### Table S1 ####
 
 sub_var <- c("Family Care Inventory at Year 1")
@@ -16,7 +42,6 @@ out_var <- c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressi
 
 tbl_s1 <- subgroup_tbl("Effect Measure Modification of Urinary isoprostanes and child development by Family Care Inventory at Year 1", expo_var, out_var, sub_var, exposure, outcome, subgroup, H1a_adj_emm)
 
-print(tbl_s1, preview = "html")
 
 #tbls1flex <- subgroup_tbl_flex("Effect Measure Modification of Urinary isoprostanes and child development by Family Care Inventory at Year 1", expo_var, out_var, sub_var, exposure, outcome, subgroup, H1a_adj_emm)
 
@@ -35,12 +60,16 @@ out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Persona
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
 tbl_s2 <- subgroup_tbl("Urinary isoprostanes at Year 1 and child development at Year 2", expo_var, out_var, sub_var, exposure, outcome, subgroup, H1b_adj_emm)
-print(tbl_s2, preview = "docx") 
+
 #tbl3flex <- growth_tbl_flex("Urinary isoprostanes at Year 1 and child development at Year 2", expo_var, out_var, exposure, outcome, H1b, H1b_adj)
 
 
-#### Table 4 ####
+#### Table 3 ####
 #Hypothesis 2#
+
+sub_var <- c("Family Care Inventory at Year 1", "Family Care Inventory at Year 2")
+subgroup <- c("fci_t2", "fci_t3")
+
 exposure <- c("t3_cort_slope", "t3_cort_z01", "t3_cort_z03", "t3_saa_slope", "t3_saa_z01", "t3_saa_z02" )
 outcome <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
              "z_cdi_say_t3", "z_cdi_und_t3") 
@@ -51,12 +80,16 @@ out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Persona
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
 
-tbl4 <- growth_tbl("Salivary Stress Biomarkers and Child Development at Year 2", expo_var, out_var, exposure, outcome, H2, H2_adj)
-tbl4flex <- growth_tbl_flex("Salivary Stress Biomarkers and Development at Year 2", expo_var, out_var, exposure, outcome, H2, H2_adj)
+tbl_s3 <- subgroup_tbl("Salivary Stress Biomarkers and Child Development at Year 2", sub_var, expo_var, out_var, subgroup, exposure, outcome, H2_adj_emm)
+#tbl4flex <- growth_tbl_flex("Salivary Stress Biomarkers and Development at Year 2", sub_var, expo_var, out_var, subgroup, exposure, outcome, H2_adj_emm)
 
 
-#### Table 5 ####
+#### Table 4 ####
 #Hypothesis 3#
+
+sub_var <- c("Family Care Inventory at Year 1", "Family Care Inventory at Year 2")
+subgroup <- c("fci_t2", "fci_t3")
+
 exposure <- c("t3_map", "t3_hr_mean")  
 outcome <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
              "z_cdi_say_t3", "z_cdi_und_t3") 
@@ -64,11 +97,14 @@ expo_var <- c("Mean arterial pressure (mmHg)", "Mean Resting Heart Rate (bpm)")
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl5 <- growth_tbl("Mean arterial pressure and heart rate at year 2 v. development at year 2", expo_var, out_var, exposure, outcome, H3, H3_adj)
-tbl5flex <- growth_tbl_flex("Mean arterial pressure and heart rate at year 2 v. development at year 2", expo_var, out_var, exposure, outcome, H3, H3_adj)
+tbl_s4 <- subgroup_tbl("Mean arterial pressure and heart rate at year 2 v. development at year 2", sub_var, expo_var, out_var, subgroup, exposure, outcome, H3_adj_emm)
+#tbl5flex <- growth_tbl_flex("Mean arterial pressure and heart rate at year 2 v. development at year 2", expo_var, out_var, exposure, outcome, H3, H3_adj)
 
-#### Table 6 ####
+#### Table 5 ####
 #Hypothesis 4#
+
+sub_var <- c("Family Care Inventory at Year 1", "Family Care Inventory at Year 2")
+subgroup <- c("fci_t2", "fci_t3")
 
 exposure <- c("t3_gcr_mean", "t3_gcr_cpg12")   
 outcome <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
@@ -77,5 +113,16 @@ expo_var <- c("Mean Overall Percentage Glucocorticoid Receptor Methylation", "Pe
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl6 <- growth_tbl("Glucocortoic receptor methylation and child development at Year 2", expo_var, out_var, exposure, outcome, H4, H4_adj)
-tbl6flex <- growth_tbl_flex("Glucocortoic receptor methylation and child development at Year 2", expo_var, out_var, exposure, outcome, H4, H4_adj)
+tbl_s5 <- subgroup_tbl("Glucocortoic receptor methylation and child development at Year 2", sub_var, expo_var, out_var, subgroup, exposure, outcome, H4_adj_emm)
+#tbl6flex <- growth_tbl_flex("Glucocortoic receptor methylation and child development at Year 2", expo_var, out_var, exposure, outcome, H4, H4_adj)
+
+#SAVE TABLES
+#write.csv(tbl_s1, here('tables/supp-tables/stress-dev-table-S1.csv'))
+#write.csv(tbl_s2, here('tables/supp-tables/stress-dev-table-S2.csv'))
+#write.csv(tbl_s3, here('tables/supp-tables/stress-dev-table-S3.csv'))
+#write.csv(tbl_s4, here('tables/supp-tables/stress-dev-table-S4.csv'))
+#write.csv(tbl_s5, here('tables/supp-tables/stress-dev-table-S5.csv'))
+
+
+save_as_docx("Table S1" = tbl_s1, "Table S2" = tbl_s2, "Table S3" = tbl_s3, "Table S4" = tbl_s4, "Table S5" = tbl_s5,  
+             pr_section = sect_properties, path='tables/supp-tables/stress-dev-EMM-tables.docx')
