@@ -78,6 +78,7 @@ full_adj_res <- full_adj_res %>% group_by(H) %>%
 
 full_adj_emm_res <- full_adj_emm_res %>% group_by(H) %>% 
   mutate(BH.Pval=p.adjust(Pval, method="BH")) %>%
+  mutate(BH.int.Pval=p.adjust(int.p, method="BH")) %>%
   ungroup() %>%
   as.data.frame()
 

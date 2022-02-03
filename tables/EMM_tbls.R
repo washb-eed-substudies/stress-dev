@@ -18,11 +18,11 @@ d <- box_read("880476682582")
 
 
 #Adjusted
-H1a_adj_emm <- readRDS(here('results/bh-corrected/H1a_adj_emm_res_BH.RDS'))  %>% mutate(int.Pval = int.p) %>% mutate(BH.int.Pval = NA)
-H1b_adj_emm <- readRDS(here('results/bh-corrected/H1b_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) %>% mutate(BH.int.Pval = NA)
-H2_adj_emm <- readRDS(here('results/bh-corrected/H2_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) %>% mutate(BH.int.Pval = NA)
-H3_adj_emm <- readRDS(here('results/bh-corrected/H3_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) %>% mutate(BH.int.Pval = NA)
-H4_adj_emm <- readRDS(here('results/bh-corrected/H4_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) %>% mutate(BH.int.Pval = NA)
+H1a_adj_emm <- readRDS(here('results/bh-corrected/H1a_adj_emm_res_BH.RDS'))  %>% mutate(int.Pval = int.p) 
+H1b_adj_emm <- readRDS(here('results/bh-corrected/H1b_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) 
+H2_adj_emm <- readRDS(here('results/bh-corrected/H2_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) 
+H3_adj_emm <- readRDS(here('results/bh-corrected/H3_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) 
+H4_adj_emm <- readRDS(here('results/bh-corrected/H4_adj_emm_res_BH.RDS')) %>% mutate(int.Pval = int.p) 
 
 #WHO Hazard Ratios
 H1a_who_adj_emm <- readRDS(here('results/bh-corrected/H1a_who_adj_emm_res_BH.RDS'))
@@ -43,7 +43,7 @@ out_var <- c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressi
 tbl_s1 <- subgroup_tbl("Effect Measure Modification of Urinary isoprostanes and child development by Family Care Inventory at Year 1", expo_var, out_var, sub_var, exposure, outcome, subgroup, H1a_adj_emm)
 
 
-#tbls1flex <- subgroup_tbl_flex("Effect Measure Modification of Urinary isoprostanes and child development by Family Care Inventory at Year 1", expo_var, out_var, sub_var, exposure, outcome, subgroup, H1a_adj_emm)
+
 
 ######
 #Supp table 2: Urinary isoprostanes at Year 1 and child development at Year 2
@@ -61,7 +61,7 @@ out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Persona
 
 tbl_s2 <- subgroup_tbl("Urinary isoprostanes at Year 1 and child development at Year 2", expo_var, out_var, sub_var, exposure, outcome, subgroup, H1b_adj_emm)
 
-#tbl3flex <- growth_tbl_flex("Urinary isoprostanes at Year 1 and child development at Year 2", expo_var, out_var, exposure, outcome, H1b, H1b_adj)
+
 
 
 #### Table 3 ####
@@ -80,8 +80,9 @@ out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Persona
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
 
-tbl_s3 <- subgroup_tbl("Salivary Stress Biomarkers and Child Development at Year 2", sub_var, expo_var, out_var, subgroup, exposure, outcome, H2_adj_emm)
-#tbl4flex <- growth_tbl_flex("Salivary Stress Biomarkers and Development at Year 2", sub_var, expo_var, out_var, subgroup, exposure, outcome, H2_adj_emm)
+tbl_s3 <- subgroup_tbl("Salivary Stress Biomarkers and Child Development at Year 2", expo_var, out_var, sub_var, exposure, outcome, subgroup, H2_adj_emm)
+
+
 
 
 #### Table 4 ####
@@ -97,8 +98,8 @@ expo_var <- c("Mean arterial pressure (mmHg)", "Mean Resting Heart Rate (bpm)")
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl_s4 <- subgroup_tbl("Mean arterial pressure and heart rate at year 2 v. development at year 2", sub_var, expo_var, out_var, subgroup, exposure, outcome, H3_adj_emm)
-#tbl5flex <- growth_tbl_flex("Mean arterial pressure and heart rate at year 2 v. development at year 2", expo_var, out_var, exposure, outcome, H3, H3_adj)
+tbl_s4 <- subgroup_tbl("Mean arterial pressure and heart rate at year 2 v. development at year 2", expo_var, out_var, sub_var, exposure, outcome, subgroup, H3_adj_emm)
+
 
 #### Table 5 ####
 #Hypothesis 4#
@@ -113,8 +114,8 @@ expo_var <- c("Mean Overall Percentage Glucocorticoid Receptor Methylation", "Pe
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl_s5 <- subgroup_tbl("Glucocortoic receptor methylation and child development at Year 2", sub_var, expo_var, out_var, subgroup, exposure, outcome, H4_adj_emm)
-#tbl6flex <- growth_tbl_flex("Glucocortoic receptor methylation and child development at Year 2", expo_var, out_var, exposure, outcome, H4, H4_adj)
+tbl_s5 <- subgroup_tbl("Glucocortoic receptor methylation and child development at Year 2", expo_var, out_var, sub_var, exposure, outcome, subgroup, H4_adj_emm)
+
 
 #SAVE TABLES
 #write.csv(tbl_s1, here('tables/supp-tables/stress-dev-table-S1.csv'))
