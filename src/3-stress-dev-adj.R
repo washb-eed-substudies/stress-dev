@@ -165,10 +165,10 @@ saveRDS(H1a_adj_res, here("results/adjusted/H1a_adj_res.RDS"))
 
 
 #Save plots
-#saveRDS(H1a_adj_plot_list, paste0(dropboxDir,"results/stress-growth-models/figure-objects/H1a_adj_splines.RDS"))
+#saveRDS(H1a_adj_plot_list, here("results/figure-objects/H1a_adj_splines.RDS"))
 
 #Save plot data
-saveRDS(H1a_adj_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H1a_adj_spline_data.RDS"))
+saveRDS(H1a_adj_plot_data, here("results/figure-data/H1a_adj_spline_data.RDS"))
 
 
 ######H1b
@@ -220,10 +220,10 @@ saveRDS(H1b_adj_res, here("results/adjusted/H1b_adj_res.RDS"))
 
 
 #Save plots
-#saveRDS(H1b_adj_plot_list, paste0(dropboxDir,"results/stress-growth-models/figure-objects/H1b_adj_splines.RDS"))
+#saveRDS(H1b_adj_plot_list, here("results/figure-objects/H1b_adj_splines.RDS"))
 
 #Save plot data
-saveRDS(H1b_adj_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H1b_adj_spline_data.RDS"))
+saveRDS(H1b_adj_plot_data, here("results/figure-data/figure-data/H1b_adj_spline_data.RDS"))
 
 ## Hypothesis 2
 
@@ -275,10 +275,10 @@ saveRDS(H2_adj_res, here("results/adjusted/H2_adj_res.RDS"))
 
 
 #Save plots
-#saveRDS(H2_adj_plot_list, paste0(dropboxDir,"results/stress-growth-models/figure-objects/H2_adj_adj_splines.RDS"))
+#saveRDS(H2_adj_plot_list, here("results/figure-objects/H2_adj_adj_splines.RDS"))
 
 #Save plot data
-saveRDS(H2_adj_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H2_adj_adj_spline_data.RDS"))
+saveRDS(H2_adj_plot_data, here("results/figure-data/H2_adj_adj_spline_data.RDS"))
 
 
 
@@ -332,10 +332,10 @@ saveRDS(H3_res, here("results/adjusted/H3_adj_res.RDS"))
 
 
 #Save plots
-#saveRDS(H3_plot_list, paste0(dropboxDir,"results/stress-growth-models/figure-objects/H3_adj_splines.RDS"))
+#saveRDS(H3_plot_list, here("results/figure-objects/H3_adj_splines.RDS"))
 
 #Save plot data
-saveRDS(H3_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H3_adj_spline_data.RDS"))
+saveRDS(H3_plot_data, here("results/figure-data/H3_adj_spline_data.RDS"))
 
 
 ##Hypothesis 4
@@ -387,7 +387,7 @@ saveRDS(H4_res, here("results/adjusted/H4_adj_res.RDS"))
 
 
 #Save plots
-#saveRDS(H4_plot_list, paste0(dropboxDir,"results/stress-growth-models/figure-objects/H4_adj_splines.RDS"))
+#saveRDS(H4_plot_list, here("results/figure-objects/H4_adj_splines.RDS"))
 
 #Save plot data
-saveRDS(H4_plot_data, paste0(dropboxDir,"results/stress-growth-models/figure-data/H4_adj_spline_data.RDS"))
+saveRDS(H4_plot_data, here("results/figure-data/H4_adj_spline_data.RDS"))
