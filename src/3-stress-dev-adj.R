@@ -223,7 +223,7 @@ saveRDS(H1b_adj_res, here("results/adjusted/H1b_adj_res.RDS"))
 #saveRDS(H1b_adj_plot_list, here("results/figure-objects/H1b_adj_splines.RDS"))
 
 #Save plot data
-saveRDS(H1b_adj_plot_data, here("results/figure-data/figure-data/H1b_adj_spline_data.RDS"))
+saveRDS(H1b_adj_plot_data, here("results/figure-data/H1b_adj_spline_data.RDS"))
 
 ## Hypothesis 2
 
