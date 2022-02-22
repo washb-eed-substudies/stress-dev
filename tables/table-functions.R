@@ -275,9 +275,9 @@ subgroup_tbl <- function(name, expo_var, out_var, sub_var, exposure, outcome, su
   flextbl <- hline_top(flextbl, part="header", border=fp_border(color="black"))
   flextbl <- align(flextbl, align = "center", part = "all")
   flextbl <- align(flextbl, j = c(1, 2, 3), align = "left", part="all")
-  flextbl <- autofit(flextbl, part = "all")
-  flextbl <- fit_to_width(flextbl, max_width=8)
-  
+  #flextbl <- autofit(flextbl, part = "all")
+  #flextbl <- fit_to_width(flextbl, max_width=8)
+  flextbl <- fontsize(flextbl, part = "all", size = 6)
   flextbl
 }
 
