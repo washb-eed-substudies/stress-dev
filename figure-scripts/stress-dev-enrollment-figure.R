@@ -4,7 +4,8 @@ library(tibble)
 data <- tibble(x = -10:100, y= -10:100)
 head(data)
 
-d <- readRDS(paste0(dropboxDir, "Data/Cleaned/Audrie/stress-dev.RDS"))
+d <- box_read("880476682582")
+
 exposures_y1 <- c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i")
 outcomes_y1 <- c("sum_who", "z_cdi_say_t2", "z_cdi_und_t2") 
 exposures_y2 <- c("t3_cort_slope", "t3_cort_z01", "t3_cort_z03", "t3_saa_slope", "t3_saa_z01", "t3_saa_z02",
