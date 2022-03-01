@@ -2,7 +2,7 @@
 
 rm(list=ls())
 source(here::here("0-config.R"))
-
+#library(expss)
 
 #GAM FIGURES
 #start with plot_gam_diff() and plot_sig_heatmap()
@@ -10,14 +10,65 @@ source(here::here("0-config.R"))
 
 #Adjusted
 H1a_adj <- readRDS(here('results/adjusted/H1a_adj_res.RDS'))
+#
+H1a_adj$X <- factor(H1a_adj$X,
+                    levels = c("t2_f2_8ip", "t2_f2_23d","t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca"),
+                    labels = c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarker score"))
+
+H1a_adj$Y <- factor(H1a_adj$Y,
+                    levels = c("sum_who_t2_t3", "z_cdi_say_t2","z_cdi_und_t2"),
+                    labels = c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressive language Z-score","CDI comprehension Z-score"))
+#
 H1a_adj_emm <- readRDS(here('results/adjusted/H1a_adj_emm_res.RDS'))
 H1b_adj <- readRDS(here('results/adjusted/H1b_adj_res.RDS'))
+#
+H1b_adj$X <- factor(H1b_adj$X,
+                    levels = c("t2_f2_8ip", "t2_f2_23d","t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca"),
+                    labels = c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarker score"))
+
+H1b_adj$Y <- factor(H1b_adj$Y,
+                   levels = c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
+                              "z_cdi_say_t3", "z_cdi_und_t3"), 
+                   labels = c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
+                              "CDI expressive language Z-score","CDI comprehension Z-score"))
+#
 H1b_adj_emm <- readRDS(here('results/adjusted/H1b_adj_emm_res.RDS'))
 H2_adj <- readRDS(here('results/adjusted/H2_adj_res.RDS'))
+H2_adj$X <- factor(H2_adj$X,
+                   levels = c("t3_cort_slope", "t3_cort_z01", "t3_cort_z03", "t3_saa_slope", "t3_saa_z01", "t3_saa_z02" ),
+                   labels = c("Cortisol Reactivity (ug/dl/min)", "Pre-stressor Cortisol (ug/dl)", "Post-stressor Cortisol (ug/dl)", "sAA Reactivity (U/ml/min)", "Pre-stressor sAA (U/ml)", "Post-stressor sAA (U/ml)"))
+
+H2_adj$Y <- factor(H2_adj$Y,
+levels = c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
+             "z_cdi_say_t3", "z_cdi_und_t3"), 
+labels = c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
+             "CDI expressive language Z-score","CDI comprehension Z-score"))
+
 H2_adj_emm <- readRDS(here('results/adjusted/H2_adj_emm_res.RDS'))
 H3_adj <- readRDS(here('results/adjusted/H3_adj_res.RDS'))
+#
+H3_adj$X <- factor(H3_adj$X,
+levels = c("t3_map", "t3_hr_mean"),  
+labels = c("Mean arterial pressure (mmHg)", "Mean Resting Heart Rate (bpm)"))
+#
+H3_adj$Y <- factor(H3_adj$Y,
+                   levels = c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
+                              "z_cdi_say_t3", "z_cdi_und_t3"), 
+                   labels = c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
+                              "CDI expressive language Z-score","CDI comprehension Z-score"))
+#
 H3_adj_emm <- readRDS(here('results/adjusted/H3_adj_emm_res.RDS'))
 H4_adj <- readRDS(here('results/adjusted/H4_adj_res.RDS'))
+#
+H4_adj$X <- factor(H4_adj$X,
+levels = c("t3_gcr_mean", "t3_gcr_cpg12"),   
+labels = c("Mean Overall Percentage Glucocorticoid Receptor Methylation", "Percentage methylation at NGFI-A transcription factor binding site (CpG site #12)"))
+H4_adj$Y <- factor(H4_adj$Y,
+                   levels = c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
+                              "z_cdi_say_t3", "z_cdi_und_t3"), 
+                   labels = c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
+                              "CDI expressive language Z-score","CDI comprehension Z-score"))
+#
 H4_adj_emm <- readRDS(here('results/adjusted/H4_adj_emm_res.RDS'))
 
 #WHO Hazard Ratios
@@ -112,8 +163,8 @@ plot_sig_heatmap <- function(d,
       legend.key.height=grid::unit(0.2,"cm"),
       legend.key.width=grid::unit(1,"cm"),
       legend.position = "right",
-      #axis.text.x=element_text(size=8,colour=textcol,angle=45,hjust=1),
-      axis.text.x=element_text(size=8,colour=textcol),
+      axis.text.x=element_text(size=8,colour=textcol,angle=45,hjust=1),
+      #axis.text.x=element_text(size=8,colour=textcol),
       axis.text.y=element_text(size=8,vjust = 0.2,colour=textcol),
       axis.ticks=element_line(size=0.4),
       plot.title=element_text(colour=textcol,hjust=0,size=12,face="bold"),
@@ -134,35 +185,35 @@ plot_sig_heatmap <- function(d,
 
 ###H1A
 heat1a <- plot_sig_heatmap(H1a_adj,
-                 pval_var="Pval", title="",
+                 pval_var="Pval", title="Figure 7. Urinary isoprostanes and child development at Year 1",
                  Outcome="Outcome", Exposure="Exposure",
                  print.est=T, print.ci=F,
                  null=0)
 
 ###H1B
 heat1b <- plot_sig_heatmap(H1b_adj,
-                 pval_var="Pval", title="",
-                 Outcome="Outcome", Exposure="Exposure",
+                 pval_var="Pval", title="Figure 9. Urinary isoprostanes at Year 1 and child development at Year 2",
+                 Outcome="Outcome", Exposure="Exposure", 
                  print.est=T, print.ci=F,
                  null=0)
 
 ###H2
 heat2 <- plot_sig_heatmap(H2_adj,
-                 pval_var="Pval", title="",
+                 pval_var="Pval", title="Figure 3. Salivary stress biomarkers and child development at Year 2",
                  Outcome="Outcome", Exposure="Exposure",
                  print.est=T, print.ci=F,
                  null=0)
 
 ###H3
 heat3 <- plot_sig_heatmap(H3_adj,
-                 pval_var="Pval", title="",
+                 pval_var="Pval", title="Figure 11. Mean arterial pressure and heart rate and child development at Year 2",
                  Outcome="Outcome", Exposure="Exposure",
                  print.est=T, print.ci=F,
                  null=0)
 
 ###H4
 heat4 <- plot_sig_heatmap(H4_adj,
-                 pval_var="Pval", title="",
+                 pval_var="Pval", title="Figure 5. Glucocortoid receptor methylation and child development at Year 2",
                  Outcome="Outcome", Exposure="Exposure",
                  print.est=T, print.ci=F,
                  null=0)
@@ -188,13 +239,14 @@ p1a <- ggplot(H1a_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
+  ggtitle("Figure 6. Urinary isoprostanes and child development at Year 1") +
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
-        plot.title = element_text(hjust = 0.5, face = "plain", size=9),
+        plot.title = element_text(hjust = 0.5, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
-p1a
+
 #H1B
 p1b <- ggplot(H1b_adj, (aes(x=X, y=point.diff))) + 
   geom_point(size=3) +
@@ -204,13 +256,14 @@ p1b <- ggplot(H1b_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
+  ggtitle("Figure 8. Urinary isoprostanes at Year 1 and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
-        plot.title = element_text(hjust = 0.5, face = "plain", size=9),
+        plot.title = element_text(hjust = 0.5, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
-p1b
+
 #H2
 p2 <- ggplot(H2_adj, (aes(x=X, y=point.diff))) + 
   geom_point(size=3) +
@@ -220,13 +273,14 @@ p2 <- ggplot(H2_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
+  ggtitle("Figure 2. Salivary stress biomarkers and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
-        plot.title = element_text(hjust = 0.5, face = "plain", size=9),
+        plot.title = element_text(hjust = 0.5, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
-p2
+
 
 #H3
 p3 <- ggplot(H3_adj, (aes(x=X, y=point.diff))) + 
@@ -237,13 +291,14 @@ p3 <- ggplot(H3_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
+  ggtitle("Figure 10. Mean arterial pressure and heart rate and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
-        plot.title = element_text(hjust = 0.5, face = "plain", size=9),
+        plot.title = element_text(hjust = 0.5, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
-p3
+
 
 #H4
 p4 <- ggplot(H4_adj, (aes(x=X, y=point.diff))) + 
@@ -254,14 +309,15 @@ p4 <- ggplot(H4_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
+  ggtitle("Figure 4. Glucocortoid receptor methylation and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
         #axis.text.x=ggtext::element_markdown(),
-        plot.title = element_text(hjust = 0.5, face = "plain", size=9),
+        plot.title = element_text(hjust = 0.5, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
-p4
+
 #SAVE PLOTS
 ggsave(p1a, file = here::here("figures/H1a_forest_diff_adj.png"), height=10, width=8)
 ggsave(p1b, file = here::here("figures/H1b_forest_diff_adj.png"), height=10, width=8)

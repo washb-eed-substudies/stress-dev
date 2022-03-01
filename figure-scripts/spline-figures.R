@@ -37,8 +37,7 @@ d_for_plot <- function(x_name, y_name, x_var, y_var, spline, quart){
   d
 }
 
-color_levels <- c("Sum of WHO motor milestones", "Comprehension", "Expressive language",
-                  "Communication", "Gross motor", "Personal social", "Combined")
+color_levels <- c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressive language Z-score","CDI comprehension Z-score")
 
 plot_facet <- function(d, theme, title, x_label, type) {
   if (type=="solid") {
@@ -70,98 +69,42 @@ plot_facet <- function(d, theme, title, x_label, type) {
 #### SPLINE FIGURES 
 
 
-#Figure 2 - H1B: Urinary isoprostanes at Year 1 and child development at Year 2
+#Figure 12 - H1A: Urinary isoprostanes at Year 1 and child development at Year 1
+
 
 
 d2 <- d_for_plot(c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarker score"),
-                 c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ Score", "CDI expressive language Z-score","CDI comprehension Z-score"), 
-                 c("t2_f2_8ip", "t2_f2_23d", "t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca"), 
-                 c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", "z_cdi_say_t3", "z_cdi_und_t3"),
-                 H1b_spline, H1b_quartiles)
+                 c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressive language Z-score","CDI comprehension Z-score"), 
+                 c("t2_f2_8ip", "t2_f2_23d","t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca"), 
+                 c("sum_who_t2_t3", "z_cdi_say_t2","z_cdi_und_t2"),
+                 H1a_spline, H1a_quartiles)
 
-d2$x <- d2$x %>% as.factor()
-d2$y <- factor(d2$y, levels=c("Sum of WHO motor milestones", 'Comprehension', "Expressive language",
-                              "Communication", "Gross motor", "Personal social", "Combined"))
-#p <- plot_facet(d2 %>% filter(grepl("sum_who", Yvar)), F, "Sum of WHO motor\nmilestones", F, type = "solid")
-#p1 <- plot_facet(d2 %>% filter(grepl("z_cdi_.{3}_t2", Yvar)), F, "CDI Z-scores", T, type = "solid")
-p <- plot_facet(d2 %>% filter(grepl("z_cdi_.{3}_t3", Yvar) & Xvar=="t2_f2_8ip"), F, "CDI Z-scores", F, "longdash")
-p1 <- plot_facet(d2 %>% filter(grepl("z_cdi_.{3}_t3", Yvar) & Xvar=="t2_f2_23d"), T, NULL, F, "longdash") 
-p2 <- plot_facet(d2 %>% filter(grepl("z_cdi_.{3}_t3", Yvar) & Xvar=="t2_f2_VI"), F, NULL, F, "longdash")
-p3 <- plot_facet(d2 %>% filter(grepl("z_cdi_.{3}_t3", Yvar) & Xvar=="t2_f2_12i"), T, NULL, F, "longdash")
-p4 <- plot_facet(d2 %>% filter(grepl("z_cdi_.{3}_t3", Yvar) & Xvar=="t2_f2_iso.pca"), T, NULL, F, "longdash")
-p5 <- ggplot() + theme_nothing()
-p6 <- plot_facet(d2 %>% filter(grepl("easq", Yvar) & Xvar=="t2_f2_8ip"), F, "EASQ Z-scores", F, "longdash")
-p7 <- plot_facet(d2 %>% filter(grepl("easq", Yvar) & Xvar=="t2_f2_23d"), T, NULL, F, "longdash") 
-p8 <- plot_facet(d2 %>% filter(grepl("easq", Yvar) & Xvar=="t2_f2_VI"), F, NULL, F, "longdash")
-p9 <- plot_facet(d2 %>% filter(grepl("easq", Yvar) & Xvar=="t2_f2_12i"), T, NULL, F, "longdash")
-p10 <- plot_facet(d2 %>% filter(grepl("easq", Yvar) & Xvar=="t2_f2_iso.pca"), T, NULL, F, "longdash")
+d2$x <- factor(d2$x, levels=c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarker score"))
+d2$y <- factor(d2$y, levels=c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressive language Z-score","CDI comprehension Z-score"))
 
-ggpubr::ggarrange(p,ggplot()+theme_nothing(),ggplot()+theme_nothing(),
-                  p, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, common.legend = T,
-                  ncol = 4, nrow = 4,
-                  heights = c(1, 1.7, 3.5), widths=c(1, 1, 1)) %>% ggsave(filename = here("figures/splines_H1b.jpg"), width = 10, height=15)
+p <- plot_facet(d2 %>% filter(grepl("sum_who", Yvar) & Xvar=="t2_f2_8ip"), F, "Sum of WHO motor\nmilestones", F,  type = "solid")
+p1 <- plot_facet(d2 %>% filter(grepl("sum_who", Yvar) & Xvar=="t2_f2_23d"), F, " ", F, type = "solid")
+p2 <- plot_facet(d2 %>% filter(grepl("sum_who", Yvar) & Xvar=="t2_f2_VI"), F, " ", F, type = "solid")
+p3 <- plot_facet(d2 %>% filter(grepl("sum_who", Yvar) & Xvar=="t2_f2_12i"), F, " ", F, type = "solid")
+p4 <- plot_facet(d2 %>% filter(grepl("sum_who", Yvar) & Xvar=="t2_f2_iso.pca"), F, " ", F, type = "solid")
 
+pa <- plot_facet(d2 %>% filter(grepl("z_cdi_say", Yvar) & Xvar=="t2_f2_8ip"), F, "CDI Expression", F, type = "solid")
+pa1 <- plot_facet(d2 %>% filter(grepl("z_cdi_say", Yvar) & Xvar=="t2_f2_23d"), F, " ", F, type = "solid")
+pa2 <- plot_facet(d2 %>% filter(grepl("z_cdi_say", Yvar) & Xvar=="t2_f2_VI"), F, " ", F, type = "solid")
+pa3 <- plot_facet(d2 %>% filter(grepl("z_cdi_say", Yvar) & Xvar=="t2_f2_12i"), F, " ", F, type = "solid")
+pa4 <- plot_facet(d2 %>% filter(grepl("z_cdi_say", Yvar) & Xvar=="t2_f2_iso.pca"), F, " ", F, type = "solid")
 
-#### GAM FIGURES ###
-
-#Figure 2 - H1B: Urinary isoprostanes at Year 1 and child development at Year 2
-
-d3 <- H1b_quartiles %>% filter(grepl("agp", X))
-d3 <- d3 %>% mutate(group=factor(ifelse(Y=="sum_who", "WHO motor milestones", ifelse(grepl("cdi", Y), "CDI Z-scores", "EASQ Z-scores")),
-                                 levels=c("WHO motor milestones", "CDI Z-scores", "EASQ Z-scores")), 
-                    Xvar = factor(ifelse(grepl("t2", X), "Ln AGP Year 1", "Ln AGP Year 2"), levels=c("Ln AGP Year 1", "Ln AGP Year 2")),
-                    Yvar = case_when(grepl("who", Y) ~ "Sum of WHO motor milestones",
-                                     grepl("und", Y) ~ "CDI comprehension Z-score",
-                                     grepl("say", Y) ~ "CDI expressive language Z-score",
-                                     grepl("comm", Y) ~ "EASQ communication Z-score",
-                                     grepl("motor", Y) ~ "EASQ gross motor Z-score",
-                                     grepl("personal", Y) ~ "EASQ personal social Z-score",
-                                     grepl("combined", Y) ~ "EASQ combined Z-score"))
-d3$Yvar <- factor(d3$Yvar, levels=c("Sum of WHO motor milestones", paste(c("CDI comprehension", "CDI expressive language",
-                                                                           "EASQ communication", "EASQ gross motor", "EASQ personal social", "EASQ combined"), "Z-score")))
-d3$Ytime <- factor(ifelse(grepl("t3|easq", d3$Y), "Year 2", "Year 1"))
-
-p <- ggplot(d3, aes(x=Yvar, y=point.diff)) + 
-  geom_pointrange(aes(ymin=lb.diff , ymax=ub.diff, color=group, group=Yvar, shape=Ytime),
-                  position = position_dodge2(reverse = TRUE, width = .5),
-                  size = 1) +
-  scale_x_discrete(limits = rev(levels(d1$Yvar)))+
-  #geom_text(aes(label=ref), position = position_nudge(y = (abs(yrange[1])+abs(yrange[2]))/10)) +
-  facet_grid(~Xvar, drop = T) +
-  coord_flip() + 
-  labs(y = "Adjusted difference in mean development outcome\nbetween 25th and 75th percentile of Th1/Th2 ratio", 
-       x=element_blank()) +
-  geom_hline(yintercept = 0, linetype="dashed") +
-  scale_shape_manual(values=c(21,16)) +
-  scale_colour_manual(values=tableau10) + 
-  theme_ki() +
-  theme(plot.title = element_text(hjust = 0),
-        panel.spacing = unit(0, "lines"),
-        legend.position = "right")+
-  guides(color = guide_legend(title="Development measurement"), shape=guide_legend(title="Development\nmeasurement time", reverse = T))
-p
+pb <- plot_facet(d2 %>% filter(grepl("z_cdi_und_t2", Yvar)& Xvar=="t2_f2_8ip"), F, "CDI Comprehension", T, type = "solid")
+pb1 <- plot_facet(d2 %>% filter(grepl("z_cdi_und_t2", Yvar) & Xvar=="t2_f2_23d"), F, " ", T, type = "solid")
+pb2 <- plot_facet(d2 %>% filter(grepl("z_cdi_und_t2", Yvar) & Xvar=="t2_f2_VI"), F, " ", T, type = "solid")
+pb3 <- plot_facet(d2 %>% filter(grepl("z_cdi_und_t2", Yvar) & Xvar=="t2_f2_12i"), F, " ", T, type = "solid")
+pb4 <- plot_facet(d2 %>% filter(grepl("z_cdi_und_t2", Yvar) & Xvar=="t2_f2_iso.pca"), F, " ", T, type = "solid")
 
 
-HR_agp <- HR %>% filter(grepl("agp", X) & !grepl("sit", Y))
-HR_agp$Yvar <- factor(c("Hands-and-knees crawling","Standing with assistance",
-                        "Walking with assistance","Standing alone","Walking alone"),
-                      levels=c("Hands-and-knees crawling","Standing with assistance","Walking with assistance","Standing alone","Walking alone"))
-HR_agp$Xvar <- factor(ifelse(grepl("t2", HR_agp$X), "Ln AGP Year 1", "Ln AGP Year 2"), levels=c("Ln AGP Year 1", "Ln AGP Year 2"))
 
-p1 <- ggplot(HR_agp, aes(x=Yvar, y=point.HR, color="WHO motor milestones", shape="Year 1")) + 
-  geom_pointrange(aes(ymin=lb.HR, ymax=ub.HR),
-                  size = 1) +
-  scale_x_discrete(limits = rev(levels(HR_agp$Yvar)))+
-  facet_grid(~Xvar, drop = T, scales = "free") +
-  coord_flip() + 
-  labs(y = "Adjusted hazard ratio of motor milestone achievement\nbetween 25th and 75th percentile of Th1/Th2 ratio", 
-       x=element_blank()) +
-  geom_hline(yintercept = 1, linetype="dashed") +
-  scale_shape_manual(values=c(21,16)) +
-  scale_colour_manual(values=tableau10) + 
-  theme_ki() +
-  theme(plot.title = element_text(hjust = 0),
-        panel.spacing = unit(0, "lines"))
-p1 
+ggpubr::ggarrange(p, p1, p2, p3, p4, pa, pa1, pa2, pa3, pa4, pb, pb1, pb2, pb3, pb4,
+                  common.legend = T,
+                  ncol = 5, nrow = 4,
+                  heights = c(1, 1, 1, 1), widths=c(1, 1, 1, 1)) %>% ggsave(filename = here("figures/splines_H1a.jpg"), width = 10, height=15)
 
-ggpubr::ggarrange(p1, p, widths = c(1.5, 2.5)) %>%  ggsave(filename = here("figures/gam_agp.jpg"), width = 16, height=7)
+############################################
