@@ -53,13 +53,13 @@ p +
   
   geom_rect(xmin = 20, xmax=80, ymin=76, ymax=82, color='black',
             fill='white', size=0.25) +
-  annotate('text', x= 50, y=79,label= '720 clusters created and randomly allocated across 7 arms \n 5,551 compounds randomly allocated across 7 arms \n 2 of 7 arms selected into substudy', size=3)  +
+  annotate('text', x= 50, y=79,label= '720 clusters created and randomly allocated across 7 arms \n 5,551 compounds randomly allocated across 7 arms \n 4 of 7 arms selected into substudy', size=3)  +
   annotate('text', x= 10, y=79,label= 'Allocation', size=4) +
   
   geom_rect(xmin = 27, xmax=73, ymin=64, ymax=74, color='black',
             fill='white', size=0.25) +
-  annotate('text', x= 50, y=70,label= "paste(bold('                            Control arm and\nNutrition + Water + Sanitation + Handwashing arm'))", parse=TRUE, size=3) +
-  annotate('text', x= 50, y=68.5,label= '\n270 clusters \n2,068 households', size=3) +
+  annotate('text', x= 50, y=69,label= "paste(bold('                   Control arm, Nutrition arm, \n     Water + Sanitation + Handwashing arm and\nNutrition + Water + Sanitation + Handwashing arm'))", parse=TRUE, size=3) +
+  annotate('text', x= 50, y=68.5,label= paste('\n\n', 180+90+90+90, ' clusters \n', 1382+702+699+686, ' households', sep=""), size=3) +
   annotate('text', x= 10, y=63,label= 'Subsample Target', size=4) +
   
   
@@ -67,16 +67,16 @@ p +
             fill='white', size=0.25) +
   annotate('text', x= 86, y=64.8,label= "paste(bold('Number of clusters not \n selected into substudy'))", parse=TRUE, size=3) + 
   annotate('text', x= 86, y=63.4,label= "paste(bold('Year 1 '))", parse=TRUE, size=3) + 
-  annotate('text', x= 86, y=62.1,label= '139 clusters', size=3) + 
+  annotate('text', x= 86, y=62.1,label= '319 clusters', size=3) + 
   annotate('text', x= 86, y=60.9,label= "paste(bold('Year 2'))", parse=TRUE, size=3) + 
-  annotate('text', x= 86, y=59.7,label= '135 clusters', size=3) +
+  annotate('text', x= 86, y=59.7,label= '183 clusters', size=3) +
   
   geom_rect(xmin = 42, xmax=58, ymin=52, ymax=62, color='black',
             fill='white', size=0.25) +
   annotate('text', x=50, y=61.2,label= "paste(bold('Year 1'))", parse=TRUE, size=3) + 
   annotate('text', x=50, y=60.2,label= '\n\n131 clusters \n996 children', size=3) +
   annotate('text', x=50, y=56.2,label= "paste(bold('Year 2'))", parse=TRUE, size=3) + 
-  annotate('text', x=50, y=55.2,label= '\n\n135 clusters \n1,021 children', size=3) +
+  annotate('text', x=50, y=55.2,label= paste('\n\n', 68+66+66+67, ' clusters \n', 516+514+514+505, ' children', sep=""), size=3) +
   
   
   geom_rect(xmin = 37, xmax=63, ymin=26, ymax=50, color='black',
@@ -84,7 +84,7 @@ p +
   annotate('text', x= 50, y=48.9,label= "paste(bold('Year 1'))", parse=TRUE, size=3) + 
   annotate('text', x= 50, y=45.1,label= '\n\n240 children lost to follow-up \n23 moved \n45 absent \n76 withdrew \n66 no live birth \n30 child death ', size=3) + 
   annotate('text', x= 50, y=37.7,label= "paste(bold('Year 2'))", parse=TRUE, size=3) + 
-  annotate('text', x= 50, y=32.3,label= '\n  25 new children measured \n262 children lost to follow-up \n63 moved \n5 absent \n90 withdrew \n67 no live birth \n37 child death ', size=3) + 
+  annotate('text', x= 50, y=32.3,label= paste('\n',25+18+28,' new children measured \n',158+104+115+142,' children lost to follow-up \n',35+22+36+28,' moved \n',3+4+9+2,' absent \n',72+30+42+18,' withdrew \n',29+32+35+38,' no live birth \n',19+27+20+18,' child death ', sep=""), size=3) + 
   annotate('text', x= 10, y=38.1,label= 'Follow-up', size=4) +
   
   geom_rect(xmin = 42, xmax=58, ymin=14, ymax=24, color='black',
@@ -92,7 +92,7 @@ p +
   annotate('text', x= 50, y=23.2,label= "paste(bold('Year 1'))", parse=TRUE, size=3) +
   annotate('text', x= 50, y=22.2,label= '\n\n131 clusters \n756 children', size=3) + 
   annotate('text', x= 50, y=18.2,label= "paste(bold('Year 2'))", parse=TRUE, size=3) +
-  annotate('text', x= 50, y=17.2,label= '\n\n135 clusters \n759 children  ', size=3) + 
+  annotate('text', x= 50, y=17.2,label= paste('\n\n',68+66+66+67,' clusters \n',358+399+372+401,' children', sep=""), size=3) + 
   annotate('text', x= 10, y=19,label= 'Subsample Enrollment', size=4) +
   
   
@@ -101,7 +101,7 @@ p +
   annotate('text', x= 50, y=10.2,label= "paste(bold('Year 1'))", parse=TRUE, size=3) + 
   annotate('text', x= 50, y=9.6,label= paste("\n", 756-y1_n, ' missing exposure or outcome', sep=""), size=3) + 
   annotate('text', x= 50, y=7.2,label= "paste(bold('Year 2'))", parse=TRUE, size=3) + 
-  annotate('text', x= 50, y=6.6,label= paste("\n", 759-y2_n, ' missing exposure or outcome', sep=""), size=3) + 
+  annotate('text', x= 50, y=6.6,label= paste("\n", 358+399+372+401-y2_n, ' missing exposure or outcome', sep=""), size=3) + 
   annotate('text', x= 10, y=8,label= 'Specimen Collection', size=4) +
   
   
