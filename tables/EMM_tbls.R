@@ -31,7 +31,7 @@ H1a_who_adj_emm <- readRDS(here('results/bh-corrected/H1a_who_adj_emm_res_BH.RDS
 source(here::here("tables/table-functions.R"))
 
 
-#### Table S1 ####
+#### Table S3 ####
 
 sub_var <- c("Family Care Inventory at Year 1")
 subgroup <- c("fci_t2")
@@ -40,13 +40,13 @@ outcome <- c("sum_who_t2_t3", "z_cdi_say_t2","z_cdi_und_t2")
 expo_var <- c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarker score")
 out_var <- c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl_s1 <- subgroup_tbl("Effect Measure Modification of Urinary isoprostanes and child development by Family Care Inventory at Year 1", expo_var, out_var, sub_var, exposure, outcome, subgroup, H1a_adj_emm)
+tbl_s3 <- subgroup_tbl(" ", expo_var, out_var, sub_var, exposure, outcome, subgroup, H1a_adj_emm)
 
 
 
 
 ######
-#Supp table 2: Urinary isoprostanes at Year 1 and child development at Year 2
+#Supp table 4: Urinary isoprostanes at Year 1 and child development at Year 2
 
 
 
@@ -59,12 +59,12 @@ expo_var <- c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg cr
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ Score",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl_s2 <- subgroup_tbl("Urinary isoprostanes at Year 1 and child development at Year 2", expo_var, out_var, sub_var, exposure, outcome, subgroup, H1b_adj_emm)
+tbl_s4 <- subgroup_tbl(" ", expo_var, out_var, sub_var, exposure, outcome, subgroup, H1b_adj_emm)
 
 
 
 
-#### Table 3 ####
+#### Table 1 ####
 #Hypothesis 2#
 
 sub_var <- c("Family Care Inventory at Year 1", "Family Care Inventory at Year 2")
@@ -80,12 +80,12 @@ out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Persona
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
 
-tbl_s3 <- subgroup_tbl("Salivary Stress Biomarkers and Child Development at Year 2", expo_var, out_var, sub_var, exposure, outcome, subgroup, H2_adj_emm)
+tbl_s1 <- subgroup_tbl(" ", expo_var, out_var, sub_var, exposure, outcome, subgroup, H2_adj_emm)
 
 
 
 
-#### Table 4 ####
+#### Table 5 ####
 #Hypothesis 3#
 
 sub_var <- c("Family Care Inventory at Year 1", "Family Care Inventory at Year 2")
@@ -98,10 +98,10 @@ expo_var <- c("Mean arterial pressure (mmHg)", "Mean Resting Heart Rate (bpm)")
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl_s4 <- subgroup_tbl("Mean arterial pressure and heart rate at year 2 v. development at year 2", expo_var, out_var, sub_var, exposure, outcome, subgroup, H3_adj_emm)
+tbl_s5 <- subgroup_tbl(" ", expo_var, out_var, sub_var, exposure, outcome, subgroup, H3_adj_emm)
 
 
-#### Table 5 ####
+#### Table 2 ####
 #Hypothesis 4#
 
 sub_var <- c("Family Care Inventory at Year 1", "Family Care Inventory at Year 2")
@@ -114,7 +114,7 @@ expo_var <- c("Mean Overall Percentage Glucocorticoid Receptor Methylation", "Pe
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl_s5 <- subgroup_tbl("Glucocortoic receptor methylation and child development at Year 2", expo_var, out_var, sub_var, exposure, outcome, subgroup, H4_adj_emm)
+tbl_s2 <- subgroup_tbl(" ", expo_var, out_var, sub_var, exposure, outcome, subgroup, H4_adj_emm)
 
 
 #SAVE TABLES
@@ -125,5 +125,5 @@ tbl_s5 <- subgroup_tbl("Glucocortoic receptor methylation and child development 
 #write.csv(tbl_s5, here('tables/supp-tables/stress-dev-table-S5.csv'))
 
 
-save_as_docx("Table S1" = tbl_s1, "Table S2" = tbl_s2, "Table S3" = tbl_s3, "Table S4" = tbl_s4, "Table S5" = tbl_s5,  
+save_as_docx("Supplemental Table 1. Effect measure modification of salivary stress biomarkers and concurrent child development at Year 2 by Family Care Inventory score" = tbl_s1, "Supplemental Table 2. Effect measure modification of glucocortoid receptor methylation and child development at Year 2 by Family Care Inventory score" = tbl_s2, "Supplemental Table 3. Effect measure modification of urinary isoprostanes and concurrent child development by Family Care Inventory score" = tbl_s3, "Supplemental Table 4. Effect measure modification of urinary isoprostanes at Year 1 and subsequent child development at Year 2 by Family Care Inventory score" = tbl_s4, "Supplemental Table 5. Effect measure modification of mean arterial pressure and heart rate and child development at Year 2 by Family Care Inventory score" = tbl_s5,  
              pr_section = sect_properties, path='tables/supp-tables/stress-dev-EMM-tables.docx')
