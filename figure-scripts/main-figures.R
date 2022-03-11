@@ -167,7 +167,7 @@ plot_sig_heatmap <- function(d,
       #axis.text.x=element_text(size=8,colour=textcol),
       axis.text.y=element_text(size=8,vjust = 0.2,colour=textcol),
       axis.ticks=element_line(size=0.4),
-      plot.title=element_text(colour=textcol,hjust=0,size=12,face="bold"),
+      plot.title=element_text(colour=textcol,hjust=0,size=12),
       strip.text.x = element_text(size=10),
       strip.text.y = element_text(angle=0,size=10),
       plot.background=element_blank(),
@@ -185,44 +185,44 @@ plot_sig_heatmap <- function(d,
 
 ###H1A
 heat1a <- plot_sig_heatmap(H1a_adj,
-                 pval_var="Pval", title="Figure 7. Urinary isoprostanes and child development at Year 1",
-                 Outcome="Outcome", Exposure="Exposure",
-                 print.est=T, print.ci=F,
-                 null=0)
+                           pval_var="Pval", title="Supplemental Figure 1. \n Urinary isoprostanes and child development at Year 1",
+                           Outcome="Outcome", Exposure="Exposure",
+                           print.est=T, print.ci=F,
+                           null=0)
 
 ###H1B
 heat1b <- plot_sig_heatmap(H1b_adj,
-                 pval_var="Pval", title="Figure 9. Urinary isoprostanes at Year 1 and child development at Year 2",
-                 Outcome="Outcome", Exposure="Exposure", 
-                 print.est=T, print.ci=F,
-                 null=0)
+                           pval_var="Pval", title="Supplemental Figure 4. \n Urinary isoprostanes at Year 1 and child development at Year 2",
+                           Outcome="Outcome", Exposure="Exposure", 
+                           print.est=T, print.ci=F,
+                           null=0)
 
 ###H2
 heat2 <- plot_sig_heatmap(H2_adj,
-                 pval_var="Pval", title="Figure 3. Salivary stress biomarkers and child development at Year 2",
-                 Outcome="Outcome", Exposure="Exposure",
-                 print.est=T, print.ci=F,
-                 null=0)
+                          pval_var="Pval", title="Supplemental Figure 2. \n Salivary stress biomarkers and child development at Year 2",
+                          Outcome="Outcome", Exposure="Exposure",
+                          print.est=T, print.ci=F,
+                          null=0)
 
 ###H3
 heat3 <- plot_sig_heatmap(H3_adj,
-                 pval_var="Pval", title="Figure 11. Mean arterial pressure and heart rate and child development at Year 2",
-                 Outcome="Outcome", Exposure="Exposure",
-                 print.est=T, print.ci=F,
-                 null=0)
+                          pval_var="Pval", title="Supplemental Figure 5. \n Mean arterial pressure and heart rate and child development at Year 2",
+                          Outcome="Outcome", Exposure="Exposure",
+                          print.est=T, print.ci=F,
+                          null=0)
 
 ###H4
 heat4 <- plot_sig_heatmap(H4_adj,
-                 pval_var="Pval", title="Figure 5. Glucocortoid receptor methylation and child development at Year 2",
-                 Outcome="Outcome", Exposure="Exposure",
-                 print.est=T, print.ci=F,
-                 null=0)
+                          pval_var="Pval", title="Supplemental Figure 3. \n Glucocortoid receptor methylation and child development at Year 2",
+                          Outcome="Outcome", Exposure="Exposure",
+                          print.est=T, print.ci=F,
+                          null=0)
 
-ggsave(heat1a, file = here::here("figures/H1a_heatmap.png"), height=10, width=8)
-ggsave(heat1b, file = here::here("figures/H1b_heatmap.png"), height=10, width=8)
-ggsave(heat2, file = here::here("figures/H2_heatmap.png"), height=10, width=8)
-ggsave(heat3, file = here::here("figures/H3_heatmap.png"), height=10, width=8)
-ggsave(heat4, file = here::here("figures/H4_heatmap.png"), height=10, width=8)
+ggsave(heat1a, file = here::here("figures/FigureS1_heatmap.png"), height=10, width=8)
+ggsave(heat1b, file = here::here("figures/FigureS4_heatmap.png"), height=10, width=8)
+ggsave(heat2, file = here::here("figures/FigureS2_heatmap.png"), height=10, width=8)
+ggsave(heat3, file = here::here("figures/FigureS5_heatmap.png"), height=10, width=8)
+ggsave(heat4, file = here::here("figures/FigureS3_heatmap.png"), height=10, width=8)
 
 
 ######################FOREST PLOTS ####################################
@@ -239,12 +239,12 @@ p1a <- ggplot(H1a_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
-  ggtitle("Figure 6. Urinary isoprostanes and child development at Year 1") +
+  ggtitle("Figure 4. Urinary isoprostanes and child development at Year 1") +
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
-        plot.title = element_text(hjust = 0.5, face = "plain", size=12),
+        plot.title = element_text(hjust = 0, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
 
 #H1B
@@ -256,12 +256,12 @@ p1b <- ggplot(H1b_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
-  ggtitle("Figure 8. Urinary isoprostanes at Year 1 and child development at Year 2") + 
+  ggtitle("Figure 6. Urinary isoprostanes at Year 1 and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
-        plot.title = element_text(hjust = 0.5, face = "plain", size=12),
+        plot.title = element_text(hjust = 0, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
 
 #H2
@@ -278,7 +278,7 @@ p2 <- ggplot(H2_adj, (aes(x=X, y=point.diff))) +
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
-        plot.title = element_text(hjust = 0.5, face = "plain", size=12),
+        plot.title = element_text(hjust = 0, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
 
 
@@ -291,12 +291,12 @@ p3 <- ggplot(H3_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
-  ggtitle("Figure 10. Mean arterial pressure and heart rate and child development at Year 2") + 
+  ggtitle("Figure 7. Mean arterial pressure and heart rate and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
-        plot.title = element_text(hjust = 0.5, face = "plain", size=12),
+        plot.title = element_text(hjust = 0, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
 
 
@@ -309,19 +309,19 @@ p4 <- ggplot(H4_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
-  ggtitle("Figure 4. Glucocortoid receptor methylation and child development at Year 2") + 
+  ggtitle("Figure 3. Glucocortoid receptor methylation and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
         #axis.text.x=ggtext::element_markdown(),
-        plot.title = element_text(hjust = 0.5, face = "plain", size=12),
+        plot.title = element_text(hjust = 0, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
 
 #SAVE PLOTS
-ggsave(p1a, file = here::here("figures/H1a_forest_diff_adj.png"), height=10, width=8)
-ggsave(p1b, file = here::here("figures/H1b_forest_diff_adj.png"), height=10, width=8)
-ggsave(p2, file = here::here("figures/H2_forest_diff_adj.png"), height=10, width=8)
-ggsave(p3, file = here::here("figures/H3_forest_diff_adj.png"), height=10, width=8)
-ggsave(p4, file = here::here("figures/H4_forest_diff_adj.png"), height=10, width=8)
+ggsave(p1a, file = here::here("figures/Figure4_forest_diff_adj.png"), height=10, width=10)
+ggsave(p1b, file = here::here("figures/Figure6_forest_diff_adj.png"), height=10, width=10)
+ggsave(p2, file = here::here("figures/Figure2_forest_diff_adj.png"), height=10, width=10)
+ggsave(p3, file = here::here("figures/Figure7_forest_diff_adj.png"), height=10, width=10)
+ggsave(p4, file = here::here("figures/Figure3_forest_diff_adj.png"), height=10, width=10)
 

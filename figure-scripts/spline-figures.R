@@ -108,7 +108,7 @@ ggpubr::ggarrange(p, p1, p2, p3, p4, pa, pa1, pa2, pa3, pa4, pb, pb1, pb2, pb3, 
                   show.legend = F,
                   ncol = 5, nrow = 4,
                   heights = c(1, 1, 1, 1.2), widths=c(1.2, 1, 1, 1)) %>% 
-  annotate_figure(top = text_grob("Spline curves of the relationships between concurrent urinary F2 isoprostanes and child development at Year 1", face = "bold", size = 12)) %>%
-  ggsave(filename = here("figures/splines_H1a.jpg"), width = 10, height=15)
+  annotate_figure(top = text_grob("Figure 5. Spline curves of the relationships between concurrent urinary F2 isoprostanes and child development at Year 1",  size = 12), fig.lab.pos = "top.left") %>%
+  ggsave(filename = here("figures/Figure5_splines_H1a.jpg"), width = 10, height=15)
 
 ############################################
