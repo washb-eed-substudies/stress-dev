@@ -8,7 +8,7 @@ sect_properties <- prop_section(
 )
 
 #### Functions for gam tables ####
-growth_tbl <- function(name, expo_var, out_var, exposure, outcome, results, results_adj, adj_only=F){
+growth_tbl <- function(name, expo_var, out_var, exposure, outcome, results, results_adj, adj_only=T){
   ### name: string name of group of exposures
   ### expo_var: vector of string exposures to include in table
   ### out_var: vector of string outcomes to include in table
@@ -94,7 +94,7 @@ growth_tbl <- function(name, expo_var, out_var, exposure, outcome, results, resu
   tbl
 }
 
-growth_tbl_flex <- function(name, expo_var, out_var, exposure, outcome, results, results_adj, adj_only=F, exp_col_size = 1, out_col_size = 1){
+growth_tbl_flex <- function(name, expo_var, out_var, exposure, outcome, results, results_adj, adj_only=T, exp_col_size = 1, out_col_size = 1){
   ### name: string name of group of exposures
   ### expo_var: vector of string exposures to include in table
   ### out_var: vector of string outcomes to include in table
@@ -194,11 +194,11 @@ growth_tbl_flex <- function(name, expo_var, out_var, exposure, outcome, results,
   
   if(adj_only){
     flextbl <- add_footer_row(flextbl, top=F, 
-                              values = "N, 25th Percentile, and 75th Percentile are from the adjusted analyses", colwidths = 9)
+                              values = "Analyses adjusted for child age and child sex, and screened the following covariates for potential inclusion (see Appendix 3 for details) -- child birth order, maternal age, maternal height, maternal education, household food insecurity, number of children in the household, number of individuals living in the compound, distance to primary drinking water source, household assets, prior anthropometry, month of assessment, treatment arm, pre-stressor sample collection time, maternal Center for Epidemiologic Studies Depression Scale score, maternal Perceived Stress Scale score, and maternal lifetime cumulative exposure to intimate partner violence.", colwidths = 9)
     flextbl <- add_footer_row(flextbl, top=F, 
                               values = "* P-value < 0.2 after adjusting for multiple comparisons using the Benjamini-Hochberg procedure", colwidths = 9)
     flextbl <- fontsize(flextbl, part = "all", size = 7)
-    flextbl <- width(flextbl, 1:9, width=c(exp_col_size, out_col_size, .3, .55, .55, .8, .8, 1, .5))
+    flextbl <- width(flextbl, 1:9, width=c(exp_col_size, out_col_size, .5, .6, .6, .8, .8, 1, .5))
     
   }else{
     flextbl <- add_footer_row(flextbl, top=F, 
@@ -277,13 +277,15 @@ subgroup_tbl <- function(name, expo_var, out_var, sub_var, exposure, outcome, su
   flextbl <- align(flextbl, j = c(1, 2, 3), align = "left", part="all")
   #flextbl <- autofit(flextbl, part = "all")
   #flextbl <- fit_to_width(flextbl, max_width=8)
+  flextbl <- add_footer_row(flextbl, top=F, 
+                            values = "Analyses adjusted for child age and child sex, and screened the following covariates for potential inclusion (see Appendix 3 for details) -- child birth order, maternal age, maternal height, maternal education, household food insecurity, number of children in the household, number of individuals living in the compound, distance to primary drinking water source, household assets, prior anthropometry, month of assessment, treatment arm, pre-stressor sample collection time, maternal Center for Epidemiologic Studies Depression Scale score, maternal Perceived Stress Scale score, and maternal lifetime cumulative exposure to intimate partner violence.", colwidths = 10)
   flextbl <- fontsize(flextbl, part = "all", size = 6)
   flextbl
 }
 
 #######
 
-hr_tbl <- function(name, expo_var, out_var, exposure, outcome, results, results_adj, adj_only=F){
+hr_tbl <- function(name, expo_var, out_var, exposure, outcome, results, results_adj, adj_only=T){
   ### name: string name of group of exposures
   ### expo_var: vector of string exposures to include in table
   ### out_var: vector of string outcomes to include in table
@@ -369,7 +371,7 @@ hr_tbl <- function(name, expo_var, out_var, exposure, outcome, results, results_
 }
 #######
 
-hr_tbl_flex <- function(name, expo_var, out_var, exposure, outcome, results, results_adj, adj_only=F, exp_col_size = 1, out_col_size = 1){
+hr_tbl_flex <- function(name, expo_var, out_var, exposure, outcome, results, results_adj, adj_only=T, exp_col_size = 1, out_col_size = 1){
   ### name: string name of group of exposures
   ### expo_var: vector of string exposures to include in table
   ### out_var: vector of string outcomes to include in table
@@ -468,21 +470,21 @@ hr_tbl_flex <- function(name, expo_var, out_var, exposure, outcome, results, res
 
   if(adj_only){
     flextbl <- add_footer_row(flextbl, top=F, 
-                              values = "N, 25th Percentile, and 75th Percentile are from the adjusted analyses", colwidths = 7)
+                              values = "Analyses adjusted for child age and child sex, and screened the following covariates for potential inclusion (see Appendix 3 for details) -- child birth order, maternal age, maternal height, maternal education, household food insecurity, number of children in the household, number of individuals living in the compound, distance to primary drinking water source, household assets, prior anthropometry, month of assessment, treatment arm, pre-stressor sample collection time, maternal Center for Epidemiologic Studies Depression Scale score, maternal Perceived Stress Scale score, and maternal lifetime cumulative exposure to intimate partner violence.", colwidths = 7)
     flextbl <- add_footer_row(flextbl, top=F, 
                               values = "*P-value < 0.2 after adjusting for multiple comparisons using the Benjamini-Hochberg procedure", colwidths = 7)
     flextbl <- add_footer_row(flextbl, top=F, 
                               values = "Hazard ratio could not be estimated for sitting without support since nearly all children had achieved this milestone before time of measurement", colwidths = 7)
     flextbl <- fontsize(flextbl, part = "all", size = 7)
-    flextbl <- width(flextbl, 1:7, width=c(exp_col_size, out_col_size, .3, .55, .55, 1.2, .5))
+    flextbl <- width(flextbl, 1:7, width=c(exp_col_size, out_col_size, .5, .6, .6, 1.2, .5))
     
   }else{
     flextbl <- add_footer_row(flextbl, top=F, 
-                              values = "N, 25th Percentile, and 75th Percentile are from the unadjusted analyses", colwidths = 9)
+                              values = "Analyses adjusted for child age and child sex, and screened the following covariates for potential inclusion (see Appendix 3 for details) -- child birth order, maternal age, maternal height, maternal education, household food insecurity, number of children in the household, number of individuals living in the compound, distance to primary drinking water source, household assets, prior anthropometry, month of assessment, treatment arm, pre-stressor sample collection time, maternal Center for Epidemiologic Studies Depression Scale score, maternal Perceived Stress Scale score, and maternal lifetime cumulative exposure to intimate partner violence.", colwidths = 9)
     flextbl <- add_footer_row(flextbl, top=F, 
                               values = "Hazard ratio could not be estimated for sitting without support since nearly all children had achieved this milestone before time of measurement", colwidths = 9)
     flextbl <- fontsize(flextbl, part = "all", size = 6)
-    flextbl <- width(flextbl, 1:9, width=c(exp_col_size, out_col_size, .3, .55, .55, 1, .5, 1, .5))
+    flextbl <- width(flextbl, 1:9, width=c(exp_col_size, out_col_size, .5, .6, .6, 1, .5, 1, .5))
   }
   
   flextbl

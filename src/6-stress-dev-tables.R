@@ -115,8 +115,8 @@ out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Persona
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
 
-tbl2 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H2, H2_adj)
-tbl2flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H2, H2_adj)
+tbl2 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H2, H2_adj, adj_only = T)
+tbl2flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H2, H2_adj, adj_only = T)
 
 #### Table 3 ####
 #Hypothesis 4#
@@ -128,8 +128,8 @@ expo_var <- c("Mean Overall Percentage Glucocorticoid Receptor Methylation", "Pe
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl3 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H4, H4_adj)
-tbl3flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H4, H4_adj)
+tbl3 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H4, H4_adj, adj_only = T)
+tbl3flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H4, H4_adj, adj_only = T)
 
 #### Table 4 ####
 
@@ -138,8 +138,8 @@ outcome <- c("sum_who_t2_t3", "z_cdi_say_t2","z_cdi_und_t2")
 expo_var <- c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarker score")
 out_var <- c("Sum of 2nd, 4th, 5th, and 6th WHO motor milestones", "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl4 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H1a, H1a_adj)
-tbl4flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H1a, H1a_adj)
+tbl4 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H1a, H1a_adj, adj_only = T)
+tbl4flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H1a, H1a_adj, adj_only = T)
 
 ######
 
@@ -152,8 +152,8 @@ expo_var <- c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg cr
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ Score",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl5 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H1b, H1b_adj)
-tbl5flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H1b, H1b_adj)
+tbl5 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H1b, H1b_adj, adj_only = T)
+tbl5flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H1b, H1b_adj, adj_only = T)
 
 #Table 6. WHO Hazard Ratios
 
@@ -166,8 +166,8 @@ expo_var <- c("IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg cr
 out_var <- c("Time to sitting unsupported", "Time to crawling","Time to standing with support",
              "Time to walking with support", "Time to standing unsupported", "Time to walking unsupported")
 
-tbl6 <- hr_tbl("Exposure", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj)
-tbl6flex <- hr_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj)
+tbl6 <- hr_tbl("Exposure", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj, adj_only = T)
+tbl6flex <- hr_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj, adj_only = T)
 
 
 #### Table 7 ####
@@ -179,8 +179,8 @@ expo_var <- c("Mean arterial pressure (mmHg)", "Mean Resting Heart Rate (bpm)")
 out_var <- c("EASQ Communication Score", "EASQ Gross Motor Score", "EASQ Personal Social Score", "Combined EASQ",
              "CDI expressive language Z-score","CDI comprehension Z-score")
 
-tbl7 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H3, H3_adj)
-tbl7flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H3, H3_adj)
+tbl7 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H3, H3_adj, adj_only = T)
+tbl7flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H3, H3_adj, adj_only = T)
 
 #### SAVE TABLES ####
 write.csv(tbl1, here('tables/stress-dev-table1.csv'))
@@ -191,6 +191,6 @@ write.csv(tbl5, here('tables/stress-dev-table5.csv'))
 write.csv(tbl6, here('tables/stress-dev-table6.csv'))
 write.csv(tbl7, here('tables/stress-dev-table6.csv'))
 
-save_as_docx("Table 1. Descriptive statistics of sample population" = tbl1flex, "Table 2. Salivary stress biomarkers and child development at Year 2" = tbl2flex, "Table 3. Glucocortoid receptor methylation and child development at Year 2" = tbl3flex, "Table 4. Urinary isoprostanes and child development at Year 1" = tbl4flex, "Table 5. Urinary isoprostanes at Year 1 and child development at Year 2" = tbl5flex, "Table 6. Urinary isoprostanes and time to WHO motor milestone at Year 1" = tbl6flex, "Table 7. Mean arterial pressure and heart rate and child development at Year 2" = tbl7flex, 
+save_as_docx("Table 1. Descriptive statistics of sample population" = tbl1flex, "Table 2. Salivary stress biomarkers and child development at Year 2" = tbl2flex, "Table 3. Glucocorticoid receptor methylation and child development at Year 2" = tbl3flex, "Table 4. Urinary isoprostanes and child development at Year 1" = tbl4flex, "Table 5. Urinary isoprostanes at Year 1 and child development at Year 2" = tbl5flex, "Table 6. Urinary isoprostanes and time to WHO motor milestone at Year 1" = tbl6flex, "Table 7. Mean arterial pressure and heart rate and child development at Year 2" = tbl7flex, 
             pr_section = sect_properties, path='tables/stress-dev-tables.docx')
 
