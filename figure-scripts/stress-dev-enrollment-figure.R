@@ -35,7 +35,8 @@ data %>%
   ggplot(aes(x, y)) +
   scale_x_continuous(minor_breaks = seq(10, 100, 10)) +
   scale_y_continuous(minor_breaks = seq(-10, 100, 10)) +
-  theme_void() ->
+  theme_void() +
+ggtitle("Figure 1. Participant enrollment, follow-up, and analysis")   ->
   p
 
 p +
