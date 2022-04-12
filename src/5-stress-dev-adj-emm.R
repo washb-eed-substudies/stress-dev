@@ -156,14 +156,14 @@ for(i in 1:nrow(H1a_adj_emm_models)){
 }
 
 #Make list of plots
-H1a_adj_emm_plot_list <- NULL
-H1a_adj_emm_plot_data <- NULL
-for(i in 1:nrow(H1a_adj_emm_models)){
-  res <- data.frame(X=H1a_adj_emm_models$X[i], Y=H1a_adj_emm_models$Y[i])
-  simul_plot <- gam_simul_CI(H1a_adj_emm_models$fit[i][[1]], H1a_adj_emm_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
-  H1a_adj_emm_plot_list[[i]] <-  simul_plot$p
-  H1a_adj_emm_plot_data <-  rbind(H1a_adj_emm_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred %>% subset(., select = c(Y,X,id,fit,se.fit,uprP, lwrP,uprS,lwrS))))
-}
+# H1a_adj_emm_plot_list <- NULL
+# H1a_adj_emm_plot_data <- NULL
+# for(i in 1:nrow(H1a_adj_emm_models)){
+#   res <- data.frame(X=H1a_adj_emm_models$X[i], Y=H1a_adj_emm_models$Y[i])
+#   simul_plot <- gam_simul_CI(H1a_adj_emm_models$fit[i][[1]], H1a_adj_emm_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
+#   H1a_adj_emm_plot_list[[i]] <-  simul_plot$p
+#   H1a_adj_emm_plot_data <-  rbind(H1a_adj_emm_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred %>% subset(., select = c(Y,X,id,fit,se.fit,uprP, lwrP,uprS,lwrS))))
+# }
 
 
 #Save models
@@ -177,7 +177,7 @@ saveRDS(H1a_adj_emm_res, here("results/adjusted/H1a_adj_emm_res.RDS"))
 #saveRDS(H1a_adj_emm_plot_list, paste0(dropboxDir,"results/stress-dev-models/figure-objects/H1a_adj_emm_splines.RDS"))
 
 #Save plot data
-saveRDS(H1a_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H1a_adj_emm_spline_data.RDS"))
+#saveRDS(H1a_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H1a_adj_emm_spline_data.RDS"))
 
 
 ######H1b
@@ -221,14 +221,14 @@ for(i in 1:nrow(H1b_adj_emm_models)){
 }
 
 #Make list of plots
-H1b_adj_emm_plot_list <- NULL
-H1b_adj_emm_plot_data <- NULL
-for(i in 1:nrow(H1b_adj_emm_models)){
-  res <- data.frame(X=H1b_adj_emm_models$X[i], Y=H1b_adj_emm_models$Y[i])
-  simul_plot <- gam_simul_CI(H1b_adj_emm_models$fit[i][[1]], H1b_adj_emm_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
-  H1b_adj_emm_plot_list[[i]] <-  simul_plot$p
-  H1b_adj_emm_plot_data <-  rbind(H1b_adj_emm_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred %>% subset(., select = c(Y,X,id,fit,se.fit,uprP, lwrP,uprS,lwrS))))
-}
+# H1b_adj_emm_plot_list <- NULL
+# H1b_adj_emm_plot_data <- NULL
+# for(i in 1:nrow(H1b_adj_emm_models)){
+#   res <- data.frame(X=H1b_adj_emm_models$X[i], Y=H1b_adj_emm_models$Y[i])
+#   simul_plot <- gam_simul_CI(H1b_adj_emm_models$fit[i][[1]], H1b_adj_emm_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
+#   H1b_adj_emm_plot_list[[i]] <-  simul_plot$p
+#   H1b_adj_emm_plot_data <-  rbind(H1b_adj_emm_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred %>% subset(., select = c(Y,X,id,fit,se.fit,uprP, lwrP,uprS,lwrS))))
+# }
 
 
 #Save models
@@ -242,7 +242,7 @@ saveRDS(H1b_adj_emm_res, here("results/adjusted/H1b_adj_emm_res.RDS"))
 #saveRDS(H1b_adj_emm_plot_list, paste0(dropboxDir,"results/stress-dev-models/figure-objects/H1b_adj_emm_splines.RDS"))
 
 #Save plot data
-saveRDS(H1b_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H1b_adj_emm_spline_data.RDS"))
+#saveRDS(H1b_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H1b_adj_emm_spline_data.RDS"))
 
 ## Hypothesis 2
 
@@ -282,15 +282,15 @@ for(i in 1:nrow(H2_adj_emm_models)){
 }
 
 #Make list of plots
-H2_adj_emm_plot_list <- NULL
-H2_adj_emm_plot_data <- NULL
-for(i in 1:nrow(H2_adj_emm_models)){
-  print(i)
-  res <- data.frame(X=H2_adj_emm_models$X[i], Y=H2_adj_emm_models$Y[i])
-  simul_plot <- gam_simul_CI(H2_adj_emm_models$fit[i][[1]], H2_adj_emm_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
-  H2_adj_emm_plot_list[[i]] <-  simul_plot$p
-  H2_adj_emm_plot_data <-  rbind(H2_adj_emm_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred%>% subset(., select = c(Y,X,id,fit,se.fit,uprP, lwrP,uprS,lwrS))))
-}
+# H2_adj_emm_plot_list <- NULL
+# H2_adj_emm_plot_data <- NULL
+# for(i in 1:nrow(H2_adj_emm_models)){
+#   print(i)
+#   res <- data.frame(X=H2_adj_emm_models$X[i], Y=H2_adj_emm_models$Y[i])
+#   simul_plot <- gam_simul_CI(H2_adj_emm_models$fit[i][[1]], H2_adj_emm_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
+#   H2_adj_emm_plot_list[[i]] <-  simul_plot$p
+#   H2_adj_emm_plot_data <-  rbind(H2_adj_emm_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred%>% subset(., select = c(Y,X,id,fit,se.fit,uprP, lwrP,uprS,lwrS))))
+# }
 
 
 #Save models
@@ -304,7 +304,7 @@ saveRDS(H2_adj_emm_res, here("results/adjusted/H2_adj_emm_res.RDS"))
 #saveRDS(H2_adj_emm_plot_list, paste0(dropboxDir,"results/stress-dev-models/figure-objects/H2_adj_emm_splines.RDS"))
 
 #Save plot data
-saveRDS(H2_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H2_adj_emm_spline_data.RDS"))
+#saveRDS(H2_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H2_adj_emm_spline_data.RDS"))
 
 
 
@@ -345,15 +345,15 @@ for(i in 1:nrow(H3_adj_emm_models)){
   H3_adj_emm_res <-  bind_rows(H3_adj_emm_res , preds)
 }
 
-#Make list of plots
-H3_adj_emm_plot_list <- NULL
-H3_adj_emm_plot_data <- NULL
-for(i in 1:nrow(H3_adj_emm_models)){
-  res <- data.frame(X=H3_adj_emm_models$X[i], Y=H3_adj_emm_models$Y[i])
-  simul_plot <- gam_simul_CI(H3_adj_emm_models$fit[i][[1]], H3_adj_emm_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
-  H3_adj_emm_plot_list[[i]] <-  simul_plot$p
-  H3_adj_emm_plot_data <-  rbind(H3_adj_emm_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred%>% subset(., select = c(Y,X,id,fit,se.fit,uprP, lwrP,uprS,lwrS))))
-}
+# #Make list of plots
+# H3_adj_emm_plot_list <- NULL
+# H3_adj_emm_plot_data <- NULL
+# for(i in 1:nrow(H3_adj_emm_models)){
+#   res <- data.frame(X=H3_adj_emm_models$X[i], Y=H3_adj_emm_models$Y[i])
+#   simul_plot <- gam_simul_CI(H3_adj_emm_models$fit[i][[1]], H3_adj_emm_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
+#   H3_adj_emm_plot_list[[i]] <-  simul_plot$p
+#   H3_adj_emm_plot_data <-  rbind(H3_adj_emm_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred%>% subset(., select = c(Y,X,id,fit,se.fit,uprP, lwrP,uprS,lwrS))))
+# }
 
 
 #Save models
@@ -367,7 +367,7 @@ saveRDS(H3_adj_emm_res, here("results/adjusted/H3_adj_emm_res.RDS"))
 #saveRDS(H3_adj_emm_plot_list, paste0(dropboxDir,"results/stress-dev-models/figure-objects/H3_adj_emm_splines.RDS"))
 
 #Save plot data
-saveRDS(H3_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H3_adj_emm_spline_data.RDS"))
+#saveRDS(H3_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H3_adj_emm_spline_data.RDS"))
 
 
 ##Hypothesis 4
@@ -408,15 +408,15 @@ for(i in 1:nrow(H4_adj_emm_models)){
 
 
 #Make list of plots
-H4_adj_emm_plot_list <- NULL
-H4_adj_emm_plot_data <- NULL
-for(i in 1:nrow(H4_adj_emm_models)){
-  res <- data.frame(X=H4_adj_emm_models$X[i], Y=H4_adj_emm_models$Y[i])
-  simul_plot <- gam_simul_CI(H4_adj_emm_models$fit[i][[1]], H4_adj_emm_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
-  H4_adj_emm_plot_list[[i]] <-  simul_plot$p
-  gc()
-  H4_adj_emm_plot_data <-  rbind(H4_adj_emm_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred%>% subset(., select = c(Y,X,id,fit,se.fit,uprP, lwrP,uprS,lwrS))))
-}
+#H4_adj_emm_plot_list <- NULL
+#H4_adj_emm_plot_data <- NULL
+#for(i in 1:nrow(H4_adj_emm_models)){
+#   res <- data.frame(X=H4_adj_emm_models$X[i], Y=H4_adj_emm_models$Y[i])
+#   simul_plot <- gam_simul_CI(H4_adj_emm_models$fit[i][[1]], H4_adj_emm_models$dat[i][[1]], xlab=res$X, ylab=res$Y, title="")
+#   H4_adj_emm_plot_list[[i]] <-  simul_plot$p
+#   gc()
+#   H4_adj_emm_plot_data <-  rbind(H4_adj_emm_plot_data, data.frame(Xvar=res$X, Yvar=res$Y, adj=0, simul_plot$pred%>% subset(., select = c(Y,X,id,fit,se.fit,uprP, lwrP,uprS,lwrS))))
+# }
 
 
 #Save models
@@ -430,7 +430,7 @@ saveRDS(H4_adj_emm_res, here("results/adjusted/H4_adj_emm_res.RDS"))
 #saveRDS(H4_adj_emm_plot_list, paste0(dropboxDir,"results/stress-dev-models/figure-objects/H4_adj_emm_splines.RDS"))
 
 #Save plot data
-saveRDS(H4_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H4_adj_emm_spline_data.RDS"))
+#saveRDS(H4_adj_emm_plot_data, paste0(dropboxDir,"results/stress-dev-models/figure-data/H4_adj_emm_spline_data.RDS"))
 
 
 

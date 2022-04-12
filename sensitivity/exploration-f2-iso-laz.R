@@ -56,7 +56,7 @@ d %>%
 summary(d$ageday_ut2)
 d$age
 #Create binary age, greater (=1) or less than (=0) median of 429 days
-d$ageday_ut2_binary <- ifelse(d$ageday_ut2 > 429, 1, 0, na.rm = TRUE)
+d$ageday_ut2_binary <- ifelse(d$ageday_ut2 > 429, 1, 0)
 
 #create tables of binary age and F2 Isoprostanes
 

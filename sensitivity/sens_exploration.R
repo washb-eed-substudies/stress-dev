@@ -6,6 +6,14 @@ source(here::here("0-config.R"))
 
 d <- box_read("880476682582")
 
+
+#% Female Y1
+df <- d 
+
+#% Female Y2
+
+
+
 test_fci_adj <- lm(z_cdi_und_t3 ~ t3_cort_slope + sex + birthord + momage + momheight + momedu + hfiacat + Nlt18 + Ncomp + watmin + walls + floor + HHwealth_scaled + cesd_sum_t2 + diar7d_t2 + tr + life_viol_any_t3 + fci_t2, data = d)
 test_nofci_adj <- lm(z_cdi_und_t3 ~ t3_cort_slope + sex + birthord + momage + momheight + momedu + hfiacat + Nlt18 + Ncomp + watmin + walls + floor + HHwealth_scaled + cesd_sum_t2 + diar7d_t2 + tr + life_viol_any_t3,  data = d)
 test_fci_int_adj <- lm(z_cdi_und_t3 ~ t3_cort_slope + sex + birthord + momage + momheight + momedu + hfiacat + Nlt18 + Ncomp + watmin + walls + floor + HHwealth_scaled + cesd_sum_t2 + diar7d_t2 + tr + life_viol_any_t3 + fci_t2 + fci_t2*t3_cort_slope, data = d)
