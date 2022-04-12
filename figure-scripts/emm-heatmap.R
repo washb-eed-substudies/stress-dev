@@ -5,6 +5,8 @@ rm(list=ls())
 
 source(here::here("0-config.R"))
 
+library(RColorBrewer)
+
 
 H1a_res <- readRDS(paste0(here::here(),"/results/adjusted/H1a_adj_emm_res.RDS"))
 H1b_res <- readRDS(paste0(here::here(),"/results/adjusted/H1b_adj_emm_res.RDS"))
@@ -124,7 +126,7 @@ plot_emm_heatmap <- function(d, pval_var = "Pval", title = "", Outcome = "Outcom
                                                                                                      "cm")), legend.text = element_text(colour = textcol, 
                                                                                                                                         size = 7, face = "bold"), legend.key.height = grid::unit(0.2, 
                                                                                                                                                                                                  "cm"), legend.key.width = grid::unit(1, "cm"), 
-          legend.position = "right", axis.text.x = element_text(size = 8, 
+          legend.position = "right", axis.text.x = element_text(angle=45, size = 5, 
                                                                 colour = textcol), axis.text.y = element_text(size = 8, 
                                                                                                               vjust = 0.2, colour = textcol), axis.ticks = element_line(size = 0.4), 
           plot.title = element_text(colour = textcol, hjust = 0, 

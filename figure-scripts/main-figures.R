@@ -273,7 +273,7 @@ p2 <- ggplot(H2_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
-  ggtitle("Figure 2. Salivary stress biomarkers and child development at Year 2") + 
+  ggtitle("Figure 2. \n Salivary stress biomarkers and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
