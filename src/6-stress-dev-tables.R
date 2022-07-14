@@ -182,6 +182,42 @@ out_var <- c("EASQ communication score", "EASQ gross motor score", "EASQ persona
 tbl7 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H3, H3_adj, adj_only = T)
 tbl7flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H3, H3_adj, adj_only = T)
 
+#Change font and size
+tbl1flex <- tbl1flex %>%
+  font(fontname = "Times New Roman", part = "all") %>%
+  fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
+  set_table_properties(layout = "autofit")
+
+tbl2flex <- tbl2flex %>%
+  font(fontname = "Times New Roman", part = "all") %>%
+  fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
+  set_table_properties(layout = "autofit")
+
+tbl3flex <- tbl3flex %>%
+  font(fontname = "Times New Roman", part = "all") %>%
+  fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
+  set_table_properties(layout = "autofit")
+
+tbl4flex <- tbl4flex %>%
+  font(fontname = "Times New Roman", part = "all") %>%
+  fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
+  set_table_properties(layout = "autofit")
+
+tbl5flex <- tbl5flex %>%
+  font(fontname = "Times New Roman", part = "all") %>%
+  fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
+  set_table_properties(layout = "autofit")
+
+tbl6flex <- tbl6flex %>%
+  font(fontname = "Times New Roman", part = "all") %>%
+  fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
+  set_table_properties(layout = "autofit")
+
+tbl7flex <- tbl7flex %>%
+  font(fontname = "Times New Roman", part = "all") %>%
+  fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
+  set_table_properties(layout = "autofit")
+
 #### SAVE TABLES ####
 write.csv(tbl1, here('tables/stress-dev-table1.csv'))
 write.csv(tbl2, here('tables/stress-dev-table2.csv'))

@@ -4,7 +4,7 @@ library('officer')
 ### page settings ###
 sect_properties <- prop_section(
   page_size = page_size(orient = "portrait", width=8.5, height=11),
-  page_margins = page_mar(bottom=.3, top=.3, right=.3, left=.3, gutter = 0)
+  page_margins = page_mar(bottom=1, top=1, right=1, left=1)
 )
 
 #### Functions for gam tables ####

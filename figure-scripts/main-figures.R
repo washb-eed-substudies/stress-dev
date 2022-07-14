@@ -62,7 +62,7 @@ H4_adj <- readRDS(here('results/adjusted/H4_adj_res.RDS'))
 #
 H4_adj$X <- factor(H4_adj$X,
 levels = c("t3_gcr_mean", "t3_gcr_cpg12"),   
-labels = c("Mean Overall Percentage Glucocorticoid Receptor Methylation", "Percentage methylation at NGFI-A transcription factor binding site (CpG site #12)"))
+labels = c("Mean Overall Percentage Glucocorticoid Receptor Methylation", "Percentage methylation at NGFI-A transcription factor binding site"))
 H4_adj$Y <- factor(H4_adj$Y,
                    levels = c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
                               "z_cdi_say_t3", "z_cdi_und_t3"), 
@@ -159,12 +159,13 @@ plot_sig_heatmap <- function(d,
       aspect.ratio = 1,
       legend.title=element_text(color=textcol,size=8),
       legend.margin = margin(grid::unit(0.1,"cm")),
-      legend.text=element_text(colour=textcol,size=7,face="bold"),
+      legend.text=element_text(colour=textcol,size=8),
       legend.key.height=grid::unit(0.2,"cm"),
       legend.key.width=grid::unit(1,"cm"),
       legend.position = "right",
       axis.text.x=element_text(size=8,colour=textcol,angle=45,hjust=1),
       #axis.text.x=element_text(size=8,colour=textcol),
+      text = element_text(family = "Times New Roman"),
       axis.text.y=element_text(size=8,vjust = 0.2,colour=textcol),
       axis.ticks=element_line(size=0.4),
       plot.title=element_text(colour=textcol,hjust=0,size=12),
@@ -185,35 +186,35 @@ plot_sig_heatmap <- function(d,
 
 ###H1A
 heat1a <- plot_sig_heatmap(H1a_adj,
-                           pval_var="Pval", title="Supplemental Figure 1. \n Urinary isoprostanes and child development at Year 1",
+                           pval_var="Pval", #title="Supplemental Figure 1. \n Urinary isoprostanes and child development at Year 1",
                            Outcome="Outcome", Exposure="Exposure",
                            print.est=T, print.ci=F,
                            null=0)
 
 ###H1B
 heat1b <- plot_sig_heatmap(H1b_adj,
-                           pval_var="Pval", title="Supplemental Figure 4. \n Urinary isoprostanes at Year 1 and child development at Year 2",
+                           pval_var="Pval", #title="Supplemental Figure 4. \n Urinary isoprostanes at Year 1 and child development at Year 2",
                            Outcome="Outcome", Exposure="Exposure", 
                            print.est=T, print.ci=F,
                            null=0)
 
 ###H2
 heat2 <- plot_sig_heatmap(H2_adj,
-                          pval_var="Pval", title="Supplemental Figure 2. \n Salivary stress biomarkers and child development at Year 2",
+                          pval_var="Pval", #title="Supplemental Figure 2. \n Salivary stress biomarkers and child development at Year 2",
                           Outcome="Outcome", Exposure="Exposure",
                           print.est=T, print.ci=F,
                           null=0)
 
 ###H3
 heat3 <- plot_sig_heatmap(H3_adj,
-                          pval_var="Pval", title="Supplemental Figure 5. \n Mean arterial pressure and heart rate and child development at Year 2",
+                          pval_var="Pval", #title="Supplemental Figure 5. \n Mean arterial pressure and heart rate and child development at Year 2",
                           Outcome="Outcome", Exposure="Exposure",
                           print.est=T, print.ci=F,
                           null=0)
 
 ###H4
 heat4 <- plot_sig_heatmap(H4_adj,
-                          pval_var="Pval", title="Supplemental Figure 3. \n Glucocortoid receptor methylation and child development at Year 2",
+                          pval_var="Pval", #title="Supplemental Figure 3. \n Glucocortoid receptor methylation and child development at Year 2",
                           Outcome="Outcome", Exposure="Exposure",
                           print.est=T, print.ci=F,
                           null=0)
@@ -239,11 +240,12 @@ p1a <- ggplot(H1a_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
-  ggtitle("Figure 4. Urinary isoprostanes and child development at Year 1") +
+  #ggtitle("Figure 4. Urinary isoprostanes and child development at Year 1") +
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
+        text = element_text(family = "Times New Roman"),
         plot.title = element_text(hjust = 0, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
 
@@ -256,11 +258,12 @@ p1b <- ggplot(H1b_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
-  ggtitle("Figure 6. Urinary isoprostanes at Year 1 and child development at Year 2") + 
+  #ggtitle("Figure 6. Urinary isoprostanes at Year 1 and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
+        text = element_text(family = "Times New Roman"),
         plot.title = element_text(hjust = 0, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
 
@@ -273,11 +276,12 @@ p2 <- ggplot(H2_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
-  ggtitle("Figure 2. \n Salivary stress biomarkers and child development at Year 2") + 
+  #ggtitle("Figure 2. \n Salivary stress biomarkers and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
+        text = element_text(family = "Times New Roman"),
         plot.title = element_text(hjust = 0, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
 
@@ -291,11 +295,12 @@ p3 <- ggplot(H3_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
-  ggtitle("Figure 7. Mean arterial pressure and heart rate and child development at Year 2") + 
+  #ggtitle("Figure 7. Mean arterial pressure and heart rate and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
         axis.text.y=ggtext::element_markdown(),
+        text = element_text(family = "Times New Roman"),
         plot.title = element_text(hjust = 0, face = "plain", size=12),
         panel.spacing = unit(1, "lines")) 
 
@@ -309,7 +314,7 @@ p4 <- ggplot(H4_adj, (aes(x=X, y=point.diff))) +
   facet_wrap(~Y, ncol=1, scales="free") +
   coord_flip() +
   labs(y = "Mean difference", x = "Biomarker") +
-  ggtitle("Figure 3. Glucocortoid receptor methylation and child development at Year 2") + 
+  #ggtitle("Figure 3. Glucocortoid receptor methylation and child development at Year 2") + 
   theme(axis.ticks.x=element_blank(),
         legend.position = "bottom",
         strip.text = element_text(vjust=1),
