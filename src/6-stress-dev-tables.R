@@ -6,7 +6,8 @@ source(here::here("0-config.R"))
 
 source(here::here("tables/table-functions.R"))
 here::here()
-d <- box_read("880476682582")
+#d <- box_read("880476682582")
+d <- readRDS('data/stress_dev.RDS')
 
 #Unadjusted
 H1a <- readRDS(here('results/unadjusted/H1a_res.RDS'))
@@ -26,6 +27,61 @@ H3_adj <- readRDS(here('results/adjusted/H3_adj_res.RDS'))
 H3_adj_emm <- readRDS(here('results/adjusted/H3_adj_emm_res.RDS'))
 H4_adj <- readRDS(here('results/adjusted/H4_adj_res.RDS'))
 H4_adj_emm <- readRDS(here('results/adjusted/H4_adj_emm_res.RDS'))
+
+###############Rebind hypotheses based on biological domain#############
+
+
+###UNADJUSTED######
+
+######HPA AXIS
+
+#Rebind H2 for cort
+#Cortisol from H2
+H_cort <- H2[1:18,]
+#Bind with GCR methylation from H4
+H_hpa <- rbind(H_cort, H4)
+
+####SAM Axis
+
+#Saa from H2
+H_saa <- H2[19:36,]
+#Bind with BP and HR from H3
+H_sam <- rbind(H_saa, H3)
+
+
+####ADJUSTED######
+
+######HPA AXIS
+
+#Rebind H2 for cort
+#Cortisol from H2
+H_cort_adj <- H2_adj[1:18,]
+#Bind with GCR methylation from H4
+H_hpa_adj <- rbind(H_cort_adj, H4_adj)
+
+####SAM Axis
+
+#Saa from H2
+H_saa_adj <- H2_adj[19:36,]
+#Bind with BP and HR from H3
+H_sam_adj <- rbind(H_saa_adj, H3_adj)
+
+############# EMM ########################
+
+######HPA AXIS
+
+#Rebind H2 for cort
+#Cortisol from H2
+H_cort_adj_emm <- H2_adj_emm[1:72,]
+#Bind with GCR methylation from H4
+H_hpa_adj_emm <- rbind(H_cort_adj_emm, H4_adj_emm)
+
+####SAM Axis
+
+#Saa from H2
+H_saa_adj_emm <- H2_adj_emm[73:144,]
+#Bind with BP and HR from H3
+H_sam_adj_emm <- rbind(H_saa_adj_emm, H3_adj_emm)
 
 #WHO Hazard Ratios
 
@@ -101,37 +157,24 @@ tbl1flex <- fit_to_width(tbl1flex, max_width=8)
 names(tbl1)<- c("","","","n (%) or median (IQR)")
 
 
-#FOR GATES MILESTONES
+#### Table 2 HPA Biomarkers ####
 
-#### Table 2 ####
 #Hypothesis 2#
-exposure <- c("t3_cort_slope", "t3_cort_z01", "t3_cort_z03", "t3_saa_slope", "t3_saa_z01", "t3_saa_z02" )
+exposure <- c("t3_cort_slope", "t3_cort_z01", "t3_cort_z03", "t3_gcr_mean", "t3_gcr_cpg12" )
 outcome <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
              "z_cdi_say_t3", "z_cdi_und_t3") 
 
 
-expo_var <- c("Cortisol reactivity (ug/dl/min)", "Pre-stressor cortisol (ug/dl)", "Post-stressor cortisol (ug/dl)", "Salivary alpha-amylase reactivity (U/ml/min)", "Pre-stressor salivary alpha-amylase (U/ml)", "Post-stressor salivary alpha-amylase (U/ml)")
+expo_var <- c("Cortisol reactivity (ug/dl/min)", "Pre-stressor cortisol (ug/dl)", "Post-stressor cortisol (ug/dl)", "Mean overall percentage glucocorticoid receptor methylation", "Percentage methylation at NGFI-A transcription factor binding site (CpG site #12)")
 out_var <- c("EASQ communication score", "EASQ gross motor score", "EASQ personal social score", "Combined EASQ score",
              "CDI expressive language score","CDI comprehension score")
 
 
-tbl2 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H2, H2_adj, adj_only = T)
-tbl2flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H2, H2_adj, adj_only = T)
+tbl_hpa <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H_hpa, H_hpa_adj, adj_only = T)
+tbl_hpa_flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H_hpa, H_hpa_adj, adj_only = T)
 
-#### Table 3 ####
-#Hypothesis 4#
 
-exposure <- c("t3_gcr_mean", "t3_gcr_cpg12")   
-outcome <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
-             "z_cdi_say_t3", "z_cdi_und_t3") 
-expo_var <- c("Mean overall percentage glucocorticoid receptor methylation", "Percentage methylation at NGFI-A transcription factor binding site (CpG site #12)")
-out_var <- c("EASQ communication score", "EASQ gross motor score", "EASQ personal social score", "Combined EASQ score",
-             "CDI expressive language score","CDI comprehension score")
-
-tbl3 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H4, H4_adj, adj_only = T)
-tbl3flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H4, H4_adj, adj_only = T)
-
-#### Table 4 ####
+#### Ispoprostanes concurrent ###
 
 exposure <- c("t2_f2_8ip", "t2_f2_23d","t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")
 outcome <- c("sum_who_t2_t3", "z_cdi_say_t2","z_cdi_und_t2")
@@ -143,7 +186,7 @@ tbl4flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H1
 
 ######
 
-#### Table 5 ####
+#### Isoprostanes subsequent ####
 
 exposure <- c("t2_f2_8ip", "t2_f2_23d","t2_f2_VI", "t2_f2_12i", "t2_f2_iso.pca")
 outcome <- c("z_comm_easq_t3", "z_motor_easq_t3","z_personal_easq_t3","z_combined_easq_t3", 
@@ -170,17 +213,18 @@ tbl6 <- hr_tbl("Exposure", expo_var, out_var, exposure, outcome, H1a_who, H1a_wh
 tbl6flex <- hr_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H1a_who, H1a_who_adj, adj_only = T)
 
 
-#### Table 7 ####
+#### SAM Biomarkers ####
 #Hypothesis 3#
-exposure <- c("t3_map", "t3_hr_mean")  
+
+exposure <- c("t3_saa_slope", "t3_saa_z01", "t3_saa_z02", "t3_map", "t3_hr_mean")  
 outcome <- c("z_comm_easq_t3", "z_motor_easq_t3", "z_personal_easq_t3", "z_combined_easq_t3", 
              "z_cdi_say_t3", "z_cdi_und_t3") 
-expo_var <- c("Mean arterial pressure (mmHg)", "Mean resting heart rate (bpm)")
+expo_var <- c("Salivary alpha-amylase reactivity (U/ml/min)", "Pre-stressor salivary alpha-amylase (U/ml)", "Post-stressor salivary alpha-amylase (U/ml)", "Mean arterial pressure (mmHg)", "Mean resting heart rate (bpm)")
 out_var <- c("EASQ communication score", "EASQ gross motor score", "EASQ personal social score", "Combined EASQ score",
              "CDI expressive language score","CDI comprehension score")
 
-tbl7 <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H3, H3_adj, adj_only = T)
-tbl7flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H3, H3_adj, adj_only = T)
+tbl_sam <- growth_tbl("Exposure", expo_var, out_var, exposure, outcome, H_sam, H_sam_adj, adj_only = T)
+tbl_sam_flex <- growth_tbl_flex("Exposure", expo_var, out_var, exposure, outcome, H_sam, H_sam_adj, adj_only = T)
 
 #Change font and size
 tbl1flex <- tbl1flex %>%
@@ -188,12 +232,7 @@ tbl1flex <- tbl1flex %>%
   fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
   set_table_properties(layout = "autofit")
 
-tbl2flex <- tbl2flex %>%
-  font(fontname = "Times New Roman", part = "all") %>%
-  fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
-  set_table_properties(layout = "autofit")
-
-tbl3flex <- tbl3flex %>%
+tbl_sam_flex <- tbl_sam_flex %>%
   font(fontname = "Times New Roman", part = "all") %>%
   fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
   set_table_properties(layout = "autofit")
@@ -213,20 +252,19 @@ tbl6flex <- tbl6flex %>%
   fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
   set_table_properties(layout = "autofit")
 
-tbl7flex <- tbl7flex %>%
+tbl_hpa_flex <- tbl_hpa_flex %>%
   font(fontname = "Times New Roman", part = "all") %>%
   fontsize(i = NULL, j = NULL, size = 8, part = "all") %>%
   set_table_properties(layout = "autofit")
 
 #### SAVE TABLES ####
 write.csv(tbl1, here('tables/stress-dev-table1.csv'))
-write.csv(tbl2, here('tables/stress-dev-table2.csv'))
-write.csv(tbl3, here('tables/stress-dev-table3.csv'))
+write.csv(tbl_hpa, here('tables/stress-dev-table2.csv'))
 write.csv(tbl4, here('tables/stress-dev-table4.csv'))
 write.csv(tbl5, here('tables/stress-dev-table5.csv'))
 write.csv(tbl6, here('tables/stress-dev-table6.csv'))
-write.csv(tbl7, here('tables/stress-dev-table6.csv'))
+write.csv(tbl_sam, here('tables/stress-dev-table6.csv'))
 
-save_as_docx("Table 1. Descriptive statistics of sample population" = tbl1flex, "Table 3. Salivary stress biomarkers and child development at Year 2" = tbl2flex, "Table 4. Glucocorticoid receptor methylation and child development at Year 2" = tbl3flex, "Table 5. Urinary isoprostanes and child development at Year 1" = tbl4flex, "Table 6. Urinary isoprostanes at Year 1 and child development at Year 2" = tbl5flex, "Table 7. Urinary isoprostanes and time to WHO motor milestone at Year 1" = tbl6flex, "Table 8. Mean arterial pressure and heart rate and child development at Year 2" = tbl7flex, 
-            pr_section = sect_properties, path='tables/stress-dev-tables.docx')
+save_as_docx("Table 1. Descriptive statistics of sample population" = tbl1flex, "Table 3. Hypothalamic-pituitary-adrenal axis biomarkers and child development at Year 2" = tbl_hpa_flex, "Table 4. Sympathetic adrenomedullary axis biomarkers and child development at Year 2" = tbl_sam_flex, "Table 5. Urinary isoprostanes and child development at Year 1" = tbl4flex, "Table 6. Urinary isoprostanes at Year 1 and child development at Year 2" = tbl5flex, "Table 7. Urinary isoprostanes and time to WHO motor milestone at Year 1" = tbl6flex, 
+            pr_section = sect_properties, path='tables/stress-dev-tables-V2.docx')
 
