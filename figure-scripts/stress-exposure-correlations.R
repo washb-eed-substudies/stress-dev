@@ -36,8 +36,7 @@ p <- ggplot(cors, aes(x = var1, y = var2, fill = p)) +
   scale_y_discrete(expand = c(0, 0)) +
   theme_minimal(base_size = 8) + 
   theme(axis.text.x = element_text(angle = 90)) +
-  theme(text = element_text(family = "Times New Roman"))
-#+ ggtitle("TITLE")
+  theme(text = element_text(family = "Times New Roman"))+ ggtitle("Supplemental Figure 1. Pearson’s correlation between stress biomarkers and child development outcomes")
 
 
 #save plots
