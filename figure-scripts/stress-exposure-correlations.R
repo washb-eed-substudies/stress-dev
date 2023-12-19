@@ -26,20 +26,34 @@ cors$var2 <- factor(cors$var2,
                                "sAA Reactivity (U/ml/min)", "Pre-stressor sAA (U/ml)", "Post-stressor sAA (U/ml)", "Mean arterial pressure (mmHg)", "Mean Resting Heart Rate (bpm)",
                                "IPF(2a)-III (ng/mg creatinine)", "2,3-dinor-iPF(2a)-III (ng/mg creatinine)", "iPF(2a)-VI (ng/mg creatinine)", "8,12-iso-iPF(2a)-VI (ng/mg creatinine)", "Combined urinary oxidative stress biomarker score"))
 
-?ggplot()
+cors <- cors %>%
+  mutate(signif_label = case_when(
+    p < 0.001 ~ "***",
+    p < 0.01  ~ "**",
+    p < 0.05  ~ "*",
+    TRUE      ~ ""  # Non-significant values will have no label
+  ))
+
+
 #
-p <- ggplot(cors, aes(x = var1, y = var2, fill = p)) + 
-  geom_tile(#colour = "grey80", size = 0.25
-  ) + 
-  scale_fill_viridis() +
+#remove correlation with itself 
+cors <- cors %>%
+  filter(var1 != var2)
+
+
+p <- ggplot(cors, aes(x = var1, y = var2, fill = cor)) + 
+  geom_tile() + 
+  geom_text(aes(label = signif_label)) +
+  scale_fill_viridis(option = "D", limits = c(-1, 1)) +  # Adjusted for diverging scale
   scale_x_discrete(expand = c(0, 0)) + 
   scale_y_discrete(expand = c(0, 0)) +
   theme_minimal(base_size = 8) + 
   theme(axis.text.x = element_text(angle = 90)) +
-  theme(text = element_text(family = "Times New Roman"))+ ggtitle("Supplemental Figure 1. Pearson’s correlation between stress biomarkers and child development outcomes")
+  theme(text = element_text(family = "Times New Roman")) + 
+  ggtitle("Supplemental Figure 1. Pearson’s correlation between stress biomarkers and child development outcomes") 
 
 
 #save plots
-ggsave(p, file = here::here("figures/plot-stress-cors.png"), height=5, width=7)
+ggsave(p, file = here::here("figures/plot-stress-cors.png"), height=10, width=10)
 
 
